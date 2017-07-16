@@ -9,6 +9,16 @@ export function loadBooksSuccess(books) {
         books: books
     };
 }
+export function searchBooks(text) {
+    return dispatch => {
+        dispatch(ajaxActions.beginAjaxCall());
+        return api.searchBooks(text).then(books => {
+            dispatch(loadBooksSuccess(books));
+        }).catch(error => {
+            dispatch(ajaxActions.ajaxCallError(error));
+        });
+    };
+}
 export function loadBooks() {
     return dispatch => {
         dispatch(ajaxActions.beginAjaxCall());

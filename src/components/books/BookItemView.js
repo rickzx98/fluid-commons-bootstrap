@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const BookItemView = ({ book }) => {
+export const BookItemView = () => {
     return (<div></div>);
 }
 

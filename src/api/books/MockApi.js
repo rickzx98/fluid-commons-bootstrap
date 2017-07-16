@@ -1,15 +1,27 @@
 import '../../images/lotr_fotr.jpg';
 import '../../images/lotr_trotk.jpg';
 import '../../images/lotr_tt.jpg';
+import '../../images/hp_athps.jpg';
+import '../../images/hp_cos.jpg';
+import '../../images/hp_poa.jpg';
+import '../../images/hp_tgof.jpg';
+import '../../images/hp_thbp.jpg';
+import '../../images/hp_atdh.jpg';
 
 import Book from './Book';
 import delay from '../../utils/delay';
 import generateUID from '../../utils/generateUID';
 
-const BOOK_DATA = [createMockBook(generateUID(), 'Lord of the rings', 'Fellowshing of the ring', 'J. R. R. Tolkien', 'lotr_fotr.jpg'),
-createMockBook(generateUID(), 'Lord of the rings', 'The Two Towers', 'J. R. R. Tolkien', 'lotr_tt.jpg'),
-createMockBook(generateUID(), 'Lord of the rings', 'The Return of The King', 'J. R. R. Tolkien', 'lotr_trotk.jpg')];
-
+const BOOK_DATA = [
+    createMockBook(generateUID(), 'Lord of the rings', 'Fellowshing of the ring', 'J. R. R. Tolkien', 'lotr_fotr.jpg'),
+    createMockBook(generateUID(), 'Lord of the rings', 'The Two Towers', 'J. R. R. Tolkien', 'lotr_tt.jpg'),
+    createMockBook(generateUID(), 'Lord of the rings', 'The Return of The King', 'J. R. R. Tolkien', 'lotr_trotk.jpg'),
+    createMockBook(generateUID(), 'Harry Potter', 'and the sorcerer\'s stone', ' Rowling, J. K', 'hp_athps.jpg'),
+    createMockBook(generateUID(), 'Harry Potter', 'and the chamber of secres', ' Rowling, J. K', 'hp_cos.jpg'),
+    createMockBook(generateUID(), 'Harry Potter', 'and the prisoner of Azkaban', ' Rowling, J. K', 'hp_poa.jpg'),
+    createMockBook(generateUID(), 'Harry Potter', 'and the goblet of fire', ' Rowling, J. K', 'hp_tgof.jpg'),
+    createMockBook(generateUID(), 'Harry Potter', 'and the half blood prince', ' Rowling, J. K', 'hp_thbp.jpg'),
+    createMockBook(generateUID(), 'Harry Potter', 'and the deathly hallows', ' Rowling, J. K', 'hp_atdh.jpg')];
 export default class Api {
     static createBook(book) {
         return new Promise((resolve, reject) => {
@@ -45,7 +57,7 @@ export default class Api {
                     }
                 });
                 resolve(foundBookData);
-            }, delay);
+            }, 200);
         });
     }
 }

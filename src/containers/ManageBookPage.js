@@ -5,14 +5,13 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-export class BookViewPage extends React.Component {
+export class ManageBookPage extends React.Component {
     render() {
-        console.log('BookViewPage', this);
         return (<div className="page" />);
     }
 }
 
-BookViewPage.propTypes = {
+ManageBookPage.propTypes = {
     actions: PropTypes.object.isRequired,
     books: PropTypes.array.isRequired
 };
@@ -29,7 +28,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export const ConnectBookViewPage = connect(
+export const ConnectedManageBookPage = connect(
     mapStateToProps,
     mapDispatchToProps
-)(BookViewPage);
+)(ManageBookPage);

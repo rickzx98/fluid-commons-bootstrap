@@ -11,8 +11,8 @@ export class BooksPage extends React.Component {
         this.props.actions.loadBooks();
     }
     render() {
-        return (<div className="page">
-            <BookList books={this.props.books} />
+        return (<div className="books page">
+            <BookList searchBooks={this.props.actions.searchBooks} books={this.props.books} />
         </div>);
     }
 }
