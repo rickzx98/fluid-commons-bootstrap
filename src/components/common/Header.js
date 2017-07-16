@@ -5,7 +5,6 @@ import React from 'react';
 export default class Header extends React.Component {
     render() {
         return (
-            <AppBar
-                title={APP_NAME} />);
+            <AppBar title={APP_NAME} iconStyleLeft={{ display: 'none' }} />);
     }
 }

@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
-
 import Avatar from 'material-ui/Avatar';
 import Book from '../../api/books/Book';
 import { ListItem } from 'material-ui/List';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 export const BookItem = ({ book }) => {
     return (<ListItem primaryText={book[Book.TITLE]}
