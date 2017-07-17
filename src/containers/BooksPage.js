@@ -1,5 +1,6 @@
 import * as actions from '../actions/BookActions';
 
+import { BookSearch } from '../components/books/BookSearch';
 import { BookTable } from '../components/books/BookTable';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,7 +13,8 @@ export class BooksPage extends React.Component {
     }
     render() {
         return (<div className="books page">
-            <BookTable searchBooks={this.props.actions.searchBooks} books={this.props.books} />
+            <BookSearch searchBooks={this.props.actions.searchBooks} />
+            <BookTable books={this.props.books} />
         </div>);
     }
 }
