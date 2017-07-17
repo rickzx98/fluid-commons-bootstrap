@@ -17,7 +17,7 @@ const BOOK_DATA = [
     createMockBook(generateUID(), 'Lord of the rings', 'The Two Towers', 'J. R. R. Tolkien', 'lotr_tt.jpg'),
     createMockBook(generateUID(), 'Lord of the rings', 'The Return of The King', 'J. R. R. Tolkien', 'lotr_trotk.jpg'),
     createMockBook(generateUID(), 'Harry Potter', 'and the sorcerer\'s stone', ' Rowling, J. K', 'hp_athps.jpg'),
-    createMockBook(generateUID(), 'Harry Potter', 'and the chamber of secres', ' Rowling, J. K', 'hp_cos.jpg'),
+    createMockBook(generateUID(), 'Harry Potter', 'and the chamber of secrets', ' Rowling, J. K', 'hp_cos.jpg'),
     createMockBook(generateUID(), 'Harry Potter', 'and the prisoner of Azkaban', ' Rowling, J. K', 'hp_poa.jpg'),
     createMockBook(generateUID(), 'Harry Potter', 'and the goblet of fire', ' Rowling, J. K', 'hp_tgof.jpg'),
     createMockBook(generateUID(), 'Harry Potter', 'and the half blood prince', ' Rowling, J. K', 'hp_thbp.jpg'),
@@ -72,5 +72,14 @@ function createMockBook(id, title, subtitle, author, imageUrl) {
     book[Book.SUB_TITLE] = subtitle;
     book[Book.TITLE] = title;
     book[Book.IMAGE_URL] = imageUrl;
+    book[Book.PUBLISHER] = 'The book publisher';
+    book[Book.EDITION] = '2nd Edition';
+    book[Book.ISBN] = '1234554657';
+    book[Book.SUBJECTS] = [
+        'Fanstasy',
+        'Fiction',
+        '2001',
+        'Magic'
+    ]
     return book;
 }

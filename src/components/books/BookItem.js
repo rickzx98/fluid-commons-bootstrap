@@ -5,17 +5,25 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 
 export const BookItem = ({ book }) => {
-    return (<ListItem primaryText={book[Book.TITLE]}
-        onTouchTap={() => browserHistory.push(`books/${book[Book.BOOK_ID]}`)}
-        leftAvatar={<img height="65px" width="50px" src={book[Book.IMAGE_URL]} />}
-        secondaryTextLines={2}
+    return (<ListItem
+
+        leftAvatar={<div className="book">
+            <img className="book-image" src={book[Book.IMAGE_URL]} />
+        </div>}
+        primaryText={book[Book.TITLE]}
+        secondaryTextLines={4}
         secondaryText={
             <p className="book-item">
-                <span className="book-subtitle">{book[Book.SUB_TITLE]}</span><br />
-                <span className="book-author">{book[Book.AUTHOR]}</span>
-            </p>} />);
+                {book[Book.SUB_TITLE]}<br />
+                {book[Book.AUTHOR]}<br />
+                {book[Book.PUBLISHER]}<br />
+            </p>
+        }
+    />);
 };
 
 BookItem.propTypes = {
     book: PropTypes.object.isRequired
 };
+
+//  onTouchTap={() => browserHistory.push(`books/${book[Book.BOOK_ID]}`)}

@@ -20,10 +20,10 @@ export const BookList = ({ books, searchBooks }) => {
     });
     return (<List style={listStyle}>
         <Subheader>
-            <TextField style={{ width: '90%', marginRight: '5px' }} onChange={(event, text) => {
+            <FlatButton style={{ color: 'white' }} hoverColor={lightBlueA700} label={LABEL_ADD_BOOK} backgroundColor={blue700} />
+            <TextField style={{ width: '90%', marginLeft: '5px' }} onChange={(event, text) => {
                 searchBooks(text);
             }} hintText={LABEL_SEARCH_BOOKS} />
-            <FlatButton style={{ color: 'white' }} hoverColor={lightBlueA700} label={LABEL_ADD_BOOK} backgroundColor={blue700} />
         </Subheader>
         {booksElement}
     </List>);

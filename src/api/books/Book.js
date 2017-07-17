@@ -8,7 +8,8 @@ const BookFields = {
     PUBLISHER: 'publisher',
     SERIES_TITLE: 'seriesTitle',
     EDITION: 'edition',
-    LCCN: 'lccn'
+    LCCN: 'lccn',
+    SUBJECTS: 'subjects'
 };
 
 export default BookFields;
