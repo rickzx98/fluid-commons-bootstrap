@@ -11,7 +11,7 @@ import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
 
 const listStyle = {
-    width: '90%'
+    width: '97%'
 };
 export const BookList = ({ books, searchBooks }) => {
     const booksElement = [];
@@ -20,10 +20,10 @@ export const BookList = ({ books, searchBooks }) => {
     });
     return (<List style={listStyle}>
         <Subheader>
-            <TextField style={{ width: '80%' }} onChange={(event, text) => {
+            <TextField style={{ width: '90%', marginRight: '5px' }} onChange={(event, text) => {
                 searchBooks(text);
             }} hintText={LABEL_SEARCH_BOOKS} />
-            <FlatButton hoverColor={lightBlueA700} label={LABEL_ADD_BOOK} backgroundColor={blue700} />
+            <FlatButton style={{ color: 'white' }} hoverColor={lightBlueA700} label={LABEL_ADD_BOOK} backgroundColor={blue700} />
         </Subheader>
         {booksElement}
     </List>);

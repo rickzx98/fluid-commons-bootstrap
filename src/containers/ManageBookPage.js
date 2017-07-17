@@ -1,5 +1,7 @@
 import * as actions from '../actions/BookActions';
 
+import Book from '../api/books/Book';
+import { BookItemView } from '../components/books/BookItemView';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -7,19 +9,25 @@ import { connect } from 'react-redux';
 
 export class ManageBookPage extends React.Component {
     render() {
-        return (<div className="page" />);
+        return (<div className="books page">
+            {this.props.book ? <BookItemView book={this.props.book} /> : <span>create</span>}
+        </div>);
     }
 }
 
 ManageBookPage.propTypes = {
-    actions: PropTypes.object.isRequired,
-    books: PropTypes.array.isRequired
+    actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
     return {
-        books: state.books
+        book: getBookById(state.books, ownProps.routeParams.id)
     };
+}
+
+function getBookById(books, id) {
+    const filtered = books.filter(book => book[Book.BOOK_ID] === id);
+    return filtered ? filtered[0] : undefined;
 }
 
 function mapDispatchToProps(dispatch) {
