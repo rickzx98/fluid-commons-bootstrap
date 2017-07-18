@@ -1,6 +1,7 @@
 import * as actions from '../actions/BookActions';
 
 import Book from '../api/books/Book';
+import { BookItemEdit } from '../components/books/BookItemEdit';
 import { BookItemView } from '../components/books/BookItemView';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -10,7 +11,7 @@ import { connect } from 'react-redux';
 export class ManageBookPage extends React.Component {
     render() {
         return (<div className="books page">
-            {this.props.book ? <BookItemView book={this.props.book} /> : <span>create</span>}
+             {this.props.book ? <BookItemView book={this.props.book} /> : <BookItemEdit book={this.props.book}/>}
         </div>);
     }
 }

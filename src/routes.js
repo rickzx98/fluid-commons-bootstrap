@@ -11,6 +11,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={ConnectBookPage} />
     <Route path="books" component={ConnectBookPage} />
+    <Route path="books/new" component={ConnectedManageBookPage} />
     <Route path="books/:id" component={ConnectedManageBookPage} />
     <Route path="about" component={AboutPage} />
     <Route path="*" component={NotFoundPage} />
