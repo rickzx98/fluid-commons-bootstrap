@@ -1,7 +1,7 @@
 /* eslint-disable import/default */
 
 import './styles/styles.scss'; // Yep, that's right. You can import SASS/CSS files too! Webpack will run the associated loader and plug this into the page.
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/normalize.css/normalize.css';
 import './theme/bootstrap/bootstrap.css';
 
 import { AppContainer } from 'react-hot-loader';
@@ -13,7 +13,6 @@ import { render } from 'react-dom';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 require('./favicon.ico'); // Tell webpack to load favicon.ico
-
 const store = configureStore();
 
 // Create an enhanced history that syncs navigation events with the store

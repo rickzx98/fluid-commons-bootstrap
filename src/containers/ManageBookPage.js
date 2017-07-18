@@ -9,10 +9,17 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 export class ManageBookPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onChangeBookEditForForm = this.onChangeBookEdit.bind(this);
+    }
     render() {
         return (<div className="books page">
-             {this.props.book ? <BookItemView book={this.props.book} /> : <BookItemEdit book={this.props.book}/>}
+            {this.props.book ? <BookItemView book={this.props.book} /> : <BookItemEdit onChange={this.onChangeBookEditForForm} book={this.props.book} />}
         </div>);
+    }
+    onChangeBookEdit(bookForm) {
+        console.log('bookForm', bookForm);
     }
 }
 

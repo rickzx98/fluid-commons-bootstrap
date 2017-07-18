@@ -1,7 +1,7 @@
 import { APP_NAME } from '../../labels/';
 import React from 'react';
 
-export default class Header extends React.Component {
+export class Header extends React.Component {
     render() {
         return (<nav className="navbar navbar-default">
             <div className="container-fluid">

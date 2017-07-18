@@ -1,4 +1,4 @@
-import Header from './common/Header';
+import { Header } from './common/';
 import PropTypes from 'prop-types';
 import React from 'react';
 
