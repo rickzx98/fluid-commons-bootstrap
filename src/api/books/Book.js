@@ -9,7 +9,10 @@ const BookFields = {
     SERIES_TITLE: 'seriesTitle',
     EDITION: 'edition',
     LCCN: 'lccn',
-    SUBJECTS: 'subjects'
+    SUBJECTS: 'subjects',
+    STATEMENT_OF_RESPONSIBILITY: 'statementOfResponsibility',
+    NUMBER_OF_PAGES: 'numberOfPages',
+    PUBLISHED_DATE: 'publishedDate'
 };
 
 export default BookFields;

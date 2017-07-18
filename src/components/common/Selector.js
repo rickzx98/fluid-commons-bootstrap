@@ -2,10 +2,15 @@ import { FormGroup } from './FormGroup'
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const Selector = ({ label, required, name, onChange, listItems }) => {
+export const Selector = ({ label, required, name, onChange, options, value }) => {
+    const eventOnChange = (event) => {
+        if (onChange) {
+            onChange(name, event.target.value);
+        }
+    };
     return (<FormGroup name={name} label={label} required={required}>
-        <select className="form-control">
-            {listItems.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}
+        <select onChange={eventOnChange} className="form-control" name={name} value={value}>
+            {options.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}
         </select>
     </FormGroup>);
 }
@@ -13,5 +18,5 @@ export const Selector = ({ label, required, name, onChange, listItems }) => {
 Selector.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    listItems: PropTypes.array.isRequired
+    options: PropTypes.array.isRequired
 }

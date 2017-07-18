@@ -1,4 +1,5 @@
 import Book from '../../api/books/Book';
+import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { browserHistory } from 'react-router';
@@ -22,6 +23,9 @@ export const BookRow = ({ book }) => {
         </td>
         <td>
             {book[Book.PUBLISHER]}
+        </td>
+        <td>
+            <Link className="btn btn-primary" to={'/books/' + book[Book.BOOK_ID]} >Edit</Link>
         </td>
     </tr>);
 };

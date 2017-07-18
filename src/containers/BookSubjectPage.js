@@ -1,5 +1,6 @@
 import * as actions from '../actions/BookSubjectActions';
 
+import { BookSubjectList } from '../components/subjects/BookSubjectList';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -7,26 +8,26 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 export class SubjectsPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     componentDidMount() {
-        this.props.actions.loadBooks();
+        this.props.actions.loadSubjects();
     }
     render() {
         return (<div className="subjects">
+            <BookSubjectList subjects={this.props.subjects}
+                managedBook={this.props.managedBook} />
         </div>);
     }
 }
 
-BooksPage.propTypes = {
+SubjectsPage.propTypes = {
     actions: PropTypes.object.isRequired,
     subjects: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        subjects: state.subjects
+        subjects: state.subjects,
+        managedBook: state.managedBook
     };
 }
 

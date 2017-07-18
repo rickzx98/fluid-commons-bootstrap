@@ -1,5 +1,7 @@
 const SubjectFields = {
     SUBJECT_ID: 'id',
+    LEVEL_OF_SUBJECT: 'level',
+    THESAURUS: 'thesaurus',
     TOPICAL_TERM_OR_GEOGRAPHIC_NAME_ENTRY: '$a',
     TOPICAL_TERM_FOLLOWING: '$b',
     LOCATION_OF_EVENT: '$c',
@@ -10,7 +12,8 @@ const SubjectFields = {
     FORM_SUBDIVISION: '$v',
     GENERAL_SUBDIVISION: '$x',
     CHRONOLOGICAL_SUBDIVISION: '$y',
-    GEOGRAPHIC_SUBDIVISION: '$z'
+    GEOGRAPHIC_SUBDIVISION: '$z',
+    SUBJECT_FORMAT: 'subjectFormat'
 };
 
 export default SubjectFields;

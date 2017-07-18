@@ -1,4 +1,8 @@
 export default {
   books: [],
-  subjects: []
+  book: {
+    subjects: []
+  },
+  subjects: [],
+  subject: {}
 };

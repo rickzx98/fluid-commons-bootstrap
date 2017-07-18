@@ -9,6 +9,13 @@ export function loadBooksSuccess(books) {
         books: books
     };
 }
+export function loadManagedBookSuccess(book) {
+    return {
+        type: types.LOAD_MANAGED_BOOK_SUCCESS,
+        book: book
+    };
+}
+
 export function searchBooks(text) {
     return dispatch => {
         dispatch(ajaxActions.beginAjaxCall());

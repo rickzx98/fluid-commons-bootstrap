@@ -1,12 +1,31 @@
 import * as ajaxActions from './AjaxStatusActions';
 import * as types from './';
 
-import api from '../api/books';
+import api from '../api/subjects/';
 
 export function loadSubjectSuccess(subjects) {
     return {
-        type: types.LOAD_BOOKS_SUCCESS,
+        type: types.LOAD_SUBJECT_SUCCESS,
         subjects: subjects
+    };
+}
+export function loadManagedSubjectSuccess(subject) {
+    return {
+        type: types.LOAD_MANAGED_SUBJECT_SUCCESS,
+        subject: subject
+    }
+}
+export function setManagedSubjectFieldValue(field, value) {
+    return {
+        type: types.SET_MANAGED_SUBJECT_FIELD_VALUE,
+        field: field,
+        value: value
+    };
+}
+export function addSubjectToManagedBook(subject) {
+    return {
+        type: types.ADD_SUBJECT_TO_MANAGED_BOOK,
+        subject: subject
     };
 }
 export function searchSubjects(text) {

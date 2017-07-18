@@ -2,20 +2,22 @@ import * as actions from '../actions/BookActions';
 
 import Book from '../api/books/Book';
 import { BookItemEdit } from '../components/books/BookItemEdit';
-import { BookItemView } from '../components/books/BookItemView';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 export class ManageBookPage extends React.Component {
+    componentWillMount() {
+        this.props.actions.loadManagedBookSuccess(this.props.book);
+    }
     constructor(props) {
         super(props);
         this.onChangeBookEditForForm = this.onChangeBookEdit.bind(this);
     }
     render() {
         return (<div className="books page">
-            {this.props.book ? <BookItemView book={this.props.book} /> : <BookItemEdit onChange={this.onChangeBookEditForForm} book={this.props.book} />}
+            <BookItemEdit onChange={this.onChangeBookEditForForm} book={this.props.managedBook} />
         </div>);
     }
     onChangeBookEdit(bookForm) {
@@ -29,7 +31,8 @@ ManageBookPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        book: getBookById(state.books, ownProps.routeParams.id)
+        book: getBookById(state.books, ownProps.routeParams.id),
+        managedBook: state.managedBook
     };
 }
 

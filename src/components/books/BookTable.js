@@ -8,7 +8,7 @@ export const BookTable = ({ books, searchBooks }) => {
     books.forEach(book => {
         booksElement.push(<BookRow key={book[Book.BOOK_ID]} book={book} />);
     });
-    return (<table className="table">
+    return (<table className="table table-hover">
         <thead>
             <tr>
                 <th title="preview">Preview</th>
@@ -16,6 +16,7 @@ export const BookTable = ({ books, searchBooks }) => {
                 <th title="Editon">Editon</th>
                 <th title="Author">Author</th>
                 <th title="Publisher">Publisher</th>
+                <th title="Action"></th>
             </tr>
         </thead>
         <tbody>

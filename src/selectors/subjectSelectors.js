@@ -12,7 +12,7 @@ export function getAllSubjectHeadersForDropDown() {
         'Genre/Form',
         'Hierarchical Place Name',
         'Topical Term (OCLC, RLIN)'
-    ]
+    ];
 }
 
 export function getAllFirstIndicatorTopicalTermsForDropDown() {
