@@ -1,18 +1,16 @@
 const SubjectFields = {
     SUBJECT_ID: 'id',
-    SUBJECT_TYPE: 'type',
-    SUB_FIELDS: {
-        'Personal Name': {
-            PERSONAL_NAME: '$a_Persosal Name',
-            NUMERATION: '$b_Numeration',
-            TITLES_AND_OTHERS: '$c_Titles and other words associated with a name',
-            DATES_ASSOCIATED_WITH_NAME: '$d_Dates associated with a name',
-            RELATOR_TERM: '$e_Relator term',
-            DATE_OF_WORK: '$f_Date of a work',
-            MISC_INFO: '$g_Miscellaneous information'
-        }
-
-    }
+    TOPICAL_TERM_OR_GEOGRAPHIC_NAME_ENTRY: '$a',
+    TOPICAL_TERM_FOLLOWING: '$b',
+    LOCATION_OF_EVENT: '$c',
+    ACTIVE_DATES: '$d',
+    RELATOR_TERM: '$e',
+    MISC_INFO: '$g',
+    RELATIONSHIP: '$4',
+    FORM_SUBDIVISION: '$v',
+    GENERAL_SUBDIVISION: '$x',
+    CHRONOLOGICAL_SUBDIVISION: '$y',
+    GEOGRAPHIC_SUBDIVISION: '$z'
 };
 
 export default SubjectFields;

@@ -8,9 +8,9 @@ import '../../images/hp_tgof.jpg';
 import '../../images/hp_thbp.jpg';
 import '../../images/hp_atdh.jpg';
 
+import { contains, delay, generateUID } from '../../utils/';
+
 import Book from './Book';
-import delay from '../../utils/delay';
-import generateUID from '../../utils/generateUID';
 
 const BOOK_DATA = [
     createMockBook(generateUID(), 'Lord of the rings', 'Fellowshing of the ring', 'J. R. R. Tolkien', 'lotr_fotr.jpg'),
@@ -61,9 +61,6 @@ export default class Api {
         });
     }
 }
-function contains(value, text) {
-    return value.toLowerCase().indexOf(text.toLowerCase()) > -1;
-}
 
 function createMockBook(id, title, subtitle, author, imageUrl) {
     const book = {};
@@ -76,10 +73,9 @@ function createMockBook(id, title, subtitle, author, imageUrl) {
     book[Book.EDITION] = '2nd Edition';
     book[Book.ISBN] = '1234554657';
     book[Book.SUBJECTS] = [
-        'Fanstasy',
-        'Fiction',
-        '2001',
-        'Magic'
+        '17$aCareer Exploration.$2ericd',
+        '#0$aBallads, English$zHudson River Valley (N.Y. and N.J.)',
+        '#0$aRain and rainfall$zWashington (State)$zSeattle$vMaps'
     ]
     return book;
 }

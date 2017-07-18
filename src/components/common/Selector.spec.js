@@ -4,9 +4,18 @@ import { shallow } from 'enzyme';
 
 describe('<Selector />', () => {
     it('should have two options', () => {
-        const wrapper = shallow(<Selector label="Sample" name="sample" listItems={['option1', 'option2']} />);
-        const actual = wrapper.find('options').length();
-        expect(actual).toEqual(2);
+        const listItems = [{
+            value: 'sampleValue',
+            label: 'sampleLabel'
+        }, {
+            value: 'sampleValue2',
+            label: 'sampleLabel2'
+        }];
+        const wrapper = shallow(<Selector label="Sample" name="sample" listItems={listItems} />);
+        const actual = wrapper.find('option');
+        expect(actual.at(0).text()).toEqual('sampleLabel');
+        expect(actual.at(1).text()).toEqual('sampleLabel2');
+        expect(actual.length).toEqual(2);
     });
 
 });

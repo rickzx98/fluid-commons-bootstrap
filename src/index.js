@@ -9,6 +9,7 @@ import React from 'react';
 import Root from './components/Root';
 import { browserHistory } from 'react-router';
 import configureStore from './store/configureStore';
+import { loadSubjects } from './actions/BookSubjectActions';
 import { render } from 'react-dom';
 import { syncHistoryWithStore } from 'react-router-redux';
 
@@ -17,8 +18,7 @@ const store = configureStore();
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
-
-
+store.dispatch(loadSubjects());
 render(
   <AppContainer>
     <Root store={store} history={history} />
