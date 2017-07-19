@@ -16,6 +16,13 @@ export function loadManagedBookSuccess(book) {
     };
 }
 
+export function setTabEventKey(eventKey) {
+    return {
+        type: types.SET_TAB_EVENT_KEY,
+        eventKey: eventKey
+    };
+}
+
 export function searchBooks(text) {
     return dispatch => {
         dispatch(ajaxActions.beginAjaxCall());

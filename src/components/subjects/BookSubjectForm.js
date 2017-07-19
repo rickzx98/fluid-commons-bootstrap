@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Subject from '../../api/subjects/Subject';
 
-export const BookSubjectForm = ({ subjects, onChange, managedSubject }) => {
+export const BookSubjectForm = ({ subjects, onChange, managedSubject, goToPrevious }) => {
     return (<form className="form container-fluid" onChange={event => event.preventDefault()}>
         <div className="form-group">
-            <button type="button" className="btn btn-warning">{LABEL_CANCEL}</button>
+            <button type="button" onClick={goToPrevious} className="btn btn-warning">{LABEL_CANCEL}</button>
             <button type="submit" className="btn btn-primary">{LABEL_SAVE}</button>
         </div>
         <div className="col-sm-12">
@@ -44,5 +44,6 @@ export const BookSubjectForm = ({ subjects, onChange, managedSubject }) => {
 BookSubjectForm.propTypes = {
     subjects: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
-    managedSubject: PropTypes.object.isRequired
+    managedSubject: PropTypes.object.isRequired,
+    goToPrevious: PropTypes.func.isRequired
 };

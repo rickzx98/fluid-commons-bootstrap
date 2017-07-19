@@ -13,12 +13,19 @@ export class ManageBookPage extends React.Component {
     }
     constructor(props) {
         super(props);
+        this.onSelectTab = this.onTabChanged.bind(this);
         this.onChangeBookEditForForm = this.onChangeBookEdit.bind(this);
     }
     render() {
         return (<div className="books page">
-            <BookItemEdit onChange={this.onChangeBookEditForForm} book={this.props.managedBook} />
+            <BookItemEdit
+                onSelectTab={this.onSelectTab}
+                onChange={this.onChangeBookEditForForm}
+                tabEventKey={this.props.managedBook.tabEventKey} />
         </div>);
+    }
+    onTabChanged(activeKey) {
+        this.props.actions.setTabEventKey(activeKey);
     }
     onChangeBookEdit(bookForm) {
         console.log('bookForm', bookForm);

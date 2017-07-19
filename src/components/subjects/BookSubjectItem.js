@@ -8,6 +8,5 @@ export const BookSubjectItem = ({ subject, onChange, index }) => {
 
 BookSubjectItem.propTypes = {
     index: PropTypes.number.isRequired,
-    subjects: PropTypes.array.isRequired,
-    managedBook: PropTypes.object.isRequired
+    subjects: PropTypes.array.isRequired
 };
