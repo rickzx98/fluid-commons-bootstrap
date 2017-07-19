@@ -7,6 +7,7 @@ export default {
   subjects: [],
   subject: {
     level: '#',
-    thesaurus: 0
+    thesaurus: 0,
+    subjectFormat: '#0'
   }
 };

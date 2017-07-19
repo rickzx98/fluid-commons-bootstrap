@@ -1,7 +1,6 @@
 import { DatePicker, FormGroup, TextInput } from '../../common/';
 
 import Book from '../../../api/books/Book';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 export const BookInformation = () => {
@@ -18,5 +17,5 @@ export const BookInformation = () => {
         <FormGroup label="Published Date" name={Book.PUBLISHED_DATE} required={true}>
             <DatePicker />
         </FormGroup>
-    </span>)
-}
+    </span>);
+};

@@ -6,14 +6,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Subject from '../../api/subjects/Subject';
 
-export const BookSubjectForm = ({ subjects, onChange, managedSubject, goToPrevious }) => {
-    return (<form className="form container-fluid" onChange={event => event.preventDefault()}>
+export const BookSubjectForm = ({ subjects, onChange, managedSubject, goToPrevious, addSubjectToManagedBook }) => {
+    return (<form className="form container-fluid" onSubmit={event => {
+        event.preventDefault();
+        addSubjectToManagedBook(managedSubject[Subject.SUBJECT_FORMAT]);
+    }}>
         <div className="form-group">
             <button type="button" onClick={goToPrevious} className="btn btn-warning">{LABEL_CANCEL}</button>
             <button type="submit" className="btn btn-primary">{LABEL_SAVE}</button>
         </div>
         <div className="col-sm-12">
-            <TextInput disabled={true} label="Subject Format" name={Subject.SUBJECT_FORMAT} value={managedSubject[Subject.SUBJECT_FORMAT]}></TextInput>
+            <TextInput disabled={true} label="Subject Format" name={Subject.SUBJECT_FORMAT} value={managedSubject[Subject.SUBJECT_FORMAT]} />
         </div>
         <div className="col-sm-4">
             <h3>{LABEL_MAIN_TERM}</h3>
@@ -38,12 +41,13 @@ export const BookSubjectForm = ({ subjects, onChange, managedSubject, goToPrevio
             <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Chronological subdivision" name={Subject.CHRONOLOGICAL_SUBDIVISION} />
             <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Geographic subdivision" name={Subject.GEOGRAPHIC_SUBDIVISION} />
         </div>
-    </form>)
+    </form>);
 };
 
 BookSubjectForm.propTypes = {
     subjects: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
     managedSubject: PropTypes.object.isRequired,
-    goToPrevious: PropTypes.func.isRequired
+    goToPrevious: PropTypes.func.isRequired,
+    addSubjectToManagedBook: PropTypes.func.isRequired
 };

@@ -25,7 +25,7 @@ export const TextInput = ({ type = 'text', disabled, required, label, onChange, 
                         onChange(name, event.target.value);
                     }
                 }} placeholder={label} />
-            {!valid ? <span className="glyphicon glyphicon-remove form-control-feedback"></span> : ''}
+            {!valid ? <span className="glyphicon glyphicon-remove form-control-feedback" /> : ''}
         </div>
         {!valid ? <div className="text-warning"><p>{message}</p></div> : ''}
     </div>);
@@ -33,5 +33,12 @@ export const TextInput = ({ type = 'text', disabled, required, label, onChange, 
 
 TextInput.propTypes = {
     name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    onChange: PropTypes.func,
+    message: PropTypes.string,
+    validator: PropTypes.func,
+    value: PropTypes.string
 };

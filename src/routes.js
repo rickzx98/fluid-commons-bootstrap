@@ -14,6 +14,7 @@ export default (
     <Route path="books/new" component={ConnectedManageBookPage} />
     <Route path="books/:id" component={ConnectedManageBookPage} />
     <Route path="books/subjects/:index" component={ConnectedManagedSubjectPage} />
+    <Route path="books/subjects/new" component={ConnectedManagedSubjectPage} />
     <Route path="*" component={NotFoundPage} />
   </Route>
 );

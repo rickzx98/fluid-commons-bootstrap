@@ -1,6 +1,6 @@
-import { delay, generateUID } from '../../utils/';
+import { contains, delay, generateUID } from '../../utils/';
 
-import Subject from './Subject';
+//import Subject from './Subject';
 
 const SAMPLE_SUBJECTS = [
     { id: '1', name: 'Television' },
@@ -14,7 +14,7 @@ const SAMPLE_SUBJECTS = [
     { id: '9', name: 'Hotdogs' }
 ];
 
-export default class Api {
+export class Api {
     static createSubject(subject) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -53,7 +53,7 @@ export default class Api {
                         foundSubjects.push(Object.assign({}, subject));
                     }
                 });
-                resolve(foundSubject);
+                resolve(foundSubjects);
             }, 200);
         });
     }

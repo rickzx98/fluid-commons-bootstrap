@@ -12,19 +12,23 @@ export class ManagedSubjectPage extends React.Component {
         super(props);
         this.onChangeForm = this.onChange.bind(this);
         this.goToPreviousPage = this.goToPrevious.bind(this);
+        this.addSubjectToManagedBook = this.addSubject.bind(this);
     }
     onChange(field, value) {
         this.props.actions.setManagedSubjectFieldValue(field, value);
     }
+    addSubject(subject) {
+        this.props.actions.addSubjectToManagedBook(subject);
+        this.goToPrevious();
+    }
     goToPrevious() {
-        if (this.props.previousPath) {
-            browserHistory.goBack();
-        }
+        browserHistory.goBack();
     }
     render() {
         return (<div className="page">
             <BookSubjectForm
                 managedSubject={this.props.managedSubject}
+                addSubjectToManagedBook={this.addSubjectToManagedBook}
                 onChange={this.onChangeForm}
                 goToPrevious={this.goToPreviousPage}
                 subjects={this.props.subjects} />
@@ -33,14 +37,15 @@ export class ManagedSubjectPage extends React.Component {
 }
 
 ManagedSubjectPage.propTypes = {
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    subjects: PropTypes.array.isRequired,
+    managedSubject: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
         subjects: state.subjects,
-        managedSubject: state.managedSubject,
-        previousPath: state.routing && state.routing.locationBeforeTransitions ? state.routing.locationBeforeTransitions.pathname : undefined
+        managedSubject: state.managedSubject
     };
 }
 function mapDispatchToProps(dispatch) {

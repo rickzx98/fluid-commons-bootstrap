@@ -1,2 +1,1 @@
-const delay = 1000;
-export default delay;
+export const delay = 1000;

@@ -4,16 +4,15 @@ import { BookSubjectList } from '../components/subjects/BookSubjectList';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 export class SubjectsPage extends React.Component {
-    componentDidMount() {
+    componentWillMount() {
         this.props.actions.loadSubjects();
     }
     render() {
         return (<div className="subjects">
-            <BookSubjectList subjects={this.props.subjects}
+            <BookSubjectList removeSubject={this.props.actions.removeManagedBookSubject} subjects={this.props.subjects}
                 managedBook={this.props.managedBook} />
         </div>);
     }
@@ -21,7 +20,8 @@ export class SubjectsPage extends React.Component {
 
 SubjectsPage.propTypes = {
     actions: PropTypes.object.isRequired,
-    subjects: PropTypes.array.isRequired
+    subjects: PropTypes.array.isRequired,
+    managedBook: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

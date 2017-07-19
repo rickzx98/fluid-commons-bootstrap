@@ -1,7 +1,7 @@
 import * as ajaxActions from './AjaxStatusActions';
 import * as types from './';
 
-import api from '../api/subjects/';
+import { getApi as subjectsApi } from '../api/subjects/';
 
 export function loadSubjectSuccess(subjects) {
     return {
@@ -13,7 +13,7 @@ export function loadManagedSubjectSuccess(subject) {
     return {
         type: types.LOAD_MANAGED_SUBJECT_SUCCESS,
         subject: subject
-    }
+    };
 }
 export function setManagedSubjectFieldValue(field, value) {
     return {
@@ -28,10 +28,18 @@ export function addSubjectToManagedBook(subject) {
         subject: subject
     };
 }
+
+export function removeManagedBookSubject(index) {
+    return {
+        type: types.REMOVE_MANAGED_BOOK_SUBJECT,
+        index: index
+    };
+}
+
 export function searchSubjects(text) {
     return dispatch => {
         dispatch(ajaxActions.beginAjaxCall());
-        return api.searchSubjects(text).then(books => {
+        return subjectsApi().searchSubjects(text).then(books => {
             dispatch(loadSubjectSuccess(books));
         }).catch(error => {
             dispatch(ajaxActions.ajaxCallError(error));
@@ -41,7 +49,7 @@ export function searchSubjects(text) {
 export function loadSubjects() {
     return dispatch => {
         dispatch(ajaxActions.beginAjaxCall());
-        return api.getAllSubjects().then(books => {
+        return subjectsApi().getAllSubjects().then(books => {
             dispatch(loadSubjectSuccess(books));
         }).catch(error => {
             dispatch(ajaxActions.ajaxCallError(error));

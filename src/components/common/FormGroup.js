@@ -12,5 +12,6 @@ export const FormGroup = ({ label, required, name, children }) => {
 FormGroup.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
+    required: PropTypes.bool
 };

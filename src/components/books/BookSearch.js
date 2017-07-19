@@ -1,4 +1,4 @@
-import { LABEL_ADD_BOOK, LABEL_SEARCH_BOOKS } from '../../labels/'
+import { LABEL_ADD_BOOK, LABEL_SEARCH_BOOKS } from '../../labels/';
 
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,7 +12,7 @@ export const BookSearch = ({ searchBooks, createBook }) => {
             searchBooks(event.target.value);
         }} />
     </div>);
-}
+};
 
 BookSearch.propTypes = {
     searchBooks: PropTypes.func.isRequired,

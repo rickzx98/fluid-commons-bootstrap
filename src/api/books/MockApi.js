@@ -22,7 +22,7 @@ const BOOK_DATA = [
     createMockBook(generateUID(), 'Harry Potter', 'and the goblet of fire', ' Rowling, J. K', 'hp_tgof.jpg'),
     createMockBook(generateUID(), 'Harry Potter', 'and the half blood prince', ' Rowling, J. K', 'hp_thbp.jpg'),
     createMockBook(generateUID(), 'Harry Potter', 'and the deathly hallows', ' Rowling, J. K', 'hp_atdh.jpg')];
-export default class Api {
+export class Api {
     static createBook(book) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -76,6 +76,6 @@ function createMockBook(id, title, subtitle, author, imageUrl) {
         '17$aCareer Exploration.$2ericd',
         '#0$aBallads, English$zHudson River Valley (N.Y. and N.J.)',
         '#0$aRain and rainfall$zWashington (State)$zSeattle$vMaps'
-    ]
+    ];
     return book;
 }

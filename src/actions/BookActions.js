@@ -1,7 +1,7 @@
 import * as ajaxActions from './AjaxStatusActions';
 import * as types from './';
 
-import api from '../api/books';
+import { getApi as booksApi } from '../api/books';
 
 export function loadBooksSuccess(books) {
     return {
@@ -22,11 +22,10 @@ export function setTabEventKey(eventKey) {
         eventKey: eventKey
     };
 }
-
 export function searchBooks(text) {
     return dispatch => {
         dispatch(ajaxActions.beginAjaxCall());
-        return api.searchBooks(text).then(books => {
+        return booksApi().searchBooks(text).then(books => {
             dispatch(loadBooksSuccess(books));
         }).catch(error => {
             dispatch(ajaxActions.ajaxCallError(error));
@@ -36,7 +35,7 @@ export function searchBooks(text) {
 export function loadBooks() {
     return dispatch => {
         dispatch(ajaxActions.beginAjaxCall());
-        return api.getAllBooks().then(books => {
+        return booksApi().getAllBooks().then(books => {
             dispatch(loadBooksSuccess(books));
         }).catch(error => {
             dispatch(ajaxActions.ajaxCallError(error));

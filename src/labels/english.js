@@ -9,3 +9,4 @@ export const LABEL_ADD_SUBJECT = 'Add subject';
 export const LABEL_CANCEL = 'Cancel';
 export const LABEL_MAIN_TERM = 'Main Term';
 export const LABEL_SUBJECT_SUBDIVISION = 'Subject subdivision';
+export const LABEL_REMOVE = 'Remove';

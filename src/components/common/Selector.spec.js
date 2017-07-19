@@ -11,7 +11,7 @@ describe('<Selector />', () => {
             value: 'sampleValue2',
             label: 'sampleLabel2'
         }];
-        const wrapper = shallow(<Selector label="Sample" name="sample" listItems={listItems} />);
+        const wrapper = shallow(<Selector label="Sample" name="sample" options={listItems} />);
         const actual = wrapper.find('option');
         expect(actual.at(0).text()).toEqual('sampleLabel');
         expect(actual.at(1).text()).toEqual('sampleLabel2');

@@ -3,7 +3,7 @@ import { BookRow } from './BookRow';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const BookTable = ({ books, searchBooks }) => {
+export const BookTable = ({ books }) => {
     const booksElement = [];
     books.forEach(book => {
         booksElement.push(<BookRow key={book[Book.BOOK_ID]} book={book} />);
@@ -16,7 +16,7 @@ export const BookTable = ({ books, searchBooks }) => {
                 <th title="Editon">Editon</th>
                 <th title="Author">Author</th>
                 <th title="Publisher">Publisher</th>
-                <th title="Action"></th>
+                <th title="Action" />
             </tr>
         </thead>
         <tbody>

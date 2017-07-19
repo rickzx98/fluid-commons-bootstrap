@@ -1,15 +1,12 @@
-import DatePicker from 'react-bootstrap-date-picker';
-import { FormGroup } from './FormGroup';
-import { Header } from './Header';
-import { SearchSelector } from './SearchSelector';
-import { Selector } from './Selector';
-import { TextInput } from './TextInput';
+import ReactBootstrapDatePicker from 'react-bootstrap-date-picker';
 
-module.exports = {
-    Header,
-    TextInput,
-    DatePicker,
-    FormGroup,
-    SearchSelector,
-    Selector
-};
+export { SearchSelector } from './SearchSelector';
+export { Selector } from './Selector';
+export { TextInput } from './TextInput';
+
+export { FormGroup } from './FormGroup';
+export { Header } from './Header';
+
+export const DatePicker = ReactBootstrapDatePicker;
+
+

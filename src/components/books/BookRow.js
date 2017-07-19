@@ -2,7 +2,6 @@ import Book from '../../api/books/Book';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { browserHistory } from 'react-router';
 
 export const BookRow = ({ book }) => {
     return (<tr className="book-item">

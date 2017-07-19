@@ -20,12 +20,17 @@ export const SearchSelector = ({ options, label, name, labelKey, onChange, requi
     };
     return (<FormGroup name={name} label={label} required={required}>
         <Typeahead value={value} onInputChange={eventOnChange} placeholder={label} name={name} onChange={eventOnChange} labelKey={labelKey} options={options} />
-    </FormGroup>)
+    </FormGroup>);
 };
 
 SearchSelector.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     labelKey: PropTypes.string.isRequired,
-    options: PropTypes.array.isRequired
+    options: PropTypes.array.isRequired,
+    valueKey: PropTypes.string,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool,
+    onChange: PropTypes.func,
+    value: PropTypes.string
 };

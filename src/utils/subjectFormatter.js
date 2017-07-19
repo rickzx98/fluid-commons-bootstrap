@@ -1,6 +1,6 @@
 import Subject from '../api/subjects/Subject';
 
-export default function subjectFormatter(subject) {
+export function subjectFormatter(subject) {
     return getIndicatorValue(Subject.LEVEL_OF_SUBJECT, subject) +
         getIndicatorValue(Subject.THESAURUS, subject) +
         getValue(Subject.TOPICAL_TERM_OR_GEOGRAPHIC_NAME_ENTRY, subject) +
