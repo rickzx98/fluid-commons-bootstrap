@@ -6,7 +6,7 @@ import React from 'react';
 export const BookSearch = ({ searchBooks, createBook }) => {
     return (<div className="book-search input-group">
         <div className="input-group-btn">
-            <button onClick={createBook} type="button" className="btn btn-primary">{LABEL_ADD_BOOK}</button>
+            <button onClick={createBook} type="button" className="btn btn-success">{LABEL_ADD_BOOK}</button>
         </div>
         <input type="text" className="form-control" placeholder={LABEL_SEARCH_BOOKS} onChange={event => {
             searchBooks(event.target.value);

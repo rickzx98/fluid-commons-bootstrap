@@ -14,6 +14,11 @@ export class ManagedSubjectPage extends React.Component {
         this.goToPreviousPage = this.goToPrevious.bind(this);
         this.addSubjectToManagedBook = this.addSubject.bind(this);
     }
+    componentWillMount() {
+        if (!this.props.managedSubject.active && this.props.subject) {
+            this.props.actions.loadManagedSubjectSuccess(this.props.subject);
+        }
+    }
     onChange(field, value) {
         this.props.actions.setManagedSubjectFieldValue(field, value);
     }
@@ -39,14 +44,23 @@ export class ManagedSubjectPage extends React.Component {
 ManagedSubjectPage.propTypes = {
     actions: PropTypes.object.isRequired,
     subjects: PropTypes.array.isRequired,
+    subject: PropTypes.object,
     managedSubject: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
     return {
         subjects: state.subjects,
-        managedSubject: state.managedSubject
+        managedSubject: state.managedSubject,
+        subject: getSubjectByIndex(state.managedBook.subjects, ownProps.routeParams.index)
     };
+}
+function getSubjectByIndex(subjects, index) {
+    if (subjects && index) {
+        //TODO: create converter here 
+        console.log('needs converter', subjects[index]);
+    }
+
 }
 function mapDispatchToProps(dispatch) {
     return {

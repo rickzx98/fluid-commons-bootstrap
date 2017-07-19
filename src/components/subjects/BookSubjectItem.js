@@ -8,7 +8,7 @@ export const BookSubjectItem = ({ subject, removeSubject, index }) => {
 };
 
 BookSubjectItem.propTypes = {
-    idnex: PropTypes.number.isRequired,
+    index: PropTypes.number,
     removeSubject: PropTypes.func.isRequired,
     subject: PropTypes.string.isRequired
 };

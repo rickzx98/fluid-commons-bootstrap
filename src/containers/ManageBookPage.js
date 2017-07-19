@@ -17,7 +17,7 @@ export class ManageBookPage extends React.Component {
         this.addSubject = this.onAddSubject.bind(this);
     }
     componentWillMount() {
-        if (!this.props.managedBook.active) {
+        if (!this.props.managedBook.active && this.props.book) {
             this.props.actions.loadManagedBookSuccess(this.props.book);
         }
     }
@@ -44,7 +44,7 @@ export class ManageBookPage extends React.Component {
 ManageBookPage.propTypes = {
     actions: PropTypes.object.isRequired,
     managedBook: PropTypes.object.isRequired,
-    book: PropTypes.object.isRequired
+    book: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {

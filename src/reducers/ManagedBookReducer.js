@@ -5,7 +5,9 @@ import initialState from './initialState';
 export default function managedBookReducer(state = initialState.book, action) {
     switch (action.type) {
         case REMOVE_MANAGED_BOOK_SUBJECT: {
-            return state;
+            const subjects = [...state.subjects];
+            subjects.splice(action.index, 1);
+            return Object.assign({}, { ...state, subjects });
         }
         case LOAD_MANAGED_BOOK_SUCCESS: {
             if (!action.book) {
@@ -18,7 +20,7 @@ export default function managedBookReducer(state = initialState.book, action) {
         }
         case ADD_SUBJECT_TO_MANAGED_BOOK: {
             const subjects = [...state.subjects, action.subject];
-            return Object.assign({}, { ...state, subjects });
+            return Object.assign({}, { ...state, subjects, active: false });
         }
         case SET_TAB_EVENT_KEY: { return Object.assign({}, { ...state, tabEventKey: action.eventKey }); }
         default:
