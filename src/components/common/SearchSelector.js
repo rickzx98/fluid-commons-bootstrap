@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
-export const SearchSelector = ({ options, label, name, labelKey, onChange, required, valueKey, value }) => {
+export const SearchSelector = ({ options, label, name, labelKey, onChange, required, valueKey, value, multiple }) => {
     const eventOnChange = (currentValue) => {
         if (onChange) {
             if (value instanceof Array) {
@@ -19,7 +19,7 @@ export const SearchSelector = ({ options, label, name, labelKey, onChange, requi
         }
     };
     return (<FormGroup name={name} label={label} required={required}>
-        <Typeahead value={value} onInputChange={eventOnChange} placeholder={label} name={name} onChange={eventOnChange} labelKey={labelKey} options={options} />
+        <Typeahead clearButton={multiple} multiple={multiple} value={value} onInputChange={eventOnChange} placeholder={label} name={name} onChange={eventOnChange} labelKey={labelKey} options={options} />
     </FormGroup>);
 };
 
@@ -32,5 +32,6 @@ SearchSelector.propTypes = {
     disabled: PropTypes.bool,
     required: PropTypes.bool,
     onChange: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
+    multiple: PropTypes.bool
 };

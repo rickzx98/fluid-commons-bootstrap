@@ -22,24 +22,24 @@ export const BookSubjectForm = ({ subjects, onChange, managedSubject, goToPrevio
             <h3>{LABEL_MAIN_TERM}</h3>
             <Selector onChange={onChange} options={getAllFirstIndicatorTopicalTermsForDropDown()} label="Level of subject" name={Subject.LEVEL_OF_SUBJECT} />
             <Selector onChange={onChange} options={getAllSecondIndicatorTopicalTermsForDropDown()} label="Thesaurus" name={Subject.THESAURUS} />
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Topical term or geographic name entry element" name={Subject.TOPICAL_TERM_OR_GEOGRAPHIC_NAME_ENTRY} />
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Topical term following geographic name entry element" name={Subject.TOPICAL_TERM_FOLLOWING} />
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Location of event" name={Subject.LOCATION_OF_EVENT} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Topical term or geographic name entry element" name={Subject.TOPICAL_TERM_OR_GEOGRAPHIC_NAME_ENTRY} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Topical term following geographic name entry element" name={Subject.TOPICAL_TERM_FOLLOWING} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Location of event" name={Subject.LOCATION_OF_EVENT} />
 
         </div>
         <div className="col-sm-4">
             <h3 className="clearfix">&nbsp;</h3>
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Active dates" name={Subject.ACTIVE_DATES} />
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Relator term" name={Subject.RELATOR_TERM} />
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Miscellaneous information" name={Subject.MISC_INFO} />
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Relationship" name={Subject.RELATIONSHIP} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Active dates" name={Subject.ACTIVE_DATES} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Relator term" name={Subject.RELATOR_TERM} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Miscellaneous information" name={Subject.MISC_INFO} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Relationship" name={Subject.RELATIONSHIP} />
         </div>
         <div className="col-sm-4">
             <h3>{LABEL_SUBJECT_SUBDIVISION}</h3>
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Form subdivision " name={Subject.FORM_SUBDIVISION} />
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="General subdivision" name={Subject.GENERAL_SUBDIVISION} />
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Chronological subdivision" name={Subject.CHRONOLOGICAL_SUBDIVISION} />
-            <SearchSelector valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Geographic subdivision" name={Subject.GEOGRAPHIC_SUBDIVISION} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Form subdivision " name={Subject.FORM_SUBDIVISION} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="General subdivision" name={Subject.GENERAL_SUBDIVISION} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Chronological subdivision" name={Subject.CHRONOLOGICAL_SUBDIVISION} />
+            <SearchSelector multiple={true} valueKey="value" onChange={onChange} options={getAllSubjectsForDropDown(subjects)} labelKey="label" label="Geographic subdivision" name={Subject.GEOGRAPHIC_SUBDIVISION} />
         </div>
     </form>);
 };
