@@ -4,25 +4,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
-export const SearchSelector = ({ options, label, name, labelKey, onChange, required, valueKey, value, multiple, disabled }) => {
+export const SearchSelector = ({ options, label, name, labelKey, onChange, required, value, multiple, disabled }) => {
     const eventOnChange = (currentValue) => {
         if (onChange) {
-            if (value instanceof Array) {
-                const newValue = valueKey ? currentValue[0][valueKey] : currentValue[0];
-                if (newValue.toLowerCase() !== value) {
-                    onChange(name, newValue);
-                }
-            } else {
-                if (currentValue.toLowerCase !== value) {
-                    onChange(name, currentValue);
-                }
-            }
+            onChange(name, currentValue);
         }
     };
     const typeaheadProps = {
         multiple, value,
         labelKey, options,
-        disabled, name, 
+        disabled, name,
         minLength: 2,
         onInputChange: eventOnChange,
         onChange: eventOnChange,

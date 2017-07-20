@@ -1,5 +1,6 @@
+import { convertToSubject, subjectFormatter } from './';
+
 import Subject from '../api/subjects/Subject';
-import { convertToSubject } from './';
 
 describe('Util', () => {
 
@@ -12,6 +13,20 @@ describe('Util', () => {
             expect(subject[Subject.TOPICAL_TERM_OR_GEOGRAPHIC_NAME_ENTRY]).toEqual('Rain and rainfall');
             expect(subject[Subject.GEOGRAPHIC_SUBDIVISION] instanceof Array).toEqual(true);
             expect(subject[Subject.FORM_SUBDIVISION]).toEqual('Maps.');
+        });
+    });
+
+    describe('subjectFormatter', () => {
+        it('should get the marc code from subject object', () => {
+            const state = {};
+            state[Subject.LEVEL_OF_SUBJECT] = '#';
+            state[Subject.THESAURUS] = '1';
+            state[Subject.TOPICAL_TERM_OR_GEOGRAPHIC_NAME_ENTRY] = ['hello', 'hi'];
+            state[Subject.TOPICAL_TERM_FOLLOWING] = ['sigh'];
+
+            const marc = subjectFormatter(state);
+            console.log('marc', marc);
+            expect(marc).toEqual('#1$ahello$ahi$bsigh');
         });
     });
 

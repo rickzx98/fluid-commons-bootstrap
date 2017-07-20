@@ -19,5 +19,13 @@ function getIndicatorValue(field, subject) {
     return subject[field] || '';
 }
 function getValue(field, subject) {
-    return subject[field] ? field + subject[field] : '';
+    return subject[field] ? iterateValue(subject[field], field) : '';
+}
+
+function iterateValue(arraySubject, field) {
+    let value = '';
+    arraySubject.forEach(subject => {
+        value += (field + subject);
+    });
+    return value;
 }
