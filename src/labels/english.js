@@ -10,3 +10,5 @@ export const LABEL_CANCEL = 'Cancel';
 export const LABEL_MAIN_TERM = 'Main Term';
 export const LABEL_SUBJECT_SUBDIVISION = 'Subject subdivision';
 export const LABEL_REMOVE = 'Remove';
+export const LABEL_ADD_NEW = 'Add new';
+export const LABEL_CHOOSE_A = 'Choose a';

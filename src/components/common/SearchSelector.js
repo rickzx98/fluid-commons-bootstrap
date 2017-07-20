@@ -1,9 +1,10 @@
 import { FormGroup } from './FormGroup';
+import { LABEL_ADD_NEW } from '../../labels/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
-export const SearchSelector = ({ options, label, name, labelKey, onChange, required, valueKey, value, multiple }) => {
+export const SearchSelector = ({ options, label, name, labelKey, onChange, required, valueKey, value, multiple, disabled }) => {
     const eventOnChange = (currentValue) => {
         if (onChange) {
             if (value instanceof Array) {
@@ -18,8 +19,18 @@ export const SearchSelector = ({ options, label, name, labelKey, onChange, requi
             }
         }
     };
+    const typeaheadProps = {
+        multiple, value,
+        labelKey, options,
+        disabled, name, 
+        minLength: 2,
+        onInputChange: eventOnChange,
+        onChange: eventOnChange,
+        placeholder: `${label.toLowerCase()}...`,
+        newSelectionPrefix: `${LABEL_ADD_NEW} ${label.toLowerCase()}: `
+    };
     return (<FormGroup name={name} label={label} required={required}>
-        <Typeahead clearButton={multiple} multiple={multiple} value={value} onInputChange={eventOnChange} placeholder={label} name={name} onChange={eventOnChange} labelKey={labelKey} options={options} />
+        <Typeahead allowNew {...typeaheadProps} />
     </FormGroup>);
 };
 
