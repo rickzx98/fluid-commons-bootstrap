@@ -7,15 +7,15 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 export const SearchSelector = ({ options, label, name, labelKey, onChange, required, value, multiple, disabled }) => {
     const eventOnChange = (currentValue) => {
         if (onChange) {
-            onChange(name, currentValue);
+            onChange(name, currentValue.map(cur => name ? cur[labelKey] : cur));
         }
     };
     const typeaheadProps = {
-        multiple, value,
+        multiple,
         labelKey, options,
         disabled, name,
+        selected: value,
         minLength: 2,
-        onInputChange: eventOnChange,
         onChange: eventOnChange,
         placeholder: `${label.toLowerCase()}...`,
         newSelectionPrefix: `${LABEL_ADD_NEW} ${label.toLowerCase()}: `

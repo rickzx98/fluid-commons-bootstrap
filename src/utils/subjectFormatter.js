@@ -24,8 +24,10 @@ function getValue(field, subject) {
 
 function iterateValue(arraySubject, field) {
     let value = '';
-    arraySubject.forEach(subject => {
-        value += (field + subject);
-    });
+    if (arraySubject) {
+        arraySubject.forEach(subject => {
+            value += (field + subject);
+        });
+    }
     return value;
 }
