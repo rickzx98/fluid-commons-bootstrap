@@ -35,7 +35,19 @@ export function removeManagedBookSubject(index) {
         index: index
     };
 }
+export function cancelManagedSubject() {
+    return {
+        type: types.CANCEL_MANAGED_SUBJECT
+    };
+}
 
+export function updateManagedSubject(subject, index) {
+    return {
+        type: types.UPDATE_MANAGED_SUBJECT,
+        index,
+        subject
+    };
+}
 export function searchSubjects(text) {
     return dispatch => {
         dispatch(ajaxActions.beginAjaxCall());

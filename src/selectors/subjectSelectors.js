@@ -20,13 +20,13 @@ export function getAllFirstIndicatorTopicalTermsForDropDown() {
         value: '#',
         label: 'No information provided'
     }, {
-        value: 0,
+        value: '0',
         label: 'No level specified'
     }, {
-        value: 1,
+        value: '1',
         label: 'Primary'
     }, {
-        value: 2,
+        value: '2',
         label: 'Secondary'
     }];
 }

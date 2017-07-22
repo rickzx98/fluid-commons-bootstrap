@@ -1,4 +1,4 @@
-import { ADD_SUBJECT_TO_MANAGED_BOOK, LOAD_MANAGED_SUBJECT_SUCCESS, SET_MANAGED_SUBJECT_FIELD_VALUE } from '../actions/';
+import { ADD_SUBJECT_TO_MANAGED_BOOK, CANCEL_MANAGED_SUBJECT, LOAD_MANAGED_SUBJECT_SUCCESS, SET_MANAGED_SUBJECT_FIELD_VALUE, UPDATE_MANAGED_SUBJECT } from '../actions/';
 
 import Subject from '../api/subjects/Subject';
 import initialState from './initialState';
@@ -14,6 +14,7 @@ export default function managedSubjectReducer(state = initialState.subject, acti
             } else {
                 state = Object.assign({}, { ...state, ...action.subject });
             }
+            state[Subject.SUBJECT_FORMAT] = subjectFormatter(state);
             state.active = true;
             return state;
         }
@@ -21,8 +22,11 @@ export default function managedSubjectReducer(state = initialState.subject, acti
             state = Object.assign({}, { ...state });
             state[action.field] = action.value;
             state[Subject.SUBJECT_FORMAT] = subjectFormatter(state);
+            state.edited = true;
             return state;
         case ADD_SUBJECT_TO_MANAGED_BOOK:
+        case UPDATE_MANAGED_SUBJECT:
+        case CANCEL_MANAGED_SUBJECT:
             return initialState.subject;
         default:
             return state;

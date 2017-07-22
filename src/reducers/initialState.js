@@ -1,12 +1,16 @@
 export default {
   books: [],
   book: {
+    update: false,
+    touched: false,
+    active: false,
     tabEventKey: 'bookInfo',
-    subjects: [],
-    active: false
+    subjects: []
   },
   subjects: [],
   subject: {
+    update: false,
+    touched: false,
     active: false,
     level: '#',
     thesaurus: 0,

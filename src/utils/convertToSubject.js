@@ -15,17 +15,11 @@ export function convertToSubject(marcCode) {
         } else if (isMarcField(dollar + code)) {
             if (prevCode && field.length > 0) {
                 if (subject[prevCode]) {
-                    let subar;
-                    if (subject[prevCode] instanceof Array) {
-                        subar = [...subject[prevCode], field];
-                    } else {
-                        subar = [subject[prevCode], field];
-                    }
+                    let subar = [...subject[prevCode], field];
                     subject[prevCode] = subar;
                 } else {
-                    subject[prevCode] = field;
+                    subject[prevCode] = [field];
                 }
-
             }
             prevCode = dollar + code;
             dollar = '';
@@ -34,7 +28,7 @@ export function convertToSubject(marcCode) {
             field += code;
         }
         if (i === marcCode.length - 1) {
-            subject[prevCode] = field;
+            subject[prevCode] = [field];
         }
     }
     return subject;

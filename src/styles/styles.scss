@@ -1,4 +1,5 @@
 /* Variables */
+
 @import '../components/common/common.scss';
 @import '../components/subjects/subjects.scss';
 @import '../components/books/books.scss';
@@ -53,8 +54,21 @@ td.fuel-savings-label {
     float: left;
 }
 
+@mixin placeholderColor($color) {
+    & :-moz-placeholder,
+     ::-ms-input-placeholder,
+     ::-moz-placeholder,
+     ::-webkit-input-placeholder {
+        color: $color;
+    }
+}
+
 .form-group {
     label {
         font-weight: 600;
+    }
+    .form-control {
+        color: black;
+        font-weight: 500;
     }
 }

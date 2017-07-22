@@ -34,6 +34,6 @@ SearchSelector.propTypes = {
     disabled: PropTypes.bool,
     required: PropTypes.bool,
     onChange: PropTypes.func,
-    value: PropTypes.string,
+    value: PropTypes.array,
     multiple: PropTypes.bool
 };
