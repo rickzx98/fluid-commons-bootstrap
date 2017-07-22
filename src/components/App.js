@@ -1,3 +1,4 @@
+import { ConnectAppModelPage } from '../containers/AppModalPage';
 import { Header } from './common/';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -9,6 +10,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <ConnectAppModelPage />
         <Header {...this.props} />
         {this.props.children}
       </div>

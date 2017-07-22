@@ -22,7 +22,8 @@ export default function managedSubjectReducer(state = initialState.subject, acti
             state = Object.assign({}, { ...state });
             state[action.field] = action.value;
             state[Subject.SUBJECT_FORMAT] = subjectFormatter(state);
-            state.edited = true;
+            state.active = true;
+            state.touched = true;
             return state;
         case ADD_SUBJECT_TO_MANAGED_BOOK:
         case UPDATE_MANAGED_SUBJECT:

@@ -1,3 +1,4 @@
+import appModal from './AppModalReducer';
 import books from './BookReducer';
 import { combineReducers } from 'redux';
 import managedBook from './ManagedBookReducer';
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   subjects,
   managedBook,
   managedSubject,
+  dialog: appModal,
   routing: routerReducer
 });
 

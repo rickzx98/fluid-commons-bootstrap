@@ -1,6 +1,8 @@
 import * as actions from '../actions/BookSubjectActions';
 
-import { BookSubjectForm } from '../components/subjects/BookSubjectForm';
+import { BookSubjectForm, CancelSubjectModalBody, CancelSubjectModalFooter } from '../components/subjects/';
+import { LABEL_CONFIRM_CANCEL_SUBJECT_TITLE, LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES } from '../labels/';
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -15,11 +17,16 @@ export class ManagedSubjectPage extends React.Component {
         this.cancelManagedSubject = this.cancelSubject.bind(this);
         this.addSubjectToManagedBook = this.addSubject.bind(this);
         this.updateManagedSubject = this.updateSubject.bind(this);
+        this.onPageLeave = this.routerWillLeave.bind(this);
+        this.modalConfirmCancel = this.confirmCancel.bind(this);
     }
     componentWillMount() {
         if (!this.props.managedSubject.active && this.props.subject) {
             this.props.actions.loadManagedSubjectSuccess(this.props.subject);
         }
+    }
+    componentDidMount() {
+        this.props.router.setRouteLeaveHook(this.props.route, this.onPageLeave);
     }
     onChange(field, value) {
         this.props.actions.setManagedSubjectFieldValue(field, value);
@@ -32,12 +39,29 @@ export class ManagedSubjectPage extends React.Component {
         this.props.actions.updateManagedSubject(subject, this.props.routeParams.index);
         this.goToPrevious();
     }
-    cancelSubject() {
+    confirmCancel() {
         this.props.actions.cancelManagedSubject();
+        this.props.actions.closeDialog()
         this.goToPrevious();
+    }
+    cancelSubject() {
+        if (this.props.managedSubject.active && this.props.managedSubject.touched) {
+            this.props.actions.openDialogConfirmSubjectCancel({
+                title: LABEL_CONFIRM_CANCEL_SUBJECT_TITLE,
+                body: <CancelSubjectModalBody />,
+                footer: <CancelSubjectModalFooter confirmCancel={this.modalConfirmCancel} closeDialog={this.props.actions.closeDialog} />
+            });
+        } else {
+            this.goToPrevious();
+        }
     }
     goToPrevious() {
         browserHistory.goBack();
+    }
+    routerWillLeave() {
+        if (this.props.managedSubject.active && this.props.managedSubject.touched) {
+            return LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES;
+        }
     }
     render() {
         return (<div className="page">

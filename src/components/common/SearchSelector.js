@@ -17,7 +17,7 @@ export const SearchSelector = ({ options, label, name, labelKey, onChange, requi
         selected: value,
         minLength: 2,
         onChange: eventOnChange,
-        placeholder: `${label.toLowerCase()}...`,
+        placeholder: `${label}`,
         newSelectionPrefix: `${LABEL_ADD_NEW} ${label.toLowerCase()}: `
     };
     return (<FormGroup name={name} label={label} required={required}>

@@ -6,7 +6,7 @@ export { TextInput } from './TextInput';
 
 export { FormGroup } from './FormGroup';
 export { Header } from './Header';
-
+export { TextArea } from './TextArea';
 export const DatePicker = ReactBootstrapDatePicker;
 
 

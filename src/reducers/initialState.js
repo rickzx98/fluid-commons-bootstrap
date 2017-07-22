@@ -13,7 +13,21 @@ export default {
     touched: false,
     active: false,
     level: '#',
-    thesaurus: 0,
+    thesaurus: '0',
     subjectFormat: '#0'
+  },
+  dialog: {
+    showCloseButton: true,
+    title: 'Hello!',
+    body: 'body here...',
+    footer: 'footer here...',
+    show: false,
+    onEnter: () => { },
+    onEntered: () => { },
+    onEntering: () => { },
+    onExit: () => { },
+    onExited: () => { },
+    onExiting: () => { },
+    onHide: () => { }
   }
 };

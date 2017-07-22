@@ -33,6 +33,7 @@ export class ManageBookPage extends React.Component {
     render() {
         return (<div className="books page">
             <BookItemEdit
+                managedBook={this.props.managedBook}
                 addSubject={this.addSubject}
                 onSelectTab={this.onSelectTab}
                 onChange={this.onChangeBookEditForForm}

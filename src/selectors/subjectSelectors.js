@@ -33,28 +33,28 @@ export function getAllFirstIndicatorTopicalTermsForDropDown() {
 
 export function getAllSecondIndicatorTopicalTermsForDropDown() {
     return [{
-        value: 0,
+        value: '0',
         label: 'Library of Congress Subject Headings'
     }, {
-        value: 1,
+        value: '1',
         label: 'LC subject headings for children\'s literature'
     }, {
-        value: 2,
+        value: '2',
         label: 'Medical Subject Headings'
     }, {
-        value: 3,
+        value: '3',
         label: 'National Agricultural Library subject authority file'
     }, {
-        value: 4,
+        value: '4',
         label: 'Source not specified'
     }, {
-        value: 5,
+        value: '5',
         label: 'Canadian Subject Headings'
     }, {
-        value: 6,
+        value: '6',
         label: 'Répertoire de vedettes-matière'
     }, {
-        value: 7,
+        value: '7',
         label: 'Source specified in subfield $2'
     }];
 }

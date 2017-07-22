@@ -13,7 +13,15 @@ const SubjectFields = {
     GENERAL_SUBDIVISION: '$x',
     CHRONOLOGICAL_SUBDIVISION: '$y',
     GEOGRAPHIC_SUBDIVISION: '$z',
-    SUBJECT_FORMAT: 'subjectFormat'
+    SUBJECT_FORMAT: 'subjectFormat',
+    BARCODE: 'barcode',
+    LOCATION: 'location',
+    COST: 'cost',
+    VENDOR: 'vendor',
+    DATE: 'date',
+    CALL_NUMBER: 'callNumber',
+    CURRENCY: 'currency',
+    FUND: 'fund'
 };
 
 export default SubjectFields;

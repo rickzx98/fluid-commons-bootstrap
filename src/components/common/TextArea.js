@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const TextInput = ({ type = 'text', disabled, required, label, onChange, message, validator, name, value }) => {
+export const TextArea = ({ type = 'text', disabled, required, label, onChange, message, validator, name, value, rows, columns }) => {
     let valid = true;
     let inputClass = 'clearfix form-group';
     return (<div className={valid ? inputClass : inputClass + ' has-error'}>
         <label className="control-label hidden-xs" htmlFor={name}> {required ? <span className="text-warning">*&nbsp;</span> : ''}{label}</label>
         <div className="col-sm-12">
-            <input type={type}
+            <textarea type={type}
                 value={value}
+                rows={rows}
+                cols={columns}
                 disabled={disabled}
                 required={required}
                 className="form-control"
@@ -31,7 +33,7 @@ export const TextInput = ({ type = 'text', disabled, required, label, onChange, 
     </div>);
 };
 
-TextInput.propTypes = {
+TextArea.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     type: PropTypes.string,
@@ -40,5 +42,7 @@ TextInput.propTypes = {
     onChange: PropTypes.func,
     message: PropTypes.string,
     validator: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
+    rows: PropTypes.number,
+    columns: PropTypes.number
 };
