@@ -11,11 +11,11 @@ export const BookTable = ({ books }) => {
     return (<table className="table table-hover">
         <thead>
             <tr>
-                <th title="preview">Preview</th>
-                <th title="Title">Title</th>
-                <th title="Editon">Editon</th>
-                <th title="Author">Author</th>
-                <th title="Publisher">Publisher</th>
+                <th title="preview"></th>
+                <th className="hidden-xs" title="Title">Title</th>
+                <th className="hidden-xs" className="hidden-xs" title="Editon">Editon</th>
+                <th className="hidden-xs" title="Author">Author</th>
+                <th className="hidden-xs" title="Publisher">Publisher</th>
                 <th title="Action" />
             </tr>
         </thead>

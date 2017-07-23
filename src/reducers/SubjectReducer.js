@@ -3,10 +3,8 @@ import initialState from './initialState';
 
 //import objectAssign from 'object-assign';
 
-export default function subjectsReducer(state = initialState.subjects, action) {
+export default function subjectsReducer(state = initialState.settings, action) {
     switch (action.type) {
-        case LOAD_SUBJECT_SUCCESS:
-            return action.subjects;
         default:
             return state;
     }

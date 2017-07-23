@@ -1,0 +1,18 @@
+.settings {
+    .settings-form-field {
+        .settings-form-field-header {
+            border: none !important;
+            padding: 0;
+            padding-bottom: 4px;
+        }
+        .settings-form-field-value {
+            font-weight: 500;
+            button {
+                margin-right: 5px;
+            }
+        }
+        .settings-form-field-value-edit {
+            cursor: pointer;
+        }
+    }
+}
