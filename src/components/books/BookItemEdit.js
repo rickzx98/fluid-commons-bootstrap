@@ -11,7 +11,6 @@ import Tab from 'react-bootstrap/lib/Tab';
 import Tabs from 'react-bootstrap/lib/Tabs';
 
 export const BookItemEdit = ({ onChange, tabEventKey, onSelectTab, addSubject, managedBook }) => {
-    console.log('managedBook', managedBook);
     return (
         <form onChange={(event) => {
             event.preventDefault();

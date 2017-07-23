@@ -1,7 +1,7 @@
 import * as actions from '../actions/BookActions';
 
-import { BookSearch } from '../components/books/BookSearch';
-import { BookTable } from '../components/books/BookTable';
+import { BookPageHeader, BookSearch, BookTable } from '../components/books/';
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -21,6 +21,7 @@ export class BooksPage extends React.Component {
     }
     render() {
         return (<div className="books page">
+            <BookPageHeader />
             <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks} />
             <BookTable books={this.props.books} />
         </div>);

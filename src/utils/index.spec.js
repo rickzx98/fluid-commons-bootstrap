@@ -25,7 +25,6 @@ describe('Util', () => {
             state[Subject.TOPICAL_TERM_FOLLOWING] = ['sigh'];
 
             const marc = subjectFormatter(state);
-            console.log('marc', marc);
             expect(marc).toEqual('#1$ahello$ahi$bsigh');
         });
     });

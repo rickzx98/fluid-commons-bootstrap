@@ -1,5 +1,5 @@
 import { DatePicker, FormGroup, Selector, TextInput } from '../../common/';
-import { LABEL_BARCODE, LABEL_CALL_NUMBER, LABEL_COST, LABEL_CURRENCY, LABEL_DATE, LABEL_FUND, LABEL_LOCATION, LABEL_VENDOR } from '../../../labels/'
+import { LABEL_BARCODE, LABEL_CALL_NUMBER, LABEL_COST, LABEL_CURRENCY, LABEL_DATE, LABEL_FUND, LABEL_LOCATION, LABEL_VENDOR } from '../../../labels/';
 
 import Book from '../../../api/books/Book';
 import React from 'react';

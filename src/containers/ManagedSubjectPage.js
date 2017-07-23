@@ -41,7 +41,7 @@ export class ManagedSubjectPage extends React.Component {
     }
     confirmCancel() {
         this.props.actions.cancelManagedSubject();
-        this.props.actions.closeDialog()
+        this.props.actions.closeDialog();
         this.goToPrevious();
     }
     cancelSubject() {
@@ -80,7 +80,10 @@ ManagedSubjectPage.propTypes = {
     actions: PropTypes.object.isRequired,
     subjects: PropTypes.array.isRequired,
     subject: PropTypes.object,
-    managedSubject: PropTypes.object.isRequired
+    managedSubject: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
+    routeParams: PropTypes.object.isRequired,
+    route:PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

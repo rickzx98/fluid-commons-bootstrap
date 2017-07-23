@@ -19,7 +19,8 @@ export const LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES = 'You still have unsaved 
 export const LABEL_CONFIRM_CANCEL_SUBJECT_TITLE = 'Cancel subject confirmation';
 export const LABEL_YES_PLEASE = 'Yes, please';
 export const LABEL_NO_WAIT = 'No, wait!';
-
+export const LABEL_SETTINGS = 'Settings';
+export const LABEL_BOOKS = 'Books';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';

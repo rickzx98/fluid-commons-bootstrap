@@ -226,6 +226,13 @@
       "react/prop-types": 1,
       "react/react-in-jsx-scope": 1,
       "import/extensions": 1,
+      "import/no-unresolved": [
+        2,
+        {
+          "commonjs": true,
+          "amd": true
+        }
+      ],
       "react/self-closing-comp": 1,
       "react/sort-comp": 1
     },

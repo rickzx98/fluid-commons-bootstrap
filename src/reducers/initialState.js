@@ -29,5 +29,10 @@ export default {
     onExited: () => { },
     onExiting: () => { },
     onHide: () => { }
+  },
+  settings: {
+    funds: [],
+    currencies: [],
+    resourceTypes: []
   }
 };
