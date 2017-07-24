@@ -2,13 +2,11 @@ import { FundSetting } from './FundSetting';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export class SettingsForm extends React.Component {
-    render() {
-        return
-        (<form id="settingsForm" className="form container-fluid">
-
-        </form>);
-    }
+export const SettingsForm = ({ settings, addFund, removeFund, updateFund }) => {
+    const FundSettingProps = { settings, addFund, removeFund, updateFund };
+    return (<form id="settingsForm" className="form container-fluid">
+        <FundSetting {...FundSettingProps} />
+    </form>);
 }
 SettingsForm.propTypes = {
     settings: PropTypes.object.isRequired,

@@ -13,3 +13,19 @@
     margin-right: 5px;
     border: 1px solid lightcoral;
 }
+.list-form {
+        .list-form-field-header {
+            border: none !important;
+            padding: 0;
+            padding-bottom: 4px;
+        }
+        .list-form-field-value {
+            font-weight: 500;
+            button {
+                margin-right: 5px;
+            }
+        }
+        .list-form-field-value-edit {
+            cursor: pointer;
+        }
+}
