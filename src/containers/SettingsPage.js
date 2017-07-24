@@ -21,6 +21,12 @@ export class SettingsPage extends React.Component {
                 addFund={this.props.actions.addFund}
                 removeFund={this.props.actions.removeFund}
                 updateFund={this.props.actions.updateFund}
+                addCurrency={this.props.actions.addCurrency}
+                removeCurrency={this.props.actions.removeCurrency}
+                updateCurrency={this.props.actions.updateCurrency}
+                addResourceType={this.props.actions.addResourceType}
+                removeResourceType={this.props.actions.removeResourceType}
+                updateResourceType={this.props.actions.updateResourceType}
                 settings={this.props.settings} />
         </div>);
     }

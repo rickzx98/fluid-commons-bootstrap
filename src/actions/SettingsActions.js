@@ -37,12 +37,53 @@ export function removeFund(index) {
 
 
 export function updateFund(fund, index) {
-    return dispatch => {
-        dispatch(ajaxActions.beginAjaxCall());
-        return settingsApi().updateFund(fund, index).then(settings => {
-            dispatch(loadSettingsSuccess(settings));
-        }).catch(error => {
-            dispatch(ajaxActions.ajaxCallError(error));
-        });
+    return {
+        type: types.SETTINGS_UPDATE_FUND,
+        fund, index
+    };
+}
+
+
+export function addCurrency(currency) {
+    return {
+        type: types.SETTINGS_ADD_CURRENCY,
+        currency
+    };
+}
+
+export function removeCurrency(index) {
+    return {
+        type: types.SETTINGS_REMOVE_CURRENCY,
+        index
+    };
+}
+
+
+export function updateCurrency(currency, index) {
+    return {
+        type: types.SETTINGS_UPDATE_CURRENCY,
+        currency, index
+    };
+}
+
+export function addResourceType(resourceType) {
+    return {
+        type: types.SETTINGS_ADD_RESOURCE_TYPE,
+        resourceType
+    };
+}
+
+export function removeResourceType(index) {
+    return {
+        type: types.SETTINGS_REMOVE_RESOURCE_TYPE,
+        index
+    };
+}
+
+
+export function updateResourceType(resourceType, index) {
+    return {
+        type: types.SETTINGS_UPDATE_RESOURCE_TYPE,
+        resourceType, index
     };
 }

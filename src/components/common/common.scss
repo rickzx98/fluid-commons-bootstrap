@@ -13,19 +13,32 @@
     margin-right: 5px;
     border: 1px solid lightcoral;
 }
+
 .list-form {
-        .list-form-field-header {
-            border: none !important;
-            padding: 0;
-            padding-bottom: 4px;
+    .list-form-field-header {
+        border: none !important;
+        padding: 0;
+        padding-bottom: 4px;
+    }
+    .list-form-field-value {
+        &:hover {
+            background: whitesmoke;
         }
-        .list-form-field-value {
-            font-weight: 500;
-            button {
-                margin-right: 5px;
+        &.active {
+            a {
+                color: white !important;
             }
         }
-        .list-form-field-value-edit {
-            cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        button {
+            margin-right: 5px;
         }
+    }
+    .list-form-field-value-edit {
+        cursor: pointer;
+    }
+    .list-form-field-hidden {
+        display: none;
+    }
 }
