@@ -1,7 +1,7 @@
+import { CollapseHeader, ListForm } from '../common/';
 import { LABEL_CURRENCY, LABEL_FUND, LABEL_RESOURCE_TYPE } from '../../labels/';
 
 import FontAwesome from 'react-fontawesome';
-import { ListForm } from '../common/';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -28,12 +28,21 @@ export const SettingsForm = ({ settings, addFund, removeFund, updateFund, addCur
         values: settings.resourceTypes
     };
     return (<form id="settingsForm" className="form container-fluid">
-        <h4><FontAwesome name="money" size="lg" fixedWidth={true} />&nbsp;{LABEL_FUND}</h4>
-        <ListForm {...FundSettingProps} />
-        <h4><FontAwesome name="dollar" size="lg" fixedWidth={true} />&nbsp;{LABEL_CURRENCY}</h4>
-        <ListForm {...CurrencySettingProps} />
-        <h4><FontAwesome name="file-text-o" size="lg" fixedWidth={true} />&nbsp;{LABEL_RESOURCE_TYPE}</h4>
-        <ListForm {...ResourceTypeSettingProps} />
+        <CollapseHeader heading={
+            <h4><FontAwesome name="money" size="lg" fixedWidth={true} />&nbsp;{LABEL_FUND}</h4>}
+            body={
+                <ListForm {...FundSettingProps} />} />
+
+        <CollapseHeader heading={
+            <h4><FontAwesome name="dollar" size="lg" fixedWidth={true} />&nbsp;{LABEL_CURRENCY}</h4>
+        } body={
+            <ListForm {...CurrencySettingProps} />
+        } />
+        <CollapseHeader heading={
+            <h4><FontAwesome name="file-text-o" size="lg" fixedWidth={true} />&nbsp;{LABEL_RESOURCE_TYPE}</h4>
+        } body={
+            <ListForm {...ResourceTypeSettingProps} />
+        } />
     </form>);
 }
 SettingsForm.propTypes = {

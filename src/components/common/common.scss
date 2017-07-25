@@ -42,3 +42,21 @@
         display: none;
     }
 }
+
+.collapse-header {
+    .panel-heading {
+        cursor: pointer;
+        .actions {
+            margin-top: -35px;
+            i {
+                &:hover {
+                    cursor: pointer;
+                }
+                font-size: 12px;
+                margin: 0 3px;
+            }
+            position: absolute;
+            right: 20px;
+        }
+    }
+}
