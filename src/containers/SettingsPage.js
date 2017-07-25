@@ -10,14 +10,19 @@ import { connect } from 'react-redux';
 export class SettingsPage extends React.Component {
     constructor(props) {
         super(props);
+        this.onSubmit = this.onFormSubmit.bind(this);
     }
     componentWillMount() {
         this.props.actions.loadSettings();
+    }
+    onFormSubmit(event) {
+        event.preventDefault();
     }
     render() {
         return (<div className="settings page">
             <SettingsPageHeader />
             <SettingsForm
+                onSubmit={this.onSubmit}
                 addFund={this.props.actions.addFund}
                 removeFund={this.props.actions.removeFund}
                 updateFund={this.props.actions.updateFund}
@@ -27,6 +32,7 @@ export class SettingsPage extends React.Component {
                 addResourceType={this.props.actions.addResourceType}
                 removeResourceType={this.props.actions.removeResourceType}
                 updateResourceType={this.props.actions.updateResourceType}
+                loadSettings={this.props.actions.loadSettings}
                 settings={this.props.settings} />
         </div>);
     }

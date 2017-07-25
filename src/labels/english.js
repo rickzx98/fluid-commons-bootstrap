@@ -22,6 +22,7 @@ export const LABEL_NO_WAIT = 'No, wait!';
 export const LABEL_SETTINGS = 'Settings';
 export const LABEL_BOOKS = 'Books';
 export const LABEL_ADD = 'Add';
+export const LABEL_REFRESH = 'Refresh';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';

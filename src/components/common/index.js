@@ -9,5 +9,5 @@ export { Header } from './Header';
 export { TextArea } from './TextArea';
 export { ListForm } from './ListForm';
 export const DatePicker = ReactBootstrapDatePicker;
-
+export { ResponsiveButton } from './ResponsiveButton';
 
