@@ -3,9 +3,7 @@ import '../../images/profile.jpg';
 import { APP_NAME, LABEL_BOOKS, LABEL_SETTINGS } from '../../labels/';
 
 import FontAwesome from 'react-fontawesome';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
 import Nav from 'react-bootstrap/lib/Nav';
-import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import React from 'react';

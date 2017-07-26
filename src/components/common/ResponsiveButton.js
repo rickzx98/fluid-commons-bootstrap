@@ -5,7 +5,7 @@ export const ResponsiveButton = ({ id, name, label, type = 'button', onClick, ic
     const buttonProps = {
         id, name, type, onClick, className
     };
-    return (<button {...buttonProps}>{icon}&nbsp;<span className="hidden-xs">{label}</span></button>)
+    return (<button {...buttonProps}>{icon}&nbsp;<span className="hidden-xs">{label}</span></button>);
 };
 
 ResponsiveButton.propTypes = {
@@ -14,5 +14,6 @@ ResponsiveButton.propTypes = {
     type: PropTypes.string,
     onClick: PropTypes.func,
     icon: PropTypes.element,
-    className: PropTypes.string
+    className: PropTypes.string,
+    label: PropTypes.string.isRequired
 };

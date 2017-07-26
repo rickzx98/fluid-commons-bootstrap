@@ -1,9 +1,17 @@
-import { ADD_SUBJECT_TO_MANAGED_BOOK, LOAD_MANAGED_BOOK_SUCCESS, REMOVE_MANAGED_BOOK_SUBJECT, SET_TAB_EVENT_KEY, UPDATE_MANAGED_SUBJECT } from '../actions/';
+import { ADD_SUBJECT_TO_MANAGED_BOOK, LOAD_MANAGED_BOOK_SUCCESS, REMOVE_MANAGED_BOOK_SUBJECT, SET_MANAGED_BOOK_FIELD_VALUE, SET_TAB_EVENT_KEY, UPDATE_MANAGED_SUBJECT } from '../actions/';
 
+import Book from '../api/books/Book';
 import initialState from './initialState';
 
 export default function managedBookReducer(state = initialState.book, action) {
     switch (action.type) {
+        case SET_MANAGED_BOOK_FIELD_VALUE: {
+            if (Object.values(Book).indexOf(action.field) > -1) {
+                state = Object.assign({}, { ...state, touched: true, active: true });
+                state[action.field] = action.value;
+            }
+            return state;
+        }
         case REMOVE_MANAGED_BOOK_SUBJECT: {
             const subjects = [...state.subjects];
             subjects.splice(action.index, 1);

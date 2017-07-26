@@ -10,7 +10,7 @@ import React from 'react';
 import Tab from 'react-bootstrap/lib/Tab';
 import Tabs from 'react-bootstrap/lib/Tabs';
 
-export const BookItemEdit = ({ onChange, tabEventKey, onSelectTab, addSubject, managedBook, settings }) => {
+export const BookItemForm = ({ onChange, tabEventKey, onSelectTab, addSubject, managedBook, settings }) => {
     return (
         <form onChange={(event) => {
             event.preventDefault();
@@ -22,15 +22,15 @@ export const BookItemEdit = ({ onChange, tabEventKey, onSelectTab, addSubject, m
                 {tabEventKey === 'bookSubjects' ? <button onClick={addSubject} className="btn btn-success" type="button"><FontAwesome fixedWidth={true} name="plus-circle" /><span className="hidden-xs">{LABEL_ADD_SUBJECT}</span></button> : ''}
             </div>
             <Tabs onSelect={onSelectTab} id="bookItemEditTabs" activeKey={tabEventKey} defaultActiveKey={'bookInfo'}>
-                <Tab title={LABEL_BOOK_INFORMATION} eventKey={'bookInfo'}><BookInformation /></Tab>
+                <Tab title={LABEL_BOOK_INFORMATION} eventKey={'bookInfo'}><BookInformation managedBook={managedBook} onChange={onChange} /></Tab>
                 <Tab title={LABEL_BOOK_SUBJECTS} eventKey={'bookSubjects'}><ConnectSubjectsPage /></Tab>
-                {managedBook.update && <Tab title={LABEL_BOOK_ADDITIONAL_INFO} eventKey={'bookAddInfo'}><BookAdditionalInformation settings={settings} /></Tab>}
-                {managedBook.update && <Tab title={LABEL_BOOK_COPIES} eventKey={'bookCopies'}><BookCopies settings={settings} /></Tab>}
+                {managedBook.update && <Tab title={LABEL_BOOK_ADDITIONAL_INFO} eventKey={'bookAddInfo'}><BookAdditionalInformation managedBook={managedBook} settings={settings} /></Tab>}
+                {managedBook.update && <Tab title={LABEL_BOOK_COPIES} eventKey={'bookCopies'}><BookCopies onChange={onChange} managedBook={managedBook} settings={settings} /></Tab>}
             </Tabs>
         </form>);
 };
 
-BookItemEdit.propTypes = {
+BookItemForm.propTypes = {
     managedBook: PropTypes.object.isRequired,
     onSelectTab: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,

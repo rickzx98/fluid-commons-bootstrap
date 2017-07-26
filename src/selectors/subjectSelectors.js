@@ -17,6 +17,9 @@ export function getAllSubjectHeadersForDropDown() {
 
 export function getAllFirstIndicatorTopicalTermsForDropDown() {
     return [{
+        value: '',
+        label: '-- select --'
+    }, {
         value: '#',
         label: 'No information provided'
     }, {
@@ -33,6 +36,9 @@ export function getAllFirstIndicatorTopicalTermsForDropDown() {
 
 export function getAllSecondIndicatorTopicalTermsForDropDown() {
     return [{
+        value: '',
+        label: '-- select --'
+    }, {
         value: '0',
         label: 'Library of Congress Subject Headings'
     }, {

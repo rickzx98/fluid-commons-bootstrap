@@ -1,4 +1,3 @@
-import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -12,7 +11,7 @@ export class CollapseHeader extends React.Component {
         this.setState({ collapsed: false });
     }
     onCollapse() {
-        this.setState({ collapsed: !this.state.collapsed })
+        this.setState({ collapsed: !this.state.collapsed });
     }
     render() {
         return (<div className={this.panelStyle}>

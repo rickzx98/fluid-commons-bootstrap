@@ -15,13 +15,19 @@ export function loadManagedBookSuccess(book) {
         book: book
     };
 }
-
+export function setManagedBookFieldValue(field, value) {
+    return {
+        type: types.SET_MANAGED_BOOK_FIELD_VALUE,
+        field, value
+    };
+}
 export function setTabEventKey(eventKey) {
     return {
         type: types.SET_TAB_EVENT_KEY,
         eventKey: eventKey
     };
 }
+
 export function searchBooks(text) {
     return dispatch => {
         dispatch(ajaxActions.beginAjaxCall());

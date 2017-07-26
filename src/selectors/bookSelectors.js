@@ -1,5 +1,6 @@
 export function getReadingLevelForDropdown() {
-    return [{
+    return [{ value: '', label: '-- select --' },
+    {
         value: '#',
         label: 'Unknown or not specified'
     }, {

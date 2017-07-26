@@ -1,7 +1,7 @@
 import * as actions from '../actions/BookActions';
 
 import Book from '../api/books/Book';
-import { BookItemEdit } from '../components/books/BookItemEdit';
+import { BookItemForm } from '../components/books/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -25,15 +25,15 @@ export class ManageBookPage extends React.Component {
     onTabChanged(activeKey) {
         this.props.actions.setTabEventKey(activeKey);
     }
-    onChangeBookEdit() {
-        //console.log('bookForm', bookForm);
+    onChangeBookEdit(form) {
+        this.props.actions.setManagedBookFieldValue(form.name, form.value);
     }
     onAddSubject() {
         browserHistory.push('/books/subjects/new');
     }
     render() {
         return (<div className="books page">
-            <BookItemEdit
+            <BookItemForm
                 managedBook={this.props.managedBook}
                 addSubject={this.addSubject}
                 onSelectTab={this.onSelectTab}
@@ -48,7 +48,8 @@ ManageBookPage.propTypes = {
     actions: PropTypes.object.isRequired,
     managedBook: PropTypes.object.isRequired,
     book: PropTypes.object,
-    settings: PropTypes.object.isRequired
+    settings: PropTypes.object.isRequired,
+    routeParams: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

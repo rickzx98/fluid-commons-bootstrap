@@ -56,7 +56,7 @@ export class ListForm extends React.Component {
         this.cancelUpdate();
     }
     render() {
-        const { values = [], name, removeValue, addValue, updateValue, formName, label } = this.props;
+        const { values = [], name, label } = this.props;
         return (<div className="list-form">
             <ul className="list-group">
                 <li className="list-group-item list-form-field-header">

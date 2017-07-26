@@ -32,14 +32,6 @@ h2 {
     color: $vin-blue;
 }
 
-.savings {
-    color: $vin-green;
-}
-
-.loss {
-    color: $vin-red;
-}
-
 input.small {
     width: 46px;
 }
@@ -53,7 +45,7 @@ td.fuel-savings-label {
     .page-header-title {
         text-align: center;
         font-weight: 600;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 }
 

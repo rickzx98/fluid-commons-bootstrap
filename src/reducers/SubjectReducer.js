@@ -5,6 +5,9 @@ import initialState from './initialState';
 
 export default function subjectsReducer(state = initialState.subjects, action) {
     switch (action.type) {
+        case LOAD_SUBJECT_SUCCESS: {
+            return [...action.subjects];
+        }
         default:
             return state;
     }
