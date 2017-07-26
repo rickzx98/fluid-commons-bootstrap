@@ -10,7 +10,7 @@ import React from 'react';
 import Tab from 'react-bootstrap/lib/Tab';
 import Tabs from 'react-bootstrap/lib/Tabs';
 
-export const BookItemEdit = ({ onChange, tabEventKey, onSelectTab, addSubject, managedBook }) => {
+export const BookItemEdit = ({ onChange, tabEventKey, onSelectTab, addSubject, managedBook, settings }) => {
     return (
         <form onChange={(event) => {
             event.preventDefault();
@@ -24,8 +24,8 @@ export const BookItemEdit = ({ onChange, tabEventKey, onSelectTab, addSubject, m
             <Tabs onSelect={onSelectTab} id="bookItemEditTabs" activeKey={tabEventKey} defaultActiveKey={'bookInfo'}>
                 <Tab title={LABEL_BOOK_INFORMATION} eventKey={'bookInfo'}><BookInformation /></Tab>
                 <Tab title={LABEL_BOOK_SUBJECTS} eventKey={'bookSubjects'}><ConnectSubjectsPage /></Tab>
-                {managedBook.update && <Tab title={LABEL_BOOK_ADDITIONAL_INFO} eventKey={'bookAddInfo'}><BookAdditionalInformation /></Tab>}
-                {managedBook.update && <Tab title={LABEL_BOOK_COPIES} eventKey={'bookCopies'}><BookCopies /></Tab>}
+                {managedBook.update && <Tab title={LABEL_BOOK_ADDITIONAL_INFO} eventKey={'bookAddInfo'}><BookAdditionalInformation settings={settings} /></Tab>}
+                {managedBook.update && <Tab title={LABEL_BOOK_COPIES} eventKey={'bookCopies'}><BookCopies settings={settings} /></Tab>}
             </Tabs>
         </form>);
 };
@@ -35,5 +35,6 @@ BookItemEdit.propTypes = {
     onSelectTab: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     tabEventKey: PropTypes.string.isRequired,
-    addSubject: PropTypes.func.isRequired
+    addSubject: PropTypes.func.isRequired,
+    settings: PropTypes.object.isRequired
 };

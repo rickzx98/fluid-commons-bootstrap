@@ -18,7 +18,8 @@ export class ManageBookPage extends React.Component {
     }
     componentWillMount() {
         if (!this.props.managedBook.active && this.props.book) {
-            this.props.actions.loadManagedBookSuccess(this.props.book);
+            const update = this.props.routeParams.id !== 'new';
+            this.props.actions.loadManagedBookSuccess({ ...this.props.book, update });
         }
     }
     onTabChanged(activeKey) {
@@ -37,7 +38,8 @@ export class ManageBookPage extends React.Component {
                 addSubject={this.addSubject}
                 onSelectTab={this.onSelectTab}
                 onChange={this.onChangeBookEditForForm}
-                tabEventKey={this.props.managedBook.tabEventKey} />
+                tabEventKey={this.props.managedBook.tabEventKey}
+                settings={this.props.settings} />
         </div>);
     }
 }
@@ -45,19 +47,24 @@ export class ManageBookPage extends React.Component {
 ManageBookPage.propTypes = {
     actions: PropTypes.object.isRequired,
     managedBook: PropTypes.object.isRequired,
-    book: PropTypes.object
+    book: PropTypes.object,
+    settings: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
     return {
         book: getBookById(state.books, ownProps.routeParams.id),
-        managedBook: state.managedBook
+        managedBook: state.managedBook,
+        settings: state.settings
     };
 }
 
 function getBookById(books, id) {
-    const filtered = books.filter(book => book[Book.BOOK_ID] === id);
-    return filtered ? filtered[0] : initialState.book;
+    if (id !== 'new') {
+        const filtered = books.filter(book => book[Book.BOOK_ID] === id);
+        return filtered ? filtered[0] : initialState.book;
+    }
+    return initialState.book;
 }
 
 function mapDispatchToProps(dispatch) {
