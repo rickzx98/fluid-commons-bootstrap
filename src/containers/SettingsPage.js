@@ -17,6 +17,7 @@ export class SettingsPage extends React.Component {
     }
     onFormSubmit(event) {
         event.preventDefault();
+        this.props.actions.saveSettings(process.env.SCHOOL_ID, this.props.settings);
     }
     render() {
         return (<div className="settings page">

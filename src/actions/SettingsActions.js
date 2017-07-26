@@ -21,6 +21,17 @@ export function loadSettings() {
     };
 }
 
+export function saveSettings(schoolId, settings) {
+    return dispatch => {
+        dispatch(ajaxActions.beginAjaxCall());
+        return settingsApi().saveSettings(schoolId, settings).then(newSettings => {
+            dispatch(loadSettingsSuccess(newSettings));
+        }).catch(error => {
+            dispatch(ajaxActions.ajaxCallError(error));
+        });
+    };
+}
+
 export function addFund(fund) {
     return {
         type: types.SETTINGS_ADD_FUND,

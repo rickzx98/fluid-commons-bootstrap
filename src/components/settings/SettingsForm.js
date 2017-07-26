@@ -42,7 +42,7 @@ export const SettingsForm = ({ onSubmit, loadSettings, settings, addFund, remove
             <h5><FontAwesome name="file-text-o" size="lg" fixedWidth={true} />&nbsp;{LABEL_RESOURCE_TYPE}</h5>}
             body={<ListForm {...ResourceTypeSettingProps} />} />
     </form>);
-}
+};
 SettingsForm.propTypes = {
     settings: PropTypes.object.isRequired,
     addFund: PropTypes.func.isRequired,
