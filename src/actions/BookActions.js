@@ -48,3 +48,17 @@ export function loadBooks() {
         });
     };
 }
+
+export function openDialogConfirmBookCancel(dialog) {
+    dialog.show = true;
+    return {
+        type: types.OPEN_DIALOG_CONFIRM_BOOK_CANCEL,
+        dialog
+    };
+}
+
+export function closeDialog() {
+    return {
+        type: types.CLOSE_DIALOG
+    };
+}

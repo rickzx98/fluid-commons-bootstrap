@@ -1,5 +1,7 @@
 import * as actions from '../actions/BookActions';
 
+import { CancelModalBody, CancelModalFooter } from '../components/common/';
+
 import Book from '../api/books/Book';
 import { BookItemForm } from '../components/books/';
 import PropTypes from 'prop-types';
@@ -15,6 +17,8 @@ export class ManageBookPage extends React.Component {
         this.onSelectTab = this.onTabChanged.bind(this);
         this.onChangeBookEditForForm = this.onChangeBookEdit.bind(this);
         this.addSubject = this.onAddSubject.bind(this);
+        this.cancelManagedBook = this.cancelSubject.bind(this);
+        this.modalConfirmCancel = this.confirmCancel.bind(this);
     }
     componentWillMount() {
         if (!this.props.managedBook.active && this.props.book) {
@@ -30,6 +34,21 @@ export class ManageBookPage extends React.Component {
     }
     onAddSubject() {
         browserHistory.push('/books/subjects/new');
+    }
+    confirmCancel() {
+        this.props.actions.closeDialog();
+    }
+    cancelBook() {
+        if (this.props.managedBook.active && this.props.managedBook.touched) {
+            this.props.actions.openDialogConfirmBookCancel({
+                body: <CancelModalBody />,
+                footer: <CancelModalFooter
+                    onConfirmCancel={this.modalConfirmCancel}
+                    closeDialog={this.props.actions.closeDialog} />
+            });
+        } else {
+            this.goToPrevious();
+        }
     }
     render() {
         return (<div className="books page">

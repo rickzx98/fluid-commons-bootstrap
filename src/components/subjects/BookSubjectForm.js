@@ -16,7 +16,7 @@ export const BookSubjectForm = ({ subjects, onChange, managedSubject, cancelMana
         }
     }}>
         <div className="form-group">
-            <button type="button" onClick={cancelManagedSubject} className="btn btn-warning">{LABEL_CANCEL}</button>
+            <button type="button" onClick={cancelManagedSubject} className="btn btn-danger">{LABEL_CANCEL}</button>
             <button type="submit" className="btn btn-primary">{managedSubject.update ? LABEL_UPDATE : LABEL_SAVE}</button>
         </div>
         <div className="col-sm-12">

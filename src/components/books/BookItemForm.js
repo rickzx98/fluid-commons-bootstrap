@@ -1,3 +1,4 @@
+import { BackButton, ResponsiveButton } from '../common/';
 import { LABEL_ADD_SUBJECT, LABEL_BOOK_ADDITIONAL_INFO, LABEL_BOOK_COPIES, LABEL_BOOK_INFORMATION, LABEL_BOOK_SUBJECTS, LABEL_CANCEL, LABEL_SAVE } from '../../labels/';
 
 import { BookAdditionalInformation } from './edit-page/BookAdditionalInformation';
@@ -17,9 +18,14 @@ export const BookItemForm = ({ onChange, tabEventKey, onSelectTab, addSubject, m
             onChange(event.target);
         }} className="form container-fluid">
             <div className="col-sm-12 form-group">
-                <button className="btn btn-danger" type="button"><FontAwesome fixedWidth={true} name="long-arrow-left" /><span className="hidden-xs">{LABEL_CANCEL}</span></button>
-                <button className="btn btn-primary" type="submit"><FontAwesome fixedWidth={true} name="floppy-o" /><span className="hidden-xs">{LABEL_SAVE}</span></button>
-                {tabEventKey === 'bookSubjects' ? <button onClick={addSubject} className="btn btn-success" type="button"><FontAwesome fixedWidth={true} name="plus-circle" /><span className="hidden-xs">{LABEL_ADD_SUBJECT}</span></button> : ''}
+                <BackButton label={LABEL_CANCEL} />
+                <ResponsiveButton className="btn btn-primary" icon={
+                    <FontAwesome fixedWidth={true} name="floppy-o" />
+                } label={LABEL_SAVE} />
+                {tabEventKey === 'bookSubjects' &&
+                    <ResponsiveButton onClick={addSubject} className="btn btn-success" icon={
+                        <FontAwesome fixedWidth={true} name="plus-circle" />}
+                        label={LABEL_ADD_SUBJECT} />}
             </div>
             <Tabs onSelect={onSelectTab} id="bookItemEditTabs" activeKey={tabEventKey} defaultActiveKey={'bookInfo'}>
                 <Tab title={LABEL_BOOK_INFORMATION} eventKey={'bookInfo'}><BookInformation managedBook={managedBook} onChange={onChange} /></Tab>
