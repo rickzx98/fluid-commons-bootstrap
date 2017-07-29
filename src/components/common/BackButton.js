@@ -3,10 +3,25 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { browserHistory } from 'react-router';
 
-export const BackButton = ({ label }) => {
-    return (<button onClick={() => { browserHistory.goBack(); }} type="button" className="btn btn-danger"><FontAwesome fixedWidth={true} name="long-arrow-left" /><span className="hidden-xs">{label}</span></button>);
+export const BackButton = ({ label, confirm }) => {
+    const onClick = () => {
+        if (confirm) {
+            const onPageLeave = confirm();
+            if (onPageLeave instanceof Promise) {
+                onPageLeave.then(() => {
+                    browserHistory.goBack();
+                });
+            } else {
+                browserHistory.goBack();
+            }
+        } else {
+            browserHistory.goBack();
+        }
+    };
+    return (<button onClick={onClick} type="button" className="btn btn-danger"><FontAwesome fixedWidth={true} name="long-arrow-left" /><span className="hidden-xs">{label}</span></button>);
 };
 
 BackButton.propTypes = {
-    label: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired,
+    confirm: PropTypes.func
 };

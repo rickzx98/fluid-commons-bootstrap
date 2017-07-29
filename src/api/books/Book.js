@@ -1,5 +1,5 @@
 const BookFields = {
-    BOOK_ID: 'id',
+    BOOK_ID: '_id',
     TITLE: 'title',
     AUTHOR: 'author',
     SUB_TITLE: 'subTitle',

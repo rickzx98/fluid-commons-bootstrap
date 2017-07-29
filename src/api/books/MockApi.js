@@ -22,22 +22,9 @@ const BOOK_DATA = [
     createMockBook(generateUID(), 'Harry Potter', 'and the goblet of fire', ' Rowling, J. K', 'hp_tgof.jpg'),
     createMockBook(generateUID(), 'Harry Potter', 'and the half blood prince', ' Rowling, J. K', 'hp_thbp.jpg'),
     createMockBook(generateUID(), 'Harry Potter', 'and the deathly hallows', ' Rowling, J. K', 'hp_atdh.jpg')];
+
 export class Api {
-    static createBook(book) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (!book.title) {
-                    reject(new Error('Book title is required.'));
-                } else if (book.author) {
-                    reject(new Error('Book author is required.'));
-                } else {
-                    const persistedBook = Object.assign({}, book);
-                    persistedBook[Book.BOOK_ID] = generateUID();
-                    resolve(persistedBook);
-                }
-            }, delay);
-        });
-    }
+
     static getAllBooks() {
         return new Promise((resolve) => {
             setTimeout(() => {
@@ -45,6 +32,7 @@ export class Api {
             }, delay);
         });
     }
+
     static searchBooks(queryText) {
         return new Promise((resolve) => {
             setTimeout(() => {
@@ -58,6 +46,22 @@ export class Api {
                 });
                 resolve(foundBookData);
             }, 200);
+        });
+    }
+
+    static createBook(book) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                try {
+                    const bookId = generateUID();
+                    const newBook = Object.assign({}, { ...book, _id: bookId });
+                    BOOK_DATA.push(newBook);
+                    resolve(newBook);
+                } catch (err) {
+                    console.log(err);
+                    reject(err);
+                }
+            }, delay);
         });
     }
 }

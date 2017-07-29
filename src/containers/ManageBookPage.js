@@ -4,6 +4,7 @@ import { CancelModalBody, CancelModalFooter } from '../components/common/';
 
 import Book from '../api/books/Book';
 import { BookItemForm } from '../components/books/';
+import { LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES } from '../labels/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -17,14 +18,19 @@ export class ManageBookPage extends React.Component {
         this.onSelectTab = this.onTabChanged.bind(this);
         this.onChangeBookEditForForm = this.onChangeBookEdit.bind(this);
         this.addSubject = this.onAddSubject.bind(this);
-        this.cancelManagedBook = this.cancelSubject.bind(this);
+        this.cancelManagedBook = this.cancelBook.bind(this);
         this.modalConfirmCancel = this.confirmCancel.bind(this);
+        this.onPageLeave = this.routerWillLeave.bind(this);
+        this.saveManagedBookForm = this.saveManagedBook.bind(this);
     }
     componentWillMount() {
         if (!this.props.managedBook.active && this.props.book) {
             const update = this.props.routeParams.id !== 'new';
             this.props.actions.loadManagedBookSuccess({ ...this.props.book, update });
         }
+    }
+    componentDidMount() {
+        this.props.router.setRouteLeaveHook(this.props.route, this.onPageLeave);
     }
     onTabChanged(activeKey) {
         this.props.actions.setTabEventKey(activeKey);
@@ -36,23 +42,41 @@ export class ManageBookPage extends React.Component {
         browserHistory.push('/books/subjects/new');
     }
     confirmCancel() {
+        this.props.actions.cancelManagedBook();
         this.props.actions.closeDialog();
     }
     cancelBook() {
+        return new Promise((resolve, reject) => {
+            if (this.props.managedBook.active && this.props.managedBook.touched) {
+                this.props.actions.openDialogConfirmBookCancel({
+                    body: <CancelModalBody />,
+                    footer: <CancelModalFooter
+                        reject={reject}
+                        resolve={resolve}
+                        confirmCancel={this.modalConfirmCancel}
+                        closeDialog={this.props.actions.closeDialog} />
+                });
+            } else {
+                this.props.actions.cancelManagedBook();
+                resolve();
+            }
+        });
+    }
+    routerWillLeave() {
         if (this.props.managedBook.active && this.props.managedBook.touched) {
-            this.props.actions.openDialogConfirmBookCancel({
-                body: <CancelModalBody />,
-                footer: <CancelModalFooter
-                    onConfirmCancel={this.modalConfirmCancel}
-                    closeDialog={this.props.actions.closeDialog} />
-            });
-        } else {
-            this.goToPrevious();
+            return LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES;
+        }
+    }
+    saveManagedBook() {
+        if (!this.props.managedBook.update && !!this.props.managedBook.touched) {
+            this.props.actions.createManagedBook(this.props.managedBook);
         }
     }
     render() {
         return (<div className="books page">
             <BookItemForm
+                saveManagedBook={this.saveManagedBookForm}
+                onCancel={this.cancelManagedBook}
                 managedBook={this.props.managedBook}
                 addSubject={this.addSubject}
                 onSelectTab={this.onSelectTab}
@@ -68,7 +92,9 @@ ManageBookPage.propTypes = {
     managedBook: PropTypes.object.isRequired,
     book: PropTypes.object,
     settings: PropTypes.object.isRequired,
-    routeParams: PropTypes.object.isRequired
+    routeParams: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
+    route: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

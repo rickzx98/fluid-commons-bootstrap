@@ -1,4 +1,4 @@
-import { ADD_SUBJECT_TO_MANAGED_BOOK, LOAD_MANAGED_BOOK_SUCCESS, REMOVE_MANAGED_BOOK_SUBJECT, SET_MANAGED_BOOK_FIELD_VALUE, SET_TAB_EVENT_KEY, UPDATE_MANAGED_SUBJECT } from '../actions/';
+import { ADD_MANAGED_BOOK, ADD_SUBJECT_TO_MANAGED_BOOK, CANCEL_MANAGED_BOOK, LOAD_MANAGED_BOOK_SUCCESS, REMOVE_MANAGED_BOOK_SUBJECT, SET_MANAGED_BOOK_FIELD_VALUE, SET_TAB_EVENT_KEY, UPDATE_MANAGED_SUBJECT } from '../actions/';
 
 import Book from '../api/books/Book';
 import initialState from './initialState';
@@ -34,6 +34,10 @@ export default function managedBookReducer(state = initialState.book, action) {
             const subjects = [...state.subjects];
             subjects[action.index] = action.subject;
             return Object.assign({}, { ...state, subjects });
+        }
+        case CANCEL_MANAGED_BOOK:
+        case ADD_MANAGED_BOOK: {
+            return initialState.book;
         }
         case SET_TAB_EVENT_KEY: { return Object.assign({}, { ...state, tabEventKey: action.eventKey }); }
         default:
