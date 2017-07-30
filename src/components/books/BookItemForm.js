@@ -21,7 +21,8 @@ export const BookItemForm = ({ onCancel, onChange, addNew, tabEventKey, onSelect
         }} className="form container-fluid">
       <div className="col-sm-12 form-group">
         <BackButton to="/books" label={LABEL_BACK} confirm={onCancel}/>
-        <ResponsiveButton type="submit" className="btn btn-primary" icon={
+        <ResponsiveButton disabled={!managedBook.touched} type="submit"
+                          className="btn btn-primary" icon={
                     <FontAwesome fixedWidth={true} name="floppy-o" />
                 } label={LABEL_SAVE}/>
         {tabEventKey === 'bookSubjects' &&

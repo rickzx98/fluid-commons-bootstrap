@@ -73,7 +73,7 @@ export function loadSubjects() {
 export function openDialogConfirmSubjectCancel(dialog) {
     dialog.show = true;
     return {
-        type: types.OPEN_DIALOG_CONFIRM_SUBJECT_CANCEL,
+        type: types.OPEN_DIALOG,
         dialog
     };
 }

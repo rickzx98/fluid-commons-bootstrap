@@ -16,6 +16,7 @@ export const LABEL_REMOVE = 'Remove';
 export const LABEL_ADD_NEW = 'Add new';
 export const LABEL_CHOOSE_A = 'Choose a';
 export const LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES = 'You still have unsaved changes. Are you sure you want to leave?';
+export const LABEL_CONFIRM_DO_YOU_WANT_TO_DELETE = `Do you want to delete`;
 export const LABEL_CONFIRM_CANCEL_SUBJECT_TITLE = 'Cancel subject confirmation';
 export const LABEL_YES_PLEASE = 'Yes, please';
 export const LABEL_NO_WAIT = 'No, wait!';
@@ -25,6 +26,8 @@ export const LABEL_ADD = 'Add';
 export const LABEL_REFRESH = 'Refresh';
 export const LABEL_BACK = 'Back';
 export const LABEL_NEW_BOOK = 'New book';
+export const LABEL_EDIT = 'Edit';
+export const LABEL_DELETE = 'Delete';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';

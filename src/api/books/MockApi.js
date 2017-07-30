@@ -12,7 +12,7 @@ import { contains, delay, generateUID } from '../../utils/';
 
 import {Book} from './Book';
 
-const BOOK_DATA = [
+let BOOK_DATA = [
   createMockBook(generateUID(), 'Lord of the rings', 'Fellowshing of the ring', 'J. R. R. Tolkien', 'lotr_fotr.jpg'),
   createMockBook(generateUID(), 'Lord of the rings', 'The Two Towers', 'J. R. R. Tolkien', 'lotr_tt.jpg'),
   createMockBook(generateUID(), 'Lord of the rings', 'The Return of The King', 'J. R. R. Tolkien', 'lotr_trotk.jpg'),
@@ -61,6 +61,42 @@ export class Api {
           reject(err);
         }
       }, delay);
+    });
+  }
+
+  static updateBook(bookId, updatedBook) {
+    return new Promise((resolve, reject)=> {
+      setTimeout(()=> {
+        try {
+          let books = [...BOOK_DATA];
+          BOOK_DATA.forEach((book, index) => {
+            if (book[Book.BOOK_ID] === bookId) {
+              books[index] = updatedBook;
+            }
+          });
+          BOOK_DATA = books;
+          resolve(Object.assign({}, {...updatedBook}));
+        } catch (err) {
+          reject(err);
+        }
+      }, delay);
+    });
+  }
+
+  static deleteBook(bookId) {
+    return new Promise((resolve, reject)=> {
+      let books = [...BOOK_DATA];
+      try {
+        BOOK_DATA.forEach((book, index) => {
+          if (book[Book.BOOK_ID] === bookId) {
+            books.splice(index, 1);
+          }
+        });
+        BOOK_DATA = books;
+        resolve();
+      } catch (err) {
+        reject(err);
+      }
     });
   }
 }

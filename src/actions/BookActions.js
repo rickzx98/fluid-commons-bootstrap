@@ -36,6 +36,14 @@ export function addManagedBook(book) {
   };
 }
 
+export function updatedBook(bookId, book) {
+  return {
+    type: types.UPDATE_MANAGED_BOOK,
+    bookId,
+    book
+  };
+}
+
 export function setTabEventKey(eventKey) {
   return {
     type: types.SET_TAB_EVENT_KEY,
@@ -87,10 +95,38 @@ export function createManagedBook(managedBook) {
     }
   };
 }
+
+export function updateManagedBook(bookId, managedBook) {
+  const invalid = Validate(managedBook);
+  return dispatch => {
+    if (invalid) {
+      dispatch(invalidManagedBook(invalid));
+    } else {
+      dispatch(ajaxActions.beginAjaxCall());
+      return booksApi()
+        .updateBook(bookId, managedBook)
+        .then(book => {
+          dispatch(updatedBook(bookId, book));
+        })
+        .catch(error => {
+          dispatch(ajaxActions.ajaxCallError(error));
+        });
+    }
+  };
+}
+
 export function openDialogConfirmBookCancel(dialog) {
   dialog.show = true;
   return {
-    type: types.OPEN_DIALOG_CONFIRM_BOOK_CANCEL,
+    type: types.OPEN_DIALOG,
+    dialog
+  };
+}
+
+export function openDialogConfirmDelete(dialog) {
+  dialog.show = true;
+  return {
+    type: types.OPEN_DIALOG,
     dialog
   };
 }
@@ -109,3 +145,13 @@ export function invalidManagedBook(invalid) {
   };
 }
 
+export function deleteBook(bookId) {
+  return dispatch => {
+    dispatch(ajaxActions.beginAjaxCall());
+    return booksApi().deleteBook(bookId).then(() => {
+      dispatch(loadBooks());
+    }).catch(error => {
+      dispatch(ajaxActions.ajaxCallError(error));
+    });
+  };
+}

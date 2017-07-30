@@ -2,7 +2,7 @@ import * as actions from '../actions/BookActions';
 
 import { CancelModalBody, CancelModalFooter } from '../components/common/';
 
-import {Book} from '../api/books/Book';
+import {Book} from '../api/books/';
 import { BookItemForm } from '../components/books/';
 import { LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES } from '../labels/';
 import PropTypes from 'prop-types';
@@ -95,10 +95,15 @@ export class ManageBookPage extends React.Component {
       update: undefined,
       active: undefined,
       touched: undefined,
-      tabEventKey: undefined
+      tabEventKey: undefined,
+      invalid: undefined,
+      invalidMessage: undefined,
+      invalidField: undefined
     });
     if (!this.props.managedBook.update && !!this.props.managedBook.touched) {
       this.props.actions.createManagedBook(newBook);
+    } else if (this.props.managedBook.update && this.props.managedBook.touched) {
+      this.props.actions.updateManagedBook(newBook[Book.BOOK_ID], newBook);
     }
   }
 
