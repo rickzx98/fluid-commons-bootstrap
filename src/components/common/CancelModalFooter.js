@@ -27,5 +27,6 @@ export const CancelModalFooter = ({ confirmCancel, closeDialog, resolve, reject 
 CancelModalFooter.propTypes = {
     confirmCancel: PropTypes.func.isRequired,
     closeDialog: PropTypes.func.isRequired,
-    resolve: PropTypes.func
+    resolve: PropTypes.func,
+    reject: PropTypes.func
 };

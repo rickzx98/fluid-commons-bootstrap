@@ -69,9 +69,14 @@ export function loadBooks() {
 export function createManagedBook(managedBook) {
     return dispatch => {
         dispatch(ajaxActions.beginAjaxCall());
-        return booksApi().createBook(managedBook)
+        return booksApi()
+            .createBook(managedBook)
             .then(book => {
                 dispatch(addManagedBook(book));
+                dispatch(loadManagedBookSuccess(Object.assign({}, {
+                    ...book, update: true, touched: false,
+                    tabEventKey: 'bookInfo', active: true
+                })));
             })
             .catch(error => {
                 dispatch(ajaxActions.ajaxCallError(error));
@@ -89,6 +94,13 @@ export function openDialogConfirmBookCancel(dialog) {
 export function closeDialog() {
     return {
         type: types.CLOSE_DIALOG
+    };
+}
+
+export function redirectToManagedBookUpdate(bookId) {
+    return {
+        type: types.REDIRECT_TO_UPDATE_MANAGED_BOOK,
+        bookId
     };
 }
 

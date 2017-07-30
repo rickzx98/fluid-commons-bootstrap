@@ -22,7 +22,9 @@ export class ManageBookPage extends React.Component {
         this.modalConfirmCancel = this.confirmCancel.bind(this);
         this.onPageLeave = this.routerWillLeave.bind(this);
         this.saveManagedBookForm = this.saveManagedBook.bind(this);
+        this.addNew = this.onNewBook.bind(this);
     }
+
     componentWillMount() {
         if (!this.props.managedBook.active && this.props.book) {
             const update = this.props.routeParams.id !== 'new';
@@ -32,6 +34,12 @@ export class ManageBookPage extends React.Component {
     componentDidMount() {
         this.props.router.setRouteLeaveHook(this.props.route, this.onPageLeave);
     }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.route.path === 'books/new' && nextProps.managedBook._id) {
+            browserHistory.push('/books/' + nextProps.managedBook._id);
+        }
+
+    }
     onTabChanged(activeKey) {
         this.props.actions.setTabEventKey(activeKey);
     }
@@ -40,6 +48,9 @@ export class ManageBookPage extends React.Component {
     }
     onAddSubject() {
         browserHistory.push('/books/subjects/new');
+    }
+    onNewBook() {
+        browserHistory.push('/books/new');
     }
     confirmCancel() {
         this.props.actions.cancelManagedBook();
@@ -68,13 +79,21 @@ export class ManageBookPage extends React.Component {
         }
     }
     saveManagedBook() {
+        const newBook = Object.assign({}, {
+            ...this.props.managedBook,
+            update: undefined,
+            active: undefined,
+            touched: undefined,
+            tabEventKey: undefined
+        });
         if (!this.props.managedBook.update && !!this.props.managedBook.touched) {
-            this.props.actions.createManagedBook(this.props.managedBook);
+            this.props.actions.createManagedBook(newBook);
         }
     }
     render() {
         return (<div className="books page">
             <BookItemForm
+                addNew={this.addNew}
                 saveManagedBook={this.saveManagedBookForm}
                 onCancel={this.cancelManagedBook}
                 managedBook={this.props.managedBook}

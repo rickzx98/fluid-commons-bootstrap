@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export const BookRow = ({ book }) => {
-    return (<tr className="book-item">
+    return (<tr key={book._id} className="book-item">
         <td>
             <div className="book">
                 <img className="book-image" src={book[Book.IMAGE_URL]} />

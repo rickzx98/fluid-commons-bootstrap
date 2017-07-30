@@ -1,7 +1,7 @@
 import ReactBootstrapDatePicker from 'react-bootstrap-date-picker';
 
 export { CancelModalBody } from './CancelModalBody';
-export { CancelModalFooter } from './CancelModalFooter'
+export { CancelModalFooter } from './CancelModalFooter';
 export { BackButton } from './BackButton';
 export { SearchSelector } from './SearchSelector';
 export { Selector } from './Selector';

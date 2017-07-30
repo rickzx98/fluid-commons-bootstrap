@@ -23,6 +23,9 @@ export default function managedBookReducer(state = initialState.book, action) {
             } else {
                 state = Object.assign({}, { ...state, ...action.book });
             }
+            if (!state.tabEventKey) {
+                state.tabEventKey = initialState.book.tabEventKey;
+            }
             state.active = true;
             return state;
         }

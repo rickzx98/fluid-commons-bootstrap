@@ -13,7 +13,7 @@ export class BooksPage extends React.Component {
         super(props);
         this.createBook = this.createNewBook.bind(this);
     }
-    componentWillMount() {
+    componentWillMount(){
         this.props.actions.loadBooks();
     }
     createNewBook() {

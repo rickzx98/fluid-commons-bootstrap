@@ -28,7 +28,7 @@ export class Api {
     static getAllBooks() {
         return new Promise((resolve) => {
             setTimeout(() => {
-                resolve(BOOK_DATA);
+                resolve([...BOOK_DATA]);
             }, delay);
         });
     }
@@ -58,7 +58,6 @@ export class Api {
                     BOOK_DATA.push(newBook);
                     resolve(newBook);
                 } catch (err) {
-                    console.log(err);
                     reject(err);
                 }
             }, delay);

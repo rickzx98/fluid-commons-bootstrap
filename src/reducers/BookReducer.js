@@ -7,8 +7,7 @@ import initialState from './initialState';
 export default function booksReducer(state = initialState.books, action) {
     switch (action.type) {
         case ADD_MANAGED_BOOK: {
-            state = [...state, action.book];
-            return state;
+            return [...state, action.book];
         }
         case LOAD_BOOKS_SUCCESS:
             return action.books;

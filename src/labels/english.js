@@ -24,6 +24,7 @@ export const LABEL_BOOKS = 'Books';
 export const LABEL_ADD = 'Add';
 export const LABEL_REFRESH = 'Refresh';
 export const LABEL_BACK = 'Back';
+export const LABEL_NEW_BOOK = 'New book';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';
