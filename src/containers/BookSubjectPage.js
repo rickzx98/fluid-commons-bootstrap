@@ -7,37 +7,38 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 export class SubjectsPage extends React.Component {
-    componentWillMount() {
-        this.props.actions.loadSubjects();
-    }
-    render() {
-        return (<div className="subjects">
-            <BookSubjectList removeSubject={this.props.actions.removeManagedBookSubject} subjects={this.props.subjects}
-                managedBook={this.props.managedBook} />
-        </div>);
-    }
+  componentWillMount() {
+    this.props.actions.loadSubjects();
+  }
+
+  render() {
+    return (<div className="subjects">
+      <BookSubjectList removeSubject={this.props.actions.removeManagedBookSubject} subjects={this.props.subjects}
+                       managedBook={this.props.managedBook}/>
+    </div>);
+  }
 }
 
 SubjectsPage.propTypes = {
-    actions: PropTypes.object.isRequired,
-    subjects: PropTypes.array.isRequired,
-    managedBook: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  subjects: PropTypes.array.isRequired,
+  managedBook: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-    return {
-        subjects: state.subjects,
-        managedBook: state.managedBook
-    };
+  return {
+    subjects: state.subjects,
+    managedBook: state.managedBook
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(actions, dispatch)
-    };
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
 }
 
 export const ConnectSubjectsPage = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(SubjectsPage);

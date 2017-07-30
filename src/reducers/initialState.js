@@ -4,6 +4,8 @@ export default {
     update: false,
     touched: false,
     active: false,
+    invalid: false,
+    invalidMessage: '',
     tabEventKey: 'bookInfo',
     subjects: []
   },
@@ -22,13 +24,20 @@ export default {
     body: 'body here...',
     footer: 'footer here...',
     show: false,
-    onEnter: () => { },
-    onEntered: () => { },
-    onEntering: () => { },
-    onExit: () => { },
-    onExited: () => { },
-    onExiting: () => { },
-    onHide: () => { }
+    onEnter: () => {
+    },
+    onEntered: () => {
+    },
+    onEntering: () => {
+    },
+    onExit: () => {
+    },
+    onExited: () => {
+    },
+    onExiting: () => {
+    },
+    onHide: () => {
+    }
   },
   settings: {
     funds: [],
