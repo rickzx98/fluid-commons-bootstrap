@@ -35,7 +35,7 @@ export class Header extends React.Component {
                 </Nav>
                 <Nav pullRight>
                     <NavItem onClick={this.goToSettingsFromHeader}><FontAwesome size="lg" name="gears" fixedWidth={true} />&nbsp;{LABEL_SETTINGS}</NavItem>
-                    <NavItem><img className="header-thumbnail" height="24" width="24" src="profile.jpg" />&nbsp;Jerico de Guzman</NavItem>
+                    <NavItem><img className="header-thumbnail" height="24" width="24" src="/profile.jpg" />&nbsp;Jerico de Guzman</NavItem>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>);

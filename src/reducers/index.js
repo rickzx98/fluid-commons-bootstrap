@@ -6,7 +6,6 @@ import managedSubject from './ManagedSubjectReducer';
 import { routerReducer } from 'react-router-redux';
 import settings from './SettingsReducer';
 import subjects from './SubjectReducer';
-
 const rootReducer = combineReducers({
   books,
   subjects,

@@ -14,3 +14,4 @@ export { ListForm } from './ListForm';
 export const DatePicker = ReactBootstrapDatePicker;
 export { ResponsiveButton } from './ResponsiveButton';
 export {DeleteModalBody} from './DeleteModalBody';
+export {ImageUpload} from './ImageUpload';

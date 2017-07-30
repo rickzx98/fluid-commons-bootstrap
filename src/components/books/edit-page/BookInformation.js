@@ -1,4 +1,4 @@
-import { DatePicker, FormGroup, TextInput } from '../../common/';
+import { DatePicker, FormGroup, TextInput, ImageUpload} from '../../common/';
 import {
   LABEL_AUTHOR,
   LABEL_EDITION,
@@ -15,16 +15,19 @@ import {
   MESSAGE_ISBN_REQUIRED,
   MESSAGE_PUBLISHER_REQUIRED,
   MESSAGE_AUTHOR_REQUIRED,
-  MESSAGE_PUBLISHED_DATE_REQUIRED
+  MESSAGE_PUBLISHED_DATE_REQUIRED,
+  LABEL_BOOK_COVER
 } from '../../../labels/';
 
 import {Book} from '../../../api/books/Book';
 import PropTypes from 'prop-types';
 import React from 'react';
-
 export const BookInformation = ({ onChange, managedBook }) => {
   return (<span>
-        <div className={managedBook.update ? 'col-sm-6' : 'col-sm-12'}>
+      <div className="col-sm-12 col-md-2">
+        <ImageUpload name={Book.IMAGE_URL} label={LABEL_BOOK_COVER}/>
+      </div>
+        <div className={managedBook.update ? 'col-sm-5' : 'col-sm-12 col-md-10'}>
           <TextInput invalid={managedBook.invalidField === Book.TITLE} label={LABEL_TITLE} name={Book.TITLE}
                      required={true} message={MESSAGE_TITLE_REQUIRED}
                      value={managedBook[Book.TITLE]}/>
@@ -64,7 +67,7 @@ export const BookInformation = ({ onChange, managedBook }) => {
           </FormGroup>
         </div>
     {managedBook.update &&
-    <div className="col-sm-6">
+    <div className="col-sm-5">
       <TextInput label={LABEL_SUB_TITLE} name={Book.SUB_TITLE}
                  value={managedBook[Book.SUB_TITLE]}/>
       <TextInput label={LABEL_SERIES_TITLE} name={Book.SERIES_TITLE}
