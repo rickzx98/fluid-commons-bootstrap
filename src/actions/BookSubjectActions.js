@@ -53,6 +53,7 @@ export function searchSubjects(text) {
         dispatch(ajaxActions.beginAjaxCall());
         return subjectsApi().searchSubjects(text).then(books => {
             dispatch(loadSubjectSuccess(books));
+            dispatch(ajaxActions.ajaxCallSuccess());
         }).catch(error => {
             dispatch(ajaxActions.ajaxCallError(error));
         });
@@ -63,6 +64,7 @@ export function loadSubjects() {
         dispatch(ajaxActions.beginAjaxCall());
         return subjectsApi().getAllSubjects().then(books => {
             dispatch(loadSubjectSuccess(books));
+            dispatch(ajaxActions.ajaxCallSuccess());
         }).catch(error => {
             dispatch(ajaxActions.ajaxCallError(error));
         });

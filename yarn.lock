@@ -281,6 +281,10 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
+attr-accept@^1.0.3:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/attr-accept/-/attr-accept-1.1.0.tgz#b5cd35227f163935a8f1de10ed3eba16941f6be6"
+
 autoprefixer@7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-7.1.2.tgz#fbeaf07d48fd878e0682bf7cbeeade728adb2b18"
@@ -5604,6 +5608,13 @@ react-dom@15.5.4:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
+react-dropzone@3.13.4:
+  version "3.13.4"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.13.4.tgz#84da26815c40339691c49b4544c2ef7a16912ccc"
+  dependencies:
+    attr-accept "^1.0.3"
+    prop-types "^15.5.7"
+
 react-fontawesome@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/react-fontawesome/-/react-fontawesome-1.6.1.tgz#eddce17e7dc731aa09fd4a186688a61793a16c5c"
@@ -5629,6 +5640,12 @@ react-hot-loader@3.0.0-beta.6:
     react-proxy "^3.0.0-alpha.0"
     redbox-react "^1.2.5"
     source-map "^0.4.4"
+
+react-image@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-image/-/react-image-1.0.1.tgz#eb3178a7b2a09945310a4bea6f89317d8b6f8c40"
+  dependencies:
+    prop-types "^15.5.8"
 
 react-input-autosize@^1.1.4:
   version "1.1.4"

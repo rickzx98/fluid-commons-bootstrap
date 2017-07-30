@@ -20,6 +20,7 @@ export const CancelModalFooter = ({ confirmCancel, closeDialog, resolve, reject 
     };
     return (<div className="btn-group btn-group-sm">
         <button onClick={confirm} className="btn btn-primary">{LABEL_YES_PLEASE}</button>
+        &nbsp;
         <button onClick={cancel} className="btn btn-danger">{LABEL_NO_WAIT}</button>
     </div>);
 };

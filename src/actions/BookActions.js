@@ -1,7 +1,10 @@
 import * as ajaxActions from './AjaxStatusActions';
 import * as types from './';
 
-import { getApi as booksApi, Validate} from '../api/books';
+import { Book, Validate, getApi as booksApi } from '../api/books';
+
+import { getApi as fileApi } from '../api/file/';
+
 export function loadBooksSuccess(books) {
   return {
     type: types.LOAD_BOOKS_SUCCESS,
@@ -56,6 +59,7 @@ export function searchBooks(text) {
     dispatch(ajaxActions.beginAjaxCall());
     return booksApi().searchBooks(text).then(books => {
       dispatch(loadBooksSuccess(books));
+      dispatch(ajaxActions.ajaxCallSuccess());
     }).catch(error => {
       dispatch(ajaxActions.ajaxCallError(error));
     });
@@ -67,6 +71,7 @@ export function loadBooks() {
     dispatch(ajaxActions.beginAjaxCall());
     return booksApi().getAllBooks().then(books => {
       dispatch(loadBooksSuccess(books));
+      dispatch(ajaxActions.ajaxCallSuccess());
     }).catch(error => {
       dispatch(ajaxActions.ajaxCallError(error));
     });
@@ -88,6 +93,7 @@ export function createManagedBook(managedBook) {
             ...book, update: true, touched: false,
             tabEventKey: 'bookInfo', active: true
           })));
+          dispatch(ajaxActions.ajaxCallSuccess());
         })
         .catch(error => {
           dispatch(ajaxActions.ajaxCallError(error));
@@ -107,6 +113,7 @@ export function updateManagedBook(bookId, managedBook) {
         .updateBook(bookId, managedBook)
         .then(book => {
           dispatch(updatedBook(bookId, book));
+          dispatch(ajaxActions.ajaxCallSuccess());
         })
         .catch(error => {
           dispatch(ajaxActions.ajaxCallError(error));
@@ -150,8 +157,23 @@ export function deleteBook(bookId) {
     dispatch(ajaxActions.beginAjaxCall());
     return booksApi().deleteBook(bookId).then(() => {
       dispatch(loadBooks());
+      dispatch(ajaxActions.ajaxCallSuccess());
     }).catch(error => {
       dispatch(ajaxActions.ajaxCallError(error));
     });
   };
+}
+
+export function uploadBookCover(file) {
+  return dispatch => {
+    dispatch(ajaxActions.beginAjaxCall());
+    return fileApi().uploadFile(file)
+      .then(uploadedFile => {
+        dispatch(ajaxActions.ajaxCallSuccess());
+        dispatch(setManagedBookFieldValue(Book.IMAGE_ID, uploadedFile._id));
+      })
+      .catch(error => {
+        dispatch(ajaxActions.ajaxCallError(error));
+      });
+  }
 }

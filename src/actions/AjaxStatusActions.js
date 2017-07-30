@@ -12,3 +12,9 @@ export function ajaxCallError(error) {
         error: error
     };
 }
+
+export function ajaxCallSuccess(){
+    return {
+        type: types.AJAX_CALL_SUCESS
+    }
+}

@@ -1,10 +1,11 @@
 import {
-  MESSAGE_TITLE_REQUIRED,
-  MESSAGE_STATEMENT_OF_RESP_REQUIRED,
-  MESSAGE_ISBN_REQUIRED,
-  MESSAGE_PUBLISHER_REQUIRED,
   MESSAGE_AUTHOR_REQUIRED,
-  MESSAGE_PUBLISHED_DATE_REQUIRED}  from '../../labels/';
+  MESSAGE_ISBN_REQUIRED,
+  MESSAGE_PUBLISHED_DATE_REQUIRED,
+  MESSAGE_PUBLISHER_REQUIRED,
+  MESSAGE_STATEMENT_OF_RESP_REQUIRED,
+  MESSAGE_TITLE_REQUIRED
+} from '../../labels/';
 
 export const Book = {
   BOOK_ID: '_id',
@@ -12,6 +13,7 @@ export const Book = {
   AUTHOR: 'author',
   SUB_TITLE: 'subTitle',
   IMAGE_URL: 'imageURL',
+  IMAGE_ID: 'imageId',
   ISBN: 'isbn',
   PUBLISHER: 'publisher',
   SERIES_TITLE: 'seriesTitle',
@@ -38,7 +40,7 @@ export const Book = {
   COST: 'cost'
 };
 
-export const Validate = (book)=> {
+export const Validate = (book) => {
   if (book) {
     if (!book[Book.TITLE]) {
       return getValidation(Book.TITLE, MESSAGE_TITLE_REQUIRED);

@@ -1,4 +1,5 @@
 import ReactBootstrapDatePicker from 'react-bootstrap-date-picker';
+import ReactImg from 'react-image';
 
 export { CancelModalBody } from './CancelModalBody';
 export { CancelModalFooter } from './CancelModalFooter';
@@ -15,3 +16,4 @@ export const DatePicker = ReactBootstrapDatePicker;
 export { ResponsiveButton } from './ResponsiveButton';
 export {DeleteModalBody} from './DeleteModalBody';
 export {ImageUpload} from './ImageUpload';
+export const Img = ReactImg;

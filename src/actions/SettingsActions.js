@@ -15,6 +15,7 @@ export function loadSettings() {
         dispatch(ajaxActions.beginAjaxCall());
         return settingsApi().loadSettings().then(settings => {
             dispatch(loadSettingsSuccess(settings));
+            dispatch(ajaxActions.ajaxCallSuccess());
         }).catch(error => {
             dispatch(ajaxActions.ajaxCallError(error));
         });
@@ -26,6 +27,7 @@ export function saveSettings(schoolId, settings) {
         dispatch(ajaxActions.beginAjaxCall());
         return settingsApi().saveSettings(schoolId, settings).then(newSettings => {
             dispatch(loadSettingsSuccess(newSettings));
+            dispatch(ajaxActions.ajaxCallSuccess());
         }).catch(error => {
             dispatch(ajaxActions.ajaxCallError(error));
         });
