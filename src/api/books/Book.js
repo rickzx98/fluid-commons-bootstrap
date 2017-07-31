@@ -9,6 +9,7 @@ import {
 
 export const Book = {
   BOOK_ID: '_id',
+  SOURCE_ID: 'sourceId',
   TITLE: 'title',
   AUTHOR: 'author',
   SUB_TITLE: 'subTitle',

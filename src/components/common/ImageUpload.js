@@ -1,4 +1,4 @@
-//import '../../images/upload-image.png';
+import '../../images/upload-image.png';
 
 import Dropzone from 'react-dropzone';
 import { Img } from './';
@@ -19,7 +19,7 @@ export class ImageUpload extends React.Component {
   onDropFiles(accepted) {
     console.log('accepted', accepted);
     if (accepted) {
-      this.setState({ file: accepted[0] });
+      this.setState({file: accepted[0]});
     }
   }
 
@@ -27,12 +27,13 @@ export class ImageUpload extends React.Component {
     return (<div className="image-upload books">
       <h4>{this.props.required && <span className="text-danger">*&nbsp;</span>}{this.props.label}</h4>
       <Dropzone multiple={false}
-        accept="image/jpeg, image/png"
-        onDrop={this.onDrop}
-        className="book">
-        <Img src={this.state.file ? this.state.file.preview : '/upload-image.png'} />
+                accept="image/jpeg, image/png"
+                onDrop={this.onDrop}
+                className="book">
+        {this.state.file ? <Img src={this.state.file ? this.state.file.preview : '/upload-image.png'}/> :
+          <Img src={[this.props.value, '/upload-image.png']}/>}
       </Dropzone>
-      <input {...this.inputProps} type="hidden" />
+      <input {...this.inputProps} type="hidden"/>
     </div>);
   }
 }
@@ -42,6 +43,6 @@ ImageUpload.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
   required: PropTypes.bool,
-  upload: PropTypes.func.isRequired
+  upload: PropTypes.func
 };
 

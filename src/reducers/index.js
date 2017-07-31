@@ -6,6 +6,8 @@ import managedSubject from './ManagedSubjectReducer';
 import { routerReducer } from 'react-router-redux';
 import settings from './SettingsReducer';
 import subjects from './SubjectReducer';
+import googleBooks from './GoogleBooksReducer';
+import ajaxGlobal from './AjaxGlobalReducer';
 const rootReducer = combineReducers({
   books,
   subjects,
@@ -13,7 +15,9 @@ const rootReducer = combineReducers({
   managedSubject,
   settings,
   dialog: appModal,
-  routing: routerReducer
+  routing: routerReducer,
+  googleBooks,
+  ajaxGlobal
 });
 
 export default rootReducer;

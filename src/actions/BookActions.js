@@ -175,5 +175,5 @@ export function uploadBookCover(file) {
       .catch(error => {
         dispatch(ajaxActions.ajaxCallError(error));
       });
-  }
+  };
 }

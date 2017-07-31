@@ -25,7 +25,7 @@ import React from 'react';
 export const BookInformation = ({ onChange, managedBook }) => {
   return (<span>
       <div className="col-sm-12 col-md-2">
-        <ImageUpload name={Book.IMAGE_URL} label={LABEL_BOOK_COVER}/>
+        <ImageUpload value={managedBook[Book.IMAGE_URL]} name={Book.IMAGE_URL} label={LABEL_BOOK_COVER}/>
       </div>
         <div className={managedBook.update ? 'col-sm-5' : 'col-sm-12 col-md-10'}>
           <TextInput invalid={managedBook.invalidField === Book.TITLE} label={LABEL_TITLE} name={Book.TITLE}

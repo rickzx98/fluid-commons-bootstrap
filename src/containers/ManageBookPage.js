@@ -23,6 +23,7 @@ export class ManageBookPage extends React.Component {
     this.onPageLeave = this.routerWillLeave.bind(this);
     this.saveManagedBookForm = this.saveManagedBook.bind(this);
     this.addNew = this.onNewBook.bind(this);
+    this.onSearch = this.onSearchBook.bind(this);
   }
 
   componentWillMount() {
@@ -107,9 +108,14 @@ export class ManageBookPage extends React.Component {
     }
   }
 
+  onSearchBook() {
+    browserHistory.push('/books/new/search');
+  }
+
   render() {
     return (<div className="books page">
       <BookItemForm
+        onSearch={this.onSearch}
         addNew={this.addNew}
         saveManagedBook={this.saveManagedBookForm}
         onCancel={this.cancelManagedBook}

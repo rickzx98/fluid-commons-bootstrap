@@ -1,4 +1,4 @@
-import { Img, ResponsiveButton } from '../common/';
+import { Img, ResponsiveButton, Loading } from '../common/';
 import { LABEL_DELETE, LABEL_EDIT } from '../../labels/';
 
 import { Book } from '../../api/books/';
@@ -11,7 +11,8 @@ export const BookRow = ({ book, onRemove }) => {
   return (<tr key={book._id} className="book-item">
     <td>
       <div className="book">
-        <Img className="book-image" src={book[Book.IMAGE_URL]} />
+        <Img loader={<Loading className="text-primary" width={50} height={30}/>} className="book-image"
+             src={book[Book.IMAGE_URL]}/>
       </div>
     </td>
     <td className="hidden-xs">
@@ -35,11 +36,11 @@ export const BookRow = ({ book, onRemove }) => {
         {book[Book.AUTHOR]}
       </p>
       <Link className="btn btn-primary" to={'/books/' + book[Book.BOOK_ID]}>
-        <FontAwesome name="pencil-square-o" size="lg" fixedWidth={true} /><span className="hidden-xs">{LABEL_EDIT}</span></Link>
+        <FontAwesome name="pencil-square-o" size="lg" fixedWidth={true}/><span className="hidden-xs">{LABEL_EDIT}</span></Link>
       &nbsp;
       <ResponsiveButton onClick={() => { onRemove(book); }} className="btn btn-danger" label={LABEL_DELETE} icon={
         <FontAwesome name="trash" size="lg" fixedWidth={true} />
-      } />
+      }/>
     </td>
   </tr>);
 };

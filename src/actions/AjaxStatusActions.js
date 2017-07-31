@@ -16,5 +16,5 @@ export function ajaxCallError(error) {
 export function ajaxCallSuccess(){
     return {
         type: types.AJAX_CALL_SUCESS
-    }
+    };
 }

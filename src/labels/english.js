@@ -29,6 +29,10 @@ export const LABEL_NEW_BOOK = 'New book';
 export const LABEL_EDIT = 'Edit';
 export const LABEL_DELETE = 'Delete';
 export const LABEL_BOOK_COVER = 'Book cover';
+export const LABEL_SUBJECT = 'Subject';
+export const LABEL_LCCN = 'LCCN';
+export const LABEL_OCLC = 'OCLC';
+export const LABEL_GO = 'Go';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';

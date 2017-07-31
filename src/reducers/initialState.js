@@ -43,5 +43,16 @@ export default {
     funds: [],
     currencies: [],
     resourceTypes: []
+  },
+  googleBooks: {
+    update: false,
+    touched: false,
+    active: false,
+    query: {},
+    result: {}
+  },
+  ajaxGlobal: {
+    started: false,
+    done: false
   }
 };

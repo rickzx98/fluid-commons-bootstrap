@@ -1,10 +1,21 @@
-import {UPDATE_MANAGED_BOOK, INVALID_MANAGED_BOOK, ADD_MANAGED_BOOK, ADD_SUBJECT_TO_MANAGED_BOOK, CANCEL_MANAGED_BOOK, LOAD_MANAGED_BOOK_SUCCESS, REMOVE_MANAGED_BOOK_SUBJECT, SET_MANAGED_BOOK_FIELD_VALUE, SET_TAB_EVENT_KEY, UPDATE_MANAGED_SUBJECT } from '../actions/';
+import {CREATE_NEW_BOOK_FROM_GOOGLE, UPDATE_MANAGED_BOOK, INVALID_MANAGED_BOOK, ADD_MANAGED_BOOK, ADD_SUBJECT_TO_MANAGED_BOOK, CANCEL_MANAGED_BOOK, LOAD_MANAGED_BOOK_SUCCESS, REMOVE_MANAGED_BOOK_SUBJECT, SET_MANAGED_BOOK_FIELD_VALUE, SET_TAB_EVENT_KEY, UPDATE_MANAGED_SUBJECT } from '../actions/';
 
 import {Book} from '../api/books/Book';
 import initialState from './initialState';
 
 export default function managedBookReducer(state = initialState.book, action) {
   switch (action.type) {
+    case CREATE_NEW_BOOK_FROM_GOOGLE:
+    {
+      const newBook = {...initialState.book, touched: true, active: true};
+      newBook[Book.TITLE] = action.book.title;
+      newBook[Book.AUTHOR] = action.book.authors;
+      newBook[Book.PUBLISHER] = action.book.publisher;
+      newBook[Book.PUBLISHED_DATE] = action.book.publishedDate;
+      newBook[Book.IMAGE_URL] = action.book.imageLinks ? action.book.imageLinks.thumbnail : '';
+      newBook[Book.ISBN] = action.book.industryIdentifiers[0].identifier;
+      return newBook;
+    }
     case INVALID_MANAGED_BOOK:
     {
       return Object.assign({}, {
