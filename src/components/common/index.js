@@ -1,7 +1,7 @@
 import ReactBootstrapDatePicker from 'react-bootstrap-date-picker';
 import ReactImg from 'react-image';
-
 import ReactLoading from 'react-loading';
+import React from 'react';
 export { CancelModalBody } from './CancelModalBody';
 export { CancelModalFooter } from './CancelModalFooter';
 export { BackButton } from './BackButton';
@@ -18,4 +18,6 @@ export { ResponsiveButton } from './ResponsiveButton';
 export {DeleteModalBody} from './DeleteModalBody';
 export {ImageUpload} from './ImageUpload';
 export const Img = ReactImg;
-export const Loading = ReactLoading;
+export const Loading = ()=> {
+  return <ReactLoading type="spin" color="#E67E22" height={39} width={39} delay={100}/>
+};

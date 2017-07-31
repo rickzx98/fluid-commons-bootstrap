@@ -34,7 +34,6 @@ export function searchBooks(query) {
         dispatch(ajaxActions.ajaxCallSuccess());
       })
       .catch(error => {
-        console.log(error);
         dispatch(ajaxActions.ajaxCallError(error));
       });
   };

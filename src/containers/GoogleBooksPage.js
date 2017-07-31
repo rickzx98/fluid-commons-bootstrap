@@ -33,7 +33,8 @@ export class GoogleBooksPage extends React.Component {
 
   render() {
     return (<div className="google-books page">
-      <SearchList createBook={this.createBook}
+      <SearchList ajaxGlobal={this.props.ajaxGlobal}
+                  createBook={this.createBook}
                   googleBooks={this.props.googleBooks}
                   onSearchFilterSubmit={this.onSearchFilterSubmit}
                   onSearchFilterChange={this.onSearchFilterChange}/></div>);
@@ -42,11 +43,13 @@ export class GoogleBooksPage extends React.Component {
 
 GoogleBooksPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  googleBooks: PropTypes.object.isRequired
+  googleBooks: PropTypes.object.isRequired,
+  ajaxGlobal: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    ajaxGlobal: state.ajaxGlobal,
     googleBooks: state.googleBooks
   };
 }
