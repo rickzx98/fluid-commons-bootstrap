@@ -33,6 +33,7 @@ export const LABEL_SUBJECT = 'Subject';
 export const LABEL_LCCN = 'LCCN';
 export const LABEL_OCLC = 'OCLC';
 export const LABEL_GO = 'Go';
+export const LABEL_PREVIEW = 'Preview';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';
