@@ -17,7 +17,6 @@ export class ImageUpload extends React.Component {
   }
 
   onDropFiles(accepted) {
-    console.log('accepted', accepted);
     if (accepted) {
       this.setState({file: accepted[0]});
     }
@@ -42,7 +41,6 @@ ImageUpload.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
-  required: PropTypes.bool,
-  upload: PropTypes.func
+  required: PropTypes.bool
 };
 
