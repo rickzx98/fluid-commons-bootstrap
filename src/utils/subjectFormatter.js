@@ -1,4 +1,4 @@
-import Subject from '../api/subjects/Subject';
+import { Subject } from '../api/subjects/Subject';
 
 export function subjectFormatter(subject) {
     return getIndicatorValue(Subject.LEVEL_OF_SUBJECT, subject) +

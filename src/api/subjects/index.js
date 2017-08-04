@@ -11,3 +11,5 @@ export function getApi() {
     }
     return api;
 }
+
+export { Subject, SubjectFields, SubjectHeading } from './Subject';

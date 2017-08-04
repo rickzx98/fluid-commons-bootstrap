@@ -1,6 +1,6 @@
 import { convertToSubject, subjectFormatter } from './';
 
-import Subject from '../api/subjects/Subject';
+import { Subject } from '../api/subjects/Subject';
 
 describe('Util', () => {
 

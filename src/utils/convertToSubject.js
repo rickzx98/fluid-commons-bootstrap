@@ -1,4 +1,4 @@
-import Subject from '../api/subjects/Subject';
+import { Subject } from '../api/subjects/Subject';
 
 export function convertToSubject(marcCode) {
     const subject = {};

@@ -1,6 +1,6 @@
 import { ADD_SUBJECT_TO_MANAGED_BOOK, CANCEL_MANAGED_SUBJECT, LOAD_MANAGED_SUBJECT_SUCCESS, SET_MANAGED_SUBJECT_FIELD_VALUE, UPDATE_MANAGED_SUBJECT } from '../actions/';
 
-import Subject from '../api/subjects/Subject';
+import { Subject } from '../api/subjects/Subject';
 import initialState from './initialState';
 import { subjectFormatter } from '../utils';
 

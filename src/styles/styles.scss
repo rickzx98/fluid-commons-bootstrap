@@ -12,11 +12,12 @@ $vin-green: #60b044;
 $vin-red: #ff0000;
 $hd-text-color: #ececed;
 $fd-bg-color: #3f5c73;
+$page-header-height: 130px;
 
 /* Styles */
 
 body {
-    background-color: whitesmoke;
+    background-color: whitesmoke !important;
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.4em;
     color: #4d4d4d; //min-width: 70%;
@@ -44,18 +45,31 @@ td.fuel-savings-label {
     width: 175px;
 }
 
+.table {
+    &.table-hover {
+        tbody {
+            tr {
+                &:hover {
+                    cursor: pointer !important;
+                    background-color: wheat !important;
+                }
+            }
+        }
+    }
+}
+
 .page {
     margin-top: -41px;
     .page-header {
         .page-background-fader {
             z-index: 1;
             width: 100%;
-            height: 140px;
+            height: $page-header-height;
             position: absolute;
             background-color: $fd-bg-color;
             opacity: 0.5;
         }
-        height: 140px;
+        height: $page-header-height;
         .page-header-title {
             z-index: 2;
             position: relative;

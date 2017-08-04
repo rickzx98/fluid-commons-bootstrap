@@ -4,7 +4,7 @@ import { getAllFirstIndicatorTopicalTermsForDropDown, getAllSecondIndicatorTopic
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import Subject from '../../api/subjects/Subject';
+import {Subject} from '../../api/subjects/Subject';
 
 export const BookSubjectForm = ({ subjects, onChange, managedSubject, cancelManagedSubject, addSubjectToManagedBook, updateManagedSubject }) => {
   return (<form className="form container-fluid" onSubmit={event => {

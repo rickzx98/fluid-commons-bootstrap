@@ -1,3 +1,13 @@
+import {
+    LABEL_SUBJECT_GENRE_INDEX_TERM,
+    LABEL_SUBJECT_GEOGRAPHIC_NAME,
+    LABEL_SUBJECT_PERSONAL_NAME,
+    LABEL_SUBJECT_TOPICAL_TERM
+} from '../labels/';
+
+import { SubjectHeading } from '../api/subjects/';
+import { createOptionObject } from '../utils/';
+
 export function getAllSubjectHeadersForDropDown() {
     return [
         'Personal Name',
@@ -67,4 +77,13 @@ export function getAllSecondIndicatorTopicalTermsForDropDown() {
 
 export function getAllSubjectsForDropDown(subjects) {
     return subjects.map(subject => Object.assign({}, { label: subject.name, value: subject.name }));
+}
+
+export function getAllSubjectHeadingsForDropdown() {
+    return [createOptionObject('600', LABEL_SUBJECT_PERSONAL_NAME), createOptionObject('650', LABEL_SUBJECT_TOPICAL_TERM),
+    createOptionObject('651', LABEL_SUBJECT_GEOGRAPHIC_NAME), createOptionObject('655', LABEL_SUBJECT_GENRE_INDEX_TERM)];
+}
+
+export function getSubjectFieldsForDropdown(subject) {
+
 }
