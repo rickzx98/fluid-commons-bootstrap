@@ -3,7 +3,6 @@ import {
   MESSAGE_ISBN_REQUIRED,
   MESSAGE_PUBLISHED_DATE_REQUIRED,
   MESSAGE_PUBLISHER_REQUIRED,
-  MESSAGE_STATEMENT_OF_RESP_REQUIRED,
   MESSAGE_TITLE_REQUIRED
 } from '../../labels/';
 
@@ -16,6 +15,8 @@ export const Book = {
   IMAGE_URL: 'imageURL',
   IMAGE_ID: 'imageId',
   ISBN: 'isbn',
+  ISBN13: 'isbn13',
+  ISBN10: 'isbn10',
   PUBLISHER: 'publisher',
   SERIES_TITLE: 'seriesTitle',
   EDITION: 'edition',
@@ -38,16 +39,15 @@ export const Book = {
   CALL_NUMBER: 'callNumber',
   CURRENCY: 'currency',
   FUND: 'fund',
-  COST: 'cost'
+  COST: 'cost',
+  LIBRARY: 'library'
 };
 
 export const Validate = (book) => {
   if (book) {
     if (!book[Book.TITLE]) {
       return getValidation(Book.TITLE, MESSAGE_TITLE_REQUIRED);
-    } else if (!book[Book.STATEMENT_OF_RESPONSIBILITY]) {
-      return getValidation(Book.STATEMENT_OF_RESPONSIBILITY, MESSAGE_STATEMENT_OF_RESP_REQUIRED);
-    } else if (!book[Book.ISBN]) {
+    } else if (!book[Book.ISBN10] || !book[Book.ISBN13]) {
       return getValidation(Book.ISBN, MESSAGE_ISBN_REQUIRED);
     } else if (!book[Book.PUBLISHER]) {
       return getValidation(Book.PUBLISHER, MESSAGE_PUBLISHER_REQUIRED);
@@ -65,5 +65,3 @@ export function getValidation(field, message) {
     message
   };
 }
-
-

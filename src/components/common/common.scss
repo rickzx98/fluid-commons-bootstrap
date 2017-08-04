@@ -47,7 +47,7 @@
   .panel-heading {
     cursor: pointer;
     .actions {
-      margin-top: -35px;
+      margin-top: -30px;
       i {
         &:hover {
           cursor: pointer;
@@ -56,7 +56,7 @@
         margin: 0 3px;
       }
       position: absolute;
-      right: 20px;
+      right: 40px;
     }
   }
 }

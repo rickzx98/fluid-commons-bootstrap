@@ -1,10 +1,10 @@
 import * as actions from '../actions/BookActions';
 
-import { CancelModalBody, CancelModalFooter } from '../components/common/';
+import { CancelModalBody, CancelModalFooter, PageBody, PageHeader } from '../components/common/';
+import { LABEL_BOOKS, LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES } from '../labels/';
 
-import {Book} from '../api/books/';
+import { Book } from '../api/books/';
 import { BookItemForm } from '../components/books/';
-import { LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES } from '../labels/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -29,7 +29,7 @@ export class ManageBookPage extends React.Component {
   componentWillMount() {
     if (!this.props.managedBook.active && this.props.book) {
       const update = this.props.routeParams.id !== 'new';
-      this.props.actions.loadManagedBookSuccess({...this.props.book, update});
+      this.props.actions.loadManagedBookSuccess({ ...this.props.book, update });
     }
   }
 
@@ -75,7 +75,7 @@ export class ManageBookPage extends React.Component {
             reject={reject}
             resolve={resolve}
             confirmCancel={this.modalConfirmCancel}
-            closeDialog={this.props.actions.closeDialog}/>
+            closeDialog={this.props.actions.closeDialog} />
         });
       } else {
         this.props.actions.cancelManagedBook();
@@ -114,17 +114,20 @@ export class ManageBookPage extends React.Component {
 
   render() {
     return (<div className="books page">
-      <BookItemForm
-        onSearch={this.onSearch}
-        addNew={this.addNew}
-        saveManagedBook={this.saveManagedBookForm}
-        onCancel={this.cancelManagedBook}
-        managedBook={this.props.managedBook}
-        addSubject={this.addSubject}
-        onSelectTab={this.onSelectTab}
-        onChange={this.onChangeBookEditForForm}
-        tabEventKey={this.props.managedBook.tabEventKey}
-        settings={this.props.settings}/>
+      <PageHeader label={LABEL_BOOKS} iconName="book" />
+      <PageBody>
+        <BookItemForm
+          onSearch={this.onSearch}
+          addNew={this.addNew}
+          saveManagedBook={this.saveManagedBookForm}
+          onCancel={this.cancelManagedBook}
+          managedBook={this.props.managedBook}
+          addSubject={this.addSubject}
+          onSelectTab={this.onSelectTab}
+          onChange={this.onChangeBookEditForForm}
+          tabEventKey={this.props.managedBook.tabEventKey}
+          settings={this.props.settings} />
+      </PageBody>
     </div>);
   }
 }

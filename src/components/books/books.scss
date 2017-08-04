@@ -1,4 +1,9 @@
 .books {
+    .page-header {
+        /* width: 100%; */
+        /* -webkit-filter: blur(1px); */
+        background-image: url('/books-header.jpg');
+    }
     .book-search {
         padding: 15px 0;
     }
@@ -11,7 +16,6 @@
         height: 8em;
         width: 6em;
     }
-    padding: 5px;
     .book-item {
         font-size: 1.5rem;
         font-weight: 400;

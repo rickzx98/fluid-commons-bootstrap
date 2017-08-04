@@ -1,7 +1,10 @@
+import '../images/subject-header.jpg';
+
 import * as actions from '../actions/BookSubjectActions';
 
-import { BookSubjectForm, CancelSubjectModalBody, CancelSubjectModalFooter } from '../components/subjects/';
-import { LABEL_CONFIRM_CANCEL_SUBJECT_TITLE, LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES } from '../labels/';
+import { BookSubjectForm, CancelSubjectModalBody } from '../components/subjects/';
+import { CancelModalFooter, PageBody, PageHeader } from '../components/common/';
+import { LABEL_CONFIRM_CANCEL_SUBJECT_TITLE, LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES, LABEL_SUBJECTS } from '../labels/';
 
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -52,16 +55,22 @@ export class ManagedSubjectPage extends React.Component {
   }
 
   cancelSubject() {
-    if (this.props.managedSubject.active && this.props.managedSubject.touched) {
-      this.props.actions.openDialogConfirmSubjectCancel({
-        title: LABEL_CONFIRM_CANCEL_SUBJECT_TITLE,
-        body: <CancelSubjectModalBody />,
-        footer: <CancelSubjectModalFooter confirmCancel={this.modalConfirmCancel}
-                                          closeDialog={this.props.actions.closeDialog}/>
-      });
-    } else {
-      this.goToPrevious();
-    }
+    return new Promise((resolve, reject) => {
+      if (this.props.managedSubject.active && this.props.managedSubject.touched) {
+        this.props.actions.openDialogConfirmSubjectCancel({
+          title: LABEL_CONFIRM_CANCEL_SUBJECT_TITLE,
+          body: <CancelSubjectModalBody />,
+          footer: <CancelModalFooter
+            reject={reject}
+            resolve={resolve}
+            confirmCancel={this.modalConfirmCancel}
+            closeDialog={this.props.actions.closeDialog} />
+        });
+      } else {
+        this.props.actions.cancelManagedSubject();
+        resolve();
+      }
+    });
   }
 
   goToPrevious() {
@@ -75,14 +84,17 @@ export class ManagedSubjectPage extends React.Component {
   }
 
   render() {
-    return (<div className="page">
-      <BookSubjectForm
-        managedSubject={this.props.managedSubject}
-        addSubjectToManagedBook={this.addSubjectToManagedBook}
-        cancelManagedSubject={this.cancelManagedSubject}
-        updateManagedSubject={this.updateManagedSubject}
-        onChange={this.onChangeForm}
-        subjects={this.props.subjects}/>
+    return (<div className="subjects page">
+      <PageHeader label={LABEL_SUBJECTS} iconName={'hashtag'} />
+      <PageBody>
+        <BookSubjectForm
+          managedSubject={this.props.managedSubject}
+          addSubjectToManagedBook={this.addSubjectToManagedBook}
+          cancelManagedSubject={this.cancelManagedSubject}
+          updateManagedSubject={this.updateManagedSubject}
+          onChange={this.onChangeForm}
+          subjects={this.props.subjects} />
+      </PageBody>
     </div>);
   }
 }

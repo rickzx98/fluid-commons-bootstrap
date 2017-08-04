@@ -1,7 +1,10 @@
+import '../images/search-header.jpg';
+
 import * as actions from '../actions/GoogleBookAction';
 
-import { IFrame, ResponsiveButton } from '../components/common/';
+import { IFrame, PageBody, PageHeader, ResponsiveButton } from '../components/common/';
 
+import { LABEL_ONLINE_SEARCH } from '../labels/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { SearchList } from '../components/search/';
@@ -52,12 +55,16 @@ export class GoogleBooksPage extends React.Component {
 
   render() {
     return (<div className="google-books page">
-      <SearchList ajaxGlobal={this.props.ajaxGlobal}
-        preview={this.preview}
-        createBook={this.createBook}
-        googleBooks={this.props.googleBooks}
-        onSearchFilterSubmit={this.onSearchFilterSubmit}
-        onSearchFilterChange={this.onSearchFilterChange} /></div>);
+      <PageHeader label={LABEL_ONLINE_SEARCH} iconName="globe" />
+      <PageBody>
+        <SearchList ajaxGlobal={this.props.ajaxGlobal}
+          preview={this.preview}
+          createBook={this.createBook}
+          googleBooks={this.props.googleBooks}
+          onSearchFilterSubmit={this.onSearchFilterSubmit}
+          onSearchFilterChange={this.onSearchFilterChange} />
+      </PageBody>
+    </div>);
   }
 }
 

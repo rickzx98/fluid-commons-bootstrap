@@ -13,7 +13,18 @@ export default function managedBookReducer(state = initialState.book, action) {
         newBook[Book.PUBLISHER] = action.book.publisher;
         newBook[Book.PUBLISHED_DATE] = action.book.publishedDate;
         newBook[Book.IMAGE_URL] = action.book.imageLinks ? action.book.imageLinks.thumbnail : '';
-        newBook[Book.ISBN] = action.book.industryIdentifiers[0].identifier;
+        if (action.book.industryIdentifiers) {
+          action.book.industryIdentifiers.forEach(identifier => {
+            switch (identifier.type) {
+              case 'ISBN_13':
+                newBook[Book.ISBN13] = identifier.identifier;
+                break;
+              case 'ISBN_10':
+                newBook[Book.ISBN10] = identifier.identifier;
+                break;
+            }
+          });
+        }
         newBook[Book.SOURCE_ID] = action.bookId;
         newBook[Book.SUMMARY] = action.book.description;
         newBook[Book.SUB_TITLE] = action.book.subtitle;

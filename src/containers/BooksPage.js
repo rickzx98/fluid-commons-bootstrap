@@ -1,13 +1,16 @@
 import * as actions from '../actions/BookActions';
 
-import { BookPageHeader, BookSearch, BookTable } from '../components/books/';
-import {Book} from '../api/books/';
+import { BookSearch, BookTable } from '../components/books/';
+import { CancelModalFooter, DeleteModalBody, PageBody, PageHeader } from '../components/common';
+
+import { Book } from '../api/books/';
+import { LABEL_BOOKS } from '../labels';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import {CancelModalFooter, DeleteModalBody} from '../components/common';
+
 export class BooksPage extends React.Component {
   constructor(props) {
     super(props);
@@ -24,18 +27,18 @@ export class BooksPage extends React.Component {
   }
 
   onRemoveBook(book) {
-    return new Promise((resolve, reject)=> {
+    return new Promise((resolve, reject) => {
       try {
         this.props.actions.openDialogConfirmBookCancel({
-          body: <DeleteModalBody itemName={book[Book.TITLE]}/>,
+          body: <DeleteModalBody itemName={book[Book.TITLE]} />,
           footer: <CancelModalFooter
             reject={reject}
             resolve={resolve}
-            confirmCancel={()=> {
+            confirmCancel={() => {
               this.props.actions.deleteBook(book[Book.BOOK_ID]);
               this.props.actions.closeDialog();
             }}
-            closeDialog={this.props.actions.closeDialog}/>
+            closeDialog={this.props.actions.closeDialog} />
         });
       } catch (err) {
         reject(err);
@@ -45,9 +48,11 @@ export class BooksPage extends React.Component {
 
   render() {
     return (<div className="books page">
-      <BookPageHeader />
-      <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks}/>
-      <BookTable onRemove={this.onRemove} books={this.props.books}/>
+      <PageHeader label={LABEL_BOOKS} iconName="book" />
+      <PageBody>
+        <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks} />
+        <BookTable onRemove={this.onRemove} books={this.props.books} />
+      </PageBody>
     </div>);
   }
 }

@@ -8,9 +8,15 @@ import '../../images/hp_tgof.jpg';
 import '../../images/hp_thbp.jpg';
 import '../../images/hp_atdh.jpg';
 
-import { contains, delay, generateUID } from '../../utils/';
+import {
+  contains,
+  delay,
+  generateUID
+} from '../../utils/';
 
-import {Book} from './Book';
+import {
+  Book
+} from './Book';
 
 let BOOK_DATA = [
   createMockBook(generateUID(), 'Lord of the rings', 'Fellowshing of the ring', 'J. R. R. Tolkien', '/lotr_fotr.jpg'),
@@ -21,7 +27,8 @@ let BOOK_DATA = [
   createMockBook(generateUID(), 'Harry Potter', 'and the prisoner of Azkaban', ' Rowling, J. K', '/hp_poa.jpg'),
   createMockBook(generateUID(), 'Harry Potter', 'and the goblet of fire', ' Rowling, J. K', '/hp_tgof.jpg'),
   createMockBook(generateUID(), 'Harry Potter', 'and the half blood prince', ' Rowling, J. K', '/hp_thbp.jpg'),
-  createMockBook(generateUID(), 'Harry Potter', 'and the deathly hallows', ' Rowling, J. K', '/hp_atdh.jpg')];
+  createMockBook(generateUID(), 'Harry Potter', 'and the deathly hallows', ' Rowling, J. K', '/hp_atdh.jpg')
+];
 
 export class Api {
 
@@ -54,9 +61,19 @@ export class Api {
       setTimeout(() => {
         try {
           const bookId = generateUID();
-          const newBook = Object.assign({}, {...book, _id: bookId});
-          BOOK_DATA.push(newBook);
-          resolve(newBook);
+          const newBook = Object.assign({}, { ...book,
+            _id: bookId
+          });
+          const filterd = BOOK_DATA.filter(storedBook => storedBook[Book.ISBN] === book[Book.ISBN]);
+          if (!filterd || filterd.length === 0) {
+            BOOK_DATA.push(newBook);
+            resolve(newBook);
+          } else {
+            reject(new Error({
+              data: `${book[Book.TITLE]} is already saved in the database.`
+            }));
+          }
+
         } catch (err) {
           reject(err);
         }
@@ -65,8 +82,8 @@ export class Api {
   }
 
   static updateBook(bookId, updatedBook) {
-    return new Promise((resolve, reject)=> {
-      setTimeout(()=> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
         try {
           let books = [...BOOK_DATA];
           BOOK_DATA.forEach((book, index) => {
@@ -75,7 +92,8 @@ export class Api {
             }
           });
           BOOK_DATA = books;
-          resolve(Object.assign({}, {...updatedBook}));
+          resolve(Object.assign({}, { ...updatedBook
+          }));
         } catch (err) {
           reject(err);
         }
@@ -84,7 +102,7 @@ export class Api {
   }
 
   static deleteBook(bookId) {
-    return new Promise((resolve, reject)=> {
+    return new Promise((resolve, reject) => {
       let books = [...BOOK_DATA];
       try {
         BOOK_DATA.forEach((book, index) => {

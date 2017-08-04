@@ -1,8 +1,9 @@
+import {LABEL_AUTHOR, LABEL_EDITION, LABEL_PUBLISHER, LABEL_TITLE} from '../../labels';
+
 import {Book} from '../../api/books/Book';
 import { BookRow } from './BookRow';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {LABEL_TITLE, LABEL_EDITION, LABEL_AUTHOR, LABEL_PUBLISHER} from '../../labels';
 export const BookTable = ({ books, onRemove }) => {
   return (<table className="table table-hover">
     <thead>
