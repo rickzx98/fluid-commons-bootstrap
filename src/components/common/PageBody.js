@@ -6,5 +6,5 @@ export const PageBody = ({ children }) => {
 };
 
 PageBody.propTypes = {
-  children: PropTypes.string.isRequired
+  children: PropTypes.object.isRequired
 };

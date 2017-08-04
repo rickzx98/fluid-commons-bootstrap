@@ -1,6 +1,6 @@
-import { LABEL_ADD, LABEL_CANCEL, LABEL_LABEL, LABEL_REMOVE, LABEL_TYPE, LABEL_UPDATE } from '../../labels/';
+import { FontAwesome, ResponsiveButton } from '../common/';
+import { LABEL_ADD, LABEL_CANCEL, LABEL_EDIT, LABEL_LABEL, LABEL_REMOVE, LABEL_TYPE, LABEL_UPDATE } from '../../labels/';
 
-import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { resourceTypesDefaultsForDropdown } from '../../selectors/settingsSelectors';
@@ -13,6 +13,7 @@ export class ResourceTypeTableForm extends React.Component {
     this.removeFormValue = this.removeValue.bind(this);
     this.setFormUpdateMode = this.setUpdateMode.bind(this);
     this.onChangeFormInputValue = this.onChangeInputValue.bind(this);
+    this.onChangeFormTypeValue = this.onChangeType.bind(this);
     this.cancelFormUpdate = this.cancelUpdate.bind(this);
     this.updateFormValue = this.updateValue.bind(this);
   }
@@ -20,40 +21,45 @@ export class ResourceTypeTableForm extends React.Component {
     this.setState({});
   }
   addValue() {
-    this.props.addValue(this.state.inputValue);
-    this.setInputValue('');
+    if (this.state.inputValue && this.state.typeValue) {
+      this.props.addValue({
+        value: this.state.typeValue,
+        label: this.state.inputValue
+      });
+      this.setInputValue('');
+      this.setTypeValue('');
+    }
   }
-  removeValue(event) {
-    const index = event.currentTarget.name.substr(event.currentTarget.name.indexOf('$i') + 2);
+  removeValue(index) {
     this.props.removeValue(index);
   }
-  setUpdateMode(event) {
-    const index = event.currentTarget.name.substr(event.currentTarget.name.indexOf('$i') + 2);
+  setUpdateMode(resourceType, index) {
     this.setState({ update: true, index });
-    this.setInputValue(event.currentTarget.innerHTML);
-    this.setActiveItem(index);
-  }
-  setActiveItem(index) {
-    document.getElementsByName(`div_${this.props.name}`).forEach(element => {
-      element.className = 'list-group-item list-form-field-value';
-      if (index && (element.id === `div_${this.props.name}_$i${index}`)) {
-        element.className += ' active';
-      }
-    });
+    this.setInputValue(resourceType.label);
+    this.setTypeValue(resourceType.value);
   }
   setInputValue(value) {
     this.setState({ inputValue: value });
   }
+  setTypeValue(value) {
+    this.setState({ typeValue: value });
+  }
   onChangeInputValue(event) {
     this.setState({ inputValue: event.currentTarget.value });
+  }
+  onChangeType(event) {
+    this.setState({ typeValue: event.currentTarget.value });
   }
   cancelUpdate() {
     this.setState({ update: false, index: undefined });
     this.setInputValue('');
-    this.setActiveItem();
+    this.setTypeValue('');
   }
   updateValue() {
-    this.props.updateValue(this.state.inputValue, this.state.index);
+    this.props.updateValue({
+      value: this.state.typeValue,
+      label: this.state.inputValue
+    }, this.state.index);
     this.cancelUpdate();
   }
   render() {
@@ -62,7 +68,7 @@ export class ResourceTypeTableForm extends React.Component {
       <table className="table table-hover">
         <thead>
           <tr>
-            <th colSpan={2} className="resource-type-table-controls-header">
+            <th colSpan={3} className="resource-type-table-controls-header">
               <div className="resource-type-control-group clear-fix">
                 <div className="input-group col-sm-9 pull-left">
                   <div className="input-group-btn">
@@ -74,8 +80,8 @@ export class ResourceTypeTableForm extends React.Component {
                   <input value={values} className="table-form-field-hidden" name={name} />
                 </div>
                 <div className="form-group col-sm-3 pull-right">
-                  <select className="form-control">
-                    {resourceTypesDefaultsForDropdown().map(type => <option value={type.value}>{type.label}</option>)}
+                  <select onChange={this.onChangeFormTypeValue} value={this.state.typeValue} className="form-control">
+                    {resourceTypesDefaultsForDropdown().map(type => <option key={`${name}_${type.value}`} value={type.value}>{type.label}</option>)}
                   </select>
                 </div>
               </div>
@@ -83,11 +89,46 @@ export class ResourceTypeTableForm extends React.Component {
             </th>
           </tr>
           <tr>
-            <th>{LABEL_LABEL}</th>
-            <th>{LABEL_TYPE}</th>
+            <th>{' '}</th>
+            <th className="hidden-xs">{LABEL_LABEL}</th>
+            <th className="hidden-xs">{LABEL_TYPE}</th>
           </tr>
         </thead>
-
+        <tbody>
+          {values.map((resourceType, index) =>
+            (<tr key={`${name}_value_$i${index}`}>
+              <td className="hidden-xs" width="15%">
+                <div className="btn-toolbar">
+                  <ResponsiveButton className="btn btn-primary btn-xs" onClick={() => {
+                    this.setFormUpdateMode(resourceType, index);
+                  }} name={`a_${name}_$i${index}`}
+                    label={LABEL_EDIT} icon={<FontAwesome name="pencil" size="lg" fixedWidth={true} />} />
+                  <button disabled={!!this.state.update} type="button" className="btn btn-danger btn-xs" name={`button_${name}_$i${index}`}
+                    onClick={() => {
+                      this.removeFormValue(index);
+                    }}><FontAwesome fixedWidth={true} name="trash" /><span className="hidden-xs">&nbsp;{LABEL_REMOVE}</span></button>
+                </div>
+              </td>
+              <td className="hidden-sm hidden-md hidden-lg">
+                <div className="btn-toolbar pull-left clear-fix">
+                  <ResponsiveButton className="btn btn-primary btn-xs" onClick={() => {
+                    this.setFormUpdateMode(resourceType, index);
+                  }} name={`a_${name}_$i${index}`}
+                    label={LABEL_EDIT} icon={<FontAwesome name="pencil" size="lg" fixedWidth={true} />} />
+                  <button disabled={!!this.state.update} type="button" className="btn btn-danger btn-xs" name={`button_${name}_$i${index}`}
+                    onClick={() => {
+                      this.removeFormValue(index);
+                    }}><FontAwesome fixedWidth={true} name="trash" /><span className="hidden-xs">&nbsp;{LABEL_REMOVE}</span></button>
+                </div>
+                <p className="pull-right clear-fix hidden-sm hidden-md hidden-lg">
+                  <span className="resoure-type-item-label">{resourceType.label}</span>&nbsp;-&nbsp;
+                  <span className="resoure-type-item-value">{resourceType.value}</span>
+                </p>
+              </td>
+              <td className="hidden-xs">{resourceType.label}</td>
+              <td className="hidden-xs">{resourceType.value}</td>
+            </tr>))}
+        </tbody>
       </table>
     </div>);
   }

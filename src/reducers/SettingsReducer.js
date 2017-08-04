@@ -76,7 +76,8 @@ export default function SettingsReducer(state = initialState.settings, action) {
             return Object.assign({}, { ...state, resourceTypes });
         }
         case SETTINGS_ADD_RESOURCE_TYPE: {
-            if (action.resourceType && action.resourceType.length > 0) {
+            if (action.resourceType && action.resourceType.label && action.resourceType.label.length > 0
+                && action.resourceType.value && action.resourceType.value.length > 0) {
                 const resourceTypes = [...state.resourceTypes];
                 const found = resourceTypes.filter(cur => cur === action.resourceType);
                 if (found.length === 0) {

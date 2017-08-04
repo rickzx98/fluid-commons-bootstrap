@@ -163,4 +163,4 @@ SubjectFields[ItemType.BOOK][SubjectHeading.PERSONAL_NAME] = [
 
 function createSubjectObject(value, label, repeatable) {
   return Object.assign({}, { value, label, repeatable });
-};
+}
