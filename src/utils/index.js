@@ -4,4 +4,3 @@ export { generateUID } from './generateUID';
 export { subjectFormatter } from './subjectFormatter';
 export { convertToSubject } from './convertToSubject';
 export { createOptionObject } from './OptionObject';
-export { createSubjectObject } from './SubjectObject';

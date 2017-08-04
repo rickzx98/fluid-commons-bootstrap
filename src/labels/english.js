@@ -71,7 +71,8 @@ export const MESSAGE_ISBN_REQUIRED = 'ISBN is required.';
 export const MESSAGE_PUBLISHER_REQUIRED = 'Publisher is required.';
 export const MESSAGE_AUTHOR_REQUIRED = 'Author is required.';
 export const MESSAGE_PUBLISHED_DATE_REQUIRED = 'Published date is required.';
-
+export const LABEL_LABEL = 'Label';
+export const LABEL_TYPE = 'Type';
 
 //Subjects
 export const LABEL_SUBJECT_PERSONAL_NAME = '600 - Personal name';
