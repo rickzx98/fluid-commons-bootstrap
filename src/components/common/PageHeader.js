@@ -4,7 +4,7 @@ import React from 'react';
 export const PageHeader = ({ label, iconName }) => {
   return (<div className="page-header animated fadeIn">
     <div className="page-background-fader" />
-    <h3 className="page-header-title animated slideInDown">
+    <h3 className="page-header-title">
       <FontAwesome name={iconName} size="lg" fixedWidth={true} /><p> {label} </p></h3>
   </div>);
 };
