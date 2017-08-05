@@ -9,8 +9,8 @@ export const Selector = ({ label, required, name, onChange, options, value, disa
         }
     };
     return (<FormGroup name={name} label={label} required={required}>
-        <select disabled={disabled} onChange={eventOnChange} className="form-control" name={name} value={value}>
-            {options.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}
+        <select key={name} disabled={disabled} onChange={eventOnChange} className="form-control" name={name} value={value}>
+            {options.map((item, index) => <option key={`for_${name}_v${item.value}_i${index}`} value={item.value}>{item.label}</option>)}
         </select>
     </FormGroup>);
 };

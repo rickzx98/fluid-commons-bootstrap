@@ -53,7 +53,7 @@ export class ManageBookPage extends React.Component {
   }
 
   onAddSubject() {
-    browserHistory.push('/books/subjects/new');
+    browserHistory.push('/books/subjects/book/new');
   }
 
   onNewBook() {

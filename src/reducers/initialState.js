@@ -14,9 +14,12 @@ export default {
     update: false,
     touched: false,
     active: false,
-    level: '#',
-    thesaurus: '0',
-    subjectFormat: '#0'
+    subjectCode: '',
+    data: {
+      firstIndicator: '#',
+      SecondIndicator: '0'
+    },
+    subjectFormat: '#0',
   },
   dialog: {
     showCloseButton: true,

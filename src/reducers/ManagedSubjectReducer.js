@@ -12,17 +12,25 @@ export default function managedSubjectReducer(state = initialState.subject, acti
             if (!action.subject) {
                 state = Object.assign({}, initialState.subject);
             } else {
-                state = Object.assign({}, { ...state, ...action.subject });
+                const data = Object.assign({}, { ...state.data, ...action.subject });
+                state = Object.assign({}, { ...state, data });
             }
-            state[Subject.SUBJECT_FORMAT] = subjectFormatter(state);
+            state[Subject.SUBJECT_FORMAT] = subjectFormatter(state.data);
             state.active = true;
             return state;
         }
         case SET_MANAGED_SUBJECT_FIELD_VALUE:
-            if (Object.values(Subject).indexOf(action.field) > -1) {
-                state = Object.assign({}, { ...state, touched: true, active: true });
-                state[action.field] = action.value;
-                state[Subject.SUBJECT_FORMAT] = subjectFormatter(state);
+            if (action.field === Subject.TYPE_OF_HEADINGS) {
+                const newState = { touched: true, active: true };
+                const data = Object.assign({}, { ...state.data });
+                data[Subject.FIRST_INDICATOR] = '';
+                newState[action.field] = action.value;
+                state = Object.assign({}, { ...state, ...newState, data });
+            } else if (Object.values(Subject).indexOf(action.field) > -1) {
+                const data = Object.assign({}, { ...state.data });
+                data[action.field] = action.value;
+                state = Object.assign({}, { ...state, touched: true, active: true, data });
+                state[Subject.SUBJECT_FORMAT] = subjectFormatter(state.data);
             }
             return state;
         case ADD_SUBJECT_TO_MANAGED_BOOK:

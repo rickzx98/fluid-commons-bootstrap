@@ -2,10 +2,15 @@ import '../images/subject-header.jpg';
 
 import * as actions from '../actions/BookSubjectActions';
 
-import { BookSubjectForm, CancelSubjectModalBody } from '../components/subjects/';
-import { CancelModalFooter, PageBody, PageHeader } from '../components/common/';
-import { LABEL_CONFIRM_CANCEL_SUBJECT_TITLE, LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES, LABEL_SUBJECTS } from '../labels/';
+import { CancelSubjectModalBody, Index } from '../components/subjects/';
+import {
+  LABEL_CONFIRM_CANCEL_SUBJECT_TITLE,
+  LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES,
+  LABEL_SUBJECTS
+} from '../labels/';
+import { SubjectFields, SubjectHeadingsByType } from '../api/subjects/';
 
+import { CancelModalFooter } from '../components/common/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -84,18 +89,12 @@ export class ManagedSubjectPage extends React.Component {
   }
 
   render() {
-    return (<div className="subjects page">
-      <PageHeader label={LABEL_SUBJECTS} iconName={'hashtag'} />
-      <PageBody>
-        <BookSubjectForm
-          managedSubject={this.props.managedSubject}
-          addSubjectToManagedBook={this.addSubjectToManagedBook}
-          cancelManagedSubject={this.cancelManagedSubject}
-          updateManagedSubject={this.updateManagedSubject}
-          onChange={this.onChangeForm}
-          subjects={this.props.subjects} />
-      </PageBody>
-    </div>);
+    return <Index
+      onChange={this.onChangeForm}
+      managedSubject={this.props.managedSubject}
+      subjectFields={this.props.subjectFields}
+      subjectHeadings={this.props.subjectHeadings}
+    />;
   }
 }
 
@@ -106,14 +105,16 @@ ManagedSubjectPage.propTypes = {
   managedSubject: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   routeParams: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
+  subjectHeadings: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     subjects: state.subjects,
     managedSubject: state.managedSubject,
-    subject: getSubjectByIndex(state.managedBook.subjects, ownProps.routeParams.index)
+    subject: getSubjectByIndex(state.managedBook.subjects, ownProps.routeParams.index),
+
   };
 }
 function getSubjectByIndex(subjects, index) {
@@ -123,9 +124,11 @@ function getSubjectByIndex(subjects, index) {
     return subject;
   }
 }
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    subjectHeadings: SubjectHeadingsByType[ownProps.routeParams.resourceType],
+    subjectFields: SubjectFields[ownProps.routeParams.resourceType]
   };
 }
 

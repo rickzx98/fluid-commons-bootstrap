@@ -31,6 +31,10 @@ import {
   LABEL_RELATIONSHIP,
   LABEL_RELATOR_TERM,
   LABEL_SOURCE_OF_HEADING_OR_TERM,
+  LABEL_SUBJECT_GENRE_INDEX_TERM,
+  LABEL_SUBJECT_GEOGRAPHIC_NAME,
+  LABEL_SUBJECT_PERSONAL_NAME,
+  LABEL_SUBJECT_TOPICAL_TERM,
   LABEL_TITLES_AND_OTHER_WORDS,
   LABEL_TITLE_OF_A_WORK,
   LABEL_TOPICAL_TERM_FOLLOWING_GEOGRAPHIC_NAME_ENTRY,
@@ -63,7 +67,10 @@ export const Subject = {
   DATE: 'date',
   CALL_NUMBER: 'callNumber',
   CURRENCY: 'currency',
-  FUND: 'fund'
+  FUND: 'fund',
+  TYPE_OF_HEADINGS: 'subjectCode',
+  FIRST_INDICATOR: 'firstIndicator',
+  SECOND_INDICATOR: 'secondIndicator'
 };
 
 export const SubjectHeading = {
@@ -74,12 +81,14 @@ export const SubjectHeading = {
 };
 
 export const SubjectHeadingsByType = {};
+
 SubjectHeadingsByType[ItemType.BOOK] = [
-  SubjectHeading.PERSONAL_NAME,
-  SubjectHeading.TOPICAL_TERM,
-  SubjectHeading.GEOGRAPHIC_NAME,
-  SubjectHeading.GENRE_FORM_INDEX_TERM
+  createOption(SubjectHeading.PERSONAL_NAME, LABEL_SUBJECT_PERSONAL_NAME),
+  createOption(SubjectHeading.TOPICAL_TERM, LABEL_SUBJECT_TOPICAL_TERM),
+  createOption(SubjectHeading.GEOGRAPHIC_NAME, LABEL_SUBJECT_GEOGRAPHIC_NAME),
+  createOption(SubjectHeading.GENRE_FORM_INDEX_TERM, LABEL_SUBJECT_GENRE_INDEX_TERM)
 ];
+
 export const SubjectFields = {};
 SubjectFields[ItemType.BOOK] = {};
 SubjectFields[ItemType.BOOK][SubjectHeading.GENRE_FORM_INDEX_TERM] = [
@@ -163,4 +172,8 @@ SubjectFields[ItemType.BOOK][SubjectHeading.PERSONAL_NAME] = [
 
 function createSubjectObject(value, label, repeatable) {
   return Object.assign({}, { value, label, repeatable });
+}
+
+function createOption(value, label) {
+  return Object.assign({}, { value, label });
 }
