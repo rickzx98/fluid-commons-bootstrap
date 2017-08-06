@@ -2,7 +2,7 @@ import '../images/subject-header.jpg';
 
 import * as actions from '../actions/BookSubjectActions';
 
-import { CancelSubjectModalBody, Index } from '../components/subjects/';
+import { CancelSubjectModalBody, ManagedSubjectIndex } from '../components/subjects/';
 import {
   LABEL_CONFIRM_CANCEL_SUBJECT_TITLE,
   LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES,
@@ -89,12 +89,11 @@ export class ManagedSubjectPage extends React.Component {
   }
 
   render() {
-    return <Index
+    return (<ManagedSubjectIndex
       onChange={this.onChangeForm}
       managedSubject={this.props.managedSubject}
       subjectFields={this.props.subjectFields}
-      subjectHeadings={this.props.subjectHeadings}
-    />;
+      subjectHeadings={this.props.subjectHeadings} />);
   }
 }
 
@@ -106,7 +105,8 @@ ManagedSubjectPage.propTypes = {
   router: PropTypes.object.isRequired,
   routeParams: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
-  subjectHeadings: PropTypes.array.isRequired
+  subjectHeadings: PropTypes.array.isRequired,
+  subjectFields: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

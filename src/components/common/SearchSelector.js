@@ -5,16 +5,17 @@ import React from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 export const SearchSelector = ({ options, label, name, labelKey, onChange, required, value,
-  multiple, disabled, invalid, message }) => {
+  multiple, disabled, invalid, message, allowNew }) => {
   const eventOnChange = (currentValue) => {
     if (onChange) {
-      onChange(name, currentValue ? currentValue.map(cur => cur[labelKey || 'label'] || cur ) : []);
+      onChange(name, currentValue ? currentValue.map(cur => cur[labelKey || 'label'] || cur) : []);
     }
   };
   const typeaheadProps = {
     multiple, options,
     disabled, name,
     labelKey,
+    allowNew,
     selected: value,
     onChange: eventOnChange,
     placeholder: `${label}`,
@@ -22,7 +23,7 @@ export const SearchSelector = ({ options, label, name, labelKey, onChange, requi
   };
   return (<FormGroup name={name} label={label} required={required}>
     <span>
-      <Typeahead allowNew {...typeaheadProps} />
+      <Typeahead  {...typeaheadProps} />
       {invalid && <div className="col-sm-12 text-warning"><p>{message}</p></div>}
     </span>
   </FormGroup>);
@@ -40,5 +41,6 @@ SearchSelector.propTypes = {
   value: PropTypes.array,
   multiple: PropTypes.bool,
   invalid: PropTypes.bool,
-  message: PropTypes.string
+  message: PropTypes.string,
+  allowNew: PropTypes.any
 };

@@ -1,6 +1,6 @@
 import * as actions from '../actions/BookSubjectActions';
 
-import { BookSubjectList } from '../components/subjects/BookSubjectList';
+import { BookSubjectIndex } from '../components/subjects/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -12,10 +12,10 @@ export class SubjectsPage extends React.Component {
   }
 
   render() {
-    return (<div className="subjects">
-      <BookSubjectList removeSubject={this.props.actions.removeManagedBookSubject} subjects={this.props.subjects}
-                       managedBook={this.props.managedBook}/>
-    </div>);
+    return (<BookSubjectIndex
+      removeSubject={this.props.actions.removeManagedBookSubject}
+      subjects={this.props.subjects}
+      managedBook={this.props.managedBook} />);
   }
 }
 
