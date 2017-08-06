@@ -177,3 +177,10 @@ export function uploadBookCover(file) {
       });
   };
 }
+
+export function setMaangedSubjectState(state) {
+  return {
+    type: types.SET_MANAGED_SUBJECT_STATE,
+    state
+  };
+}

@@ -54,6 +54,7 @@ export const LABEL_SUBJECT_HEADINGS = 'Subject headings';
 export const LABEL_EMPTY_OPTION = '-- select --';
 export const LABEL_ADD_MORE = 'add more...';
 export const LABEL_SUBJECT_FIELD = 'Subject field';
+export const LABEL_THESAURUS = 'Thesaurus';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';

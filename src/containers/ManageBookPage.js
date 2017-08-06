@@ -41,7 +41,6 @@ export class ManageBookPage extends React.Component {
     if (nextProps.route.path === 'books/new' && nextProps.managedBook._id) {
       browserHistory.push('/books/' + nextProps.managedBook._id);
     }
-
   }
 
   onTabChanged(activeKey) {
@@ -53,6 +52,11 @@ export class ManageBookPage extends React.Component {
   }
 
   onAddSubject() {
+    const path = this.props.route.path === 'books/new' ? '/books/new' : `/books/${this.props.managedBook._id}`;
+    this.props.actions.setMaangedSubjectState({
+      resourceType: 'book',
+      previousPath: path
+    });
     browserHistory.push('/books/subjects/book/new');
   }
 

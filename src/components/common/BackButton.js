@@ -10,6 +10,7 @@ export const BackButton = ({ label, confirm, to }) => {
       if (onPageLeave instanceof Promise) {
         onPageLeave.then(() => {
           reRoute();
+        }).catch(() => {
         });
       } else {
         reRoute();
@@ -26,8 +27,8 @@ export const BackButton = ({ label, confirm, to }) => {
     }
   };
   return (<button onClick={onClick} type="button" className="btn btn-danger"><FontAwesome fixedWidth={true}
-                                                                                          name="long-arrow-left"/><span
-    className="hidden-xs">{label}</span></button>);
+    name="long-arrow-left" /><span
+      className="hidden-xs">{label}</span></button>);
 };
 
 BackButton.propTypes = {

@@ -1,4 +1,4 @@
-import { Subject } from '../api/subjects/';
+import { Subject, SubjectFields } from '../api/subjects/';
 
 export function subjectFormatter(subject) {
   return getIndicatorValue(Subject.LEVEL_OF_SUBJECT, subject) +
@@ -14,6 +14,23 @@ export function subjectFormatter(subject) {
     getValue(Subject.GENERAL_SUBDIVISION, subject) +
     getValue(Subject.CHRONOLOGICAL_SUBDIVISION, subject) +
     getValue(Subject.GEOGRAPHIC_SUBDIVISION, subject);
+}
+
+export function convertSubjectToMarc(subject, resourceType, subjectCode) {
+  let subjectMarc = `${subjectCode}|${subject.FIRST_INDICATOR}${subject.SECOND_INDICATOR}`;
+  SubjectFields[resourceType][subjectCode].forEach(subField => {
+    const value = subject[subField.value];
+    if (value) {
+      if (value instanceof Array) {
+        value.forEach(v => {
+          subjectMarc += `$${subField.value}${v}`;
+        });
+      } else {
+        subjectMarc += `$${subField.value}${value}`;
+      }
+    }
+  });
+  return subjectMarc;
 }
 function getIndicatorValue(field, subject) {
   return subject[field] || '';

@@ -5,8 +5,7 @@ import * as actions from '../actions/BookSubjectActions';
 import { CancelSubjectModalBody, ManagedSubjectIndex } from '../components/subjects/';
 import {
   LABEL_CONFIRM_CANCEL_SUBJECT_TITLE,
-  LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES,
-  LABEL_SUBJECTS
+  LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES
 } from '../labels/';
 import { SubjectFields, SubjectHeadingsByType } from '../api/subjects/';
 
@@ -90,6 +89,8 @@ export class ManagedSubjectPage extends React.Component {
 
   render() {
     return (<ManagedSubjectIndex
+      cancelManagedSubject={this.cancelManagedSubject}
+      subjects={this.props.subjects}
       onChange={this.onChangeForm}
       managedSubject={this.props.managedSubject}
       subjectFields={this.props.subjectFields}
@@ -114,7 +115,8 @@ function mapStateToProps(state, ownProps) {
     subjects: state.subjects,
     managedSubject: state.managedSubject,
     subject: getSubjectByIndex(state.managedBook.subjects, ownProps.routeParams.index),
-
+    subjectHeadings: SubjectHeadingsByType[ownProps.routeParams.resourceType],
+    subjectFields: SubjectFields[ownProps.routeParams.resourceType]
   };
 }
 function getSubjectByIndex(subjects, index) {
@@ -124,11 +126,9 @@ function getSubjectByIndex(subjects, index) {
     return subject;
   }
 }
-function mapDispatchToProps(dispatch, ownProps) {
+function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch),
-    subjectHeadings: SubjectHeadingsByType[ownProps.routeParams.resourceType],
-    subjectFields: SubjectFields[ownProps.routeParams.resourceType]
+    actions: bindActionCreators(actions, dispatch)
   };
 }
 

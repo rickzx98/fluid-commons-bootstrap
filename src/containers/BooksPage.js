@@ -50,8 +50,10 @@ export class BooksPage extends React.Component {
     return (<div className="books page">
       <PageHeader label={LABEL_BOOKS} iconName="book" />
       <PageBody>
-        <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks} />
-        <BookTable onRemove={this.onRemove} books={this.props.books} />
+        <span>
+          <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks} />
+          <BookTable onRemove={this.onRemove} books={this.props.books} />
+        </span>
       </PageBody>
     </div>);
   }

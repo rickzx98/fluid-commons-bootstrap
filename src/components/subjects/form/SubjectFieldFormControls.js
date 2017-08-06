@@ -1,8 +1,7 @@
-import { FontAwesome, ResponsiveButton, Selector, TextInput } from '../../common/';
-import { LABEL_ADD_MORE, LABEL_CANCEL, LABEL_SUBJECT_FIELD } from '../../../labels/';
-
 import PropTypes from 'prop-types';
 import React from 'react';
+import { SubjectFieldTable } from './SubjectFieldTable';
+import { TextInput } from '../../common/';
 
 export class SubjectFieldFormControls extends React.Component {
   constructor(props) {
@@ -12,6 +11,8 @@ export class SubjectFieldFormControls extends React.Component {
     this.selectSubjectField = this.onSelectSubjectField.bind(this);
     this.newField = this.addNewField.bind(this);
     this.cancelField = this.cancelNewField.bind(this);
+    this.inputChange = this.onInputChange.bind(this);
+    this.removeField = this.onRemoveField.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     this.fields = [...nextProps.subjectField];
@@ -40,7 +41,8 @@ export class SubjectFieldFormControls extends React.Component {
   }
   addNewField() {
     this.setState({
-      newField: true, subjectOptions: [
+      newField: true,
+      subjectOptions: [
         { label: '-- select --', value: '' },
         ...(this.fields.filter(field => !this.isFieldExists(field.value)))]
     });
@@ -50,7 +52,7 @@ export class SubjectFieldFormControls extends React.Component {
       newField: false
     });
   }
-  removeField(index) {
+  onRemoveField(index) {
     const fields = [...this.state.fields];
     fields.splice(index, 1);
     this.setState({ fields });
@@ -58,63 +60,40 @@ export class SubjectFieldFormControls extends React.Component {
   isFieldExists(selectedField) {
     return this.state.fields.filter(field => field.value === selectedField).length > 0;
   }
+  onInputChange(event) {
+    this.props.onChange(event.target.name, event.target.value);
+  }
   render() {
     return (<div className="no-padding container-fluid">
       <TextInput
+        onChange={this.inputChange}
         required={true}
         name={this.state.$a.value}
         value={this.props.data[this.state.$a.value]}
         label={this.state.$a.label} />
-      <table className="table width100pc no-padding">
-        <thead>
-          <tr>
-            <th>{' '}</th>
-            <th>{' '}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.fields.map((field, index) =>
-            (
-              <tr key={`${field.value}_${index}`}>
-                <td className="padding-left-15px" width="3%">
-                  <ResponsiveButton onClick={() => {
-                    this.removeField(index);
-                  }}
-                    icon={<FontAwesome name="close" size="lg" fixedWidth={true} />}
-                    className="btn btn-danger btn-xs"
-                    label={''} />
-                </td>
-                <td>
-                  <TextInput key={`${field.value}_${index}`}
-                    label={field.label}
-                    name={field.value}
-                    value={this.props.data[field.value]} />
-                </td>
-              </tr>))}
-        </tbody>
-      </table>
-      {this.state.newField && <Selector
-        onChange={this.selectSubjectField}
-        label={LABEL_SUBJECT_FIELD}
-        name="subjectField"
-        options={this.state.subjectOptions} />}
-      <div className="btn-toolbar padding-left-15px">
-        {!this.state.newField &&
-          <ResponsiveButton onClick={this.newField} className="btn btn-success"
-            icon={<FontAwesome name="plus" size="lg" fixedWidth={true} />}
-            label={LABEL_ADD_MORE} />}
-        {this.state.newField &&
-          <ResponsiveButton onClick={this.cancelField} className="btn btn-danger"
-            icon={<FontAwesome name="close" size="lg" fixedWidth={true} />}
-            label={LABEL_CANCEL} />}
-      </div>
-    </div>)
+      <SubjectFieldTable
+        fields={this.state.fields}
+        subjectOptions={this.state.subjectOptions}
+        onChange={this.props.onChange}
+        data={this.props.data}
+        isNewField={this.state.newField}
+        newField={this.newField}
+        cancelField={this.cancelField}
+        selectSubjectField={this.selectSubjectField}
+        removeField={this.removeField} />
+    </div>);
   }
 }
-
 
 SubjectFieldFormControls.propTypes = {
   typeOfHeading: PropTypes.string.isRequired,
   subjectField: PropTypes.array.isRequired,
-  data: PropTypes.object.isRequired
-}
+  data: PropTypes.object.isRequired,
+  subjectOptions: PropTypes.array,
+  onChange: PropTypes.func.isRequired
+};
+
+SubjectFieldFormControls.defaultProps = {
+  subjectOptions: [],
+  data: {}
+};
