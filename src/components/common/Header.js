@@ -22,7 +22,7 @@ export class Header extends React.Component {
         browserHistory.push('/books');
     }
     render() {
-        return (<Navbar collapseOnSelect>
+        return (<Navbar collapseOnSelect fixedTop={true} fluid={true}>
             <Navbar.Header>
                 <Navbar.Brand>
                     <a href="">{APP_NAME}</a>

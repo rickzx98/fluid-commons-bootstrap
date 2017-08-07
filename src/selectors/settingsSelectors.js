@@ -1,4 +1,5 @@
 import { ItemType } from '../api/item/';
+
 export function fundsForDropdown(settings) {
   const funds = settings.funds.map(fund => { return { label: fund, value: fund }; });
   funds.unshift({ label: '-- select --', value: '' });
@@ -11,8 +12,10 @@ export function currenciesForDropdown(settings) {
   return currencies;
 }
 
-export function resourceTypesForDropdown(settings) {
-  const resourceTypes = settings.resourceTypes.map(resourceType => { return { label: resourceType, value: resourceType }; });
+export function resourceTypesForDropdown(settings, type) {
+  const resourceTypes = settings.resourceTypes
+    .filter(resourceType => resourceType.value === type)
+    .map(resourceType => { return { label: resourceType.label, value: resourceType.label }; });
   resourceTypes.unshift({ label: '-- select --', value: '' });
   return resourceTypes;
 }

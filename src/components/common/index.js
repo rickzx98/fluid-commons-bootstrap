@@ -4,6 +4,7 @@ import ReactBootstrapDatePicker from 'react-bootstrap-date-picker';
 import ReactFontAwesome from 'react-fontawesome';
 import ReactImg from 'react-image';
 import ReactLoading from 'react-loading';
+
 export { CancelModalBody } from './CancelModalBody';
 export { CancelModalFooter } from './CancelModalFooter';
 export { BackButton } from './BackButton';
@@ -24,6 +25,9 @@ export const Img = ReactImg;
 export const Loading = () => {
   return (<ReactLoading type="spin" color="#E67E22" height={39} width={39} delay={100} />);
 };
+export const LoadingBalls = () => {
+  return (<ReactLoading className="margin-auto" type="balls" color="#E67E22" height={39} width={50} delay={100} />)
+}
 export const IFrame = Iframe;
 export const FontAwesome = ReactFontAwesome;
 export const DatePicker = ReactBootstrapDatePicker;

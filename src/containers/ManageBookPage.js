@@ -83,9 +83,13 @@ export class ManageBookPage extends React.Component {
     });
   }
 
-  routerWillLeave() {
+  routerWillLeave(next) {
     if (this.props.managedBook.active && this.props.managedBook.touched) {
       return LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES;
+    } else if (next.pathname.indexOf('subjects/new') > -1) {
+      return true;
+    } else {
+      this.props.actions.cancelManagedBook();
     }
   }
 

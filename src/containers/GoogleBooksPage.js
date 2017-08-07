@@ -55,7 +55,7 @@ export class GoogleBooksPage extends React.Component {
 
   render() {
     return (<div className="google-books page">
-      <PageHeader label={LABEL_ONLINE_SEARCH} iconName="globe" />
+      <PageHeader loading={this.props.ajaxGlobal.started} label={LABEL_ONLINE_SEARCH} iconName="globe" />
       <PageBody>
         <SearchList ajaxGlobal={this.props.ajaxGlobal}
           preview={this.preview}

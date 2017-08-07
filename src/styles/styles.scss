@@ -13,6 +13,7 @@ $vin-red: #ff0000;
 $hd-text-color: #ececed;
 $fd-bg-color: #3f5c73;
 $page-header-height: 130px;
+$loading-color: #E67E22;
 
 /* Styles */
 
@@ -59,7 +60,6 @@ td.fuel-savings-label {
 }
 
 .page {
-    margin-top: -41px;
     .page-header {
         .page-background-fader {
             z-index: 1;
@@ -144,4 +144,12 @@ td.fuel-savings-label {
 
 .width100pc {
     width: 100% !important;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.loading-icon {
+    color: $loading-color;
 }

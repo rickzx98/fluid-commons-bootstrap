@@ -89,6 +89,8 @@ export class ManagedSubjectPage extends React.Component {
   routerWillLeave() {
     if (this.props.managedSubject.active && this.props.managedSubject.touched) {
       return LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES;
+    } else {
+      this.props.actions.cancelManagedSubject();
     }
   }
 
