@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { SearchSelector } from '../../common/';
 import { SubjectFieldTable } from './SubjectFieldTable';
-import { TextInput } from '../../common/';
 
 export class SubjectFieldFormControls extends React.Component {
   constructor(props) {
@@ -11,12 +11,26 @@ export class SubjectFieldFormControls extends React.Component {
     this.selectSubjectField = this.onSelectSubjectField.bind(this);
     this.newField = this.addNewField.bind(this);
     this.cancelField = this.cancelNewField.bind(this);
-    this.inputChange = this.onInputChange.bind(this);
     this.removeField = this.onRemoveField.bind(this);
   }
+  componentWillMount() {
+    const fields = [];
+    const fieldKeys = this.fields.map(field => field.value);
+    Object.keys(this.props.data).forEach(keyValue => {
+      if (keyValue !== '$a') {
+        let index = fieldKeys.indexOf(keyValue);
+        if (index > -1) {
+          fields.push(Object.assign({}, { ...this.fields[index] }));
+        }
+      }
+    });
+    this.setState({ fields });
+  }
   componentWillReceiveProps(nextProps) {
-    this.fields = [...nextProps.subjectField];
-    this.initialState();
+    if (this.props.subjectCode !== nextProps.subjectCode) {
+      this.fields = [...nextProps.subjectField];
+      this.initialState();
+    }
   }
   initialState() {
     const initState = {
@@ -60,14 +74,14 @@ export class SubjectFieldFormControls extends React.Component {
   isFieldExists(selectedField) {
     return this.state.fields.filter(field => field.value === selectedField).length > 0;
   }
-  onInputChange(event) {
-    this.props.onChange(event.target.name, event.target.value);
-  }
   render() {
     return (<div className="no-padding container-fluid">
-      <TextInput
-        onChange={this.inputChange}
+      <SearchSelector
+        labelKey="label"
+        onChange={this.props.onChange}
         required={true}
+        multiple={this.state.$a.repeatable}
+        options={this.state.subjectOptions}
         name={this.state.$a.value}
         value={this.props.data[this.state.$a.value]}
         label={this.state.$a.label} />
@@ -90,7 +104,8 @@ SubjectFieldFormControls.propTypes = {
   subjectField: PropTypes.array.isRequired,
   data: PropTypes.object.isRequired,
   subjectOptions: PropTypes.array,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  subjectCode: PropTypes.string.isRequired
 };
 
 SubjectFieldFormControls.defaultProps = {

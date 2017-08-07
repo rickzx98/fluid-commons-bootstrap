@@ -17,16 +17,16 @@ export function subjectFormatter(subject) {
 }
 
 export function convertSubjectToMarc(subject, resourceType, subjectCode) {
-  let subjectMarc = `${subjectCode}|${subject.FIRST_INDICATOR}${subject.SECOND_INDICATOR}`;
+  let subjectMarc = `${subjectCode}|${subject[Subject.FIRST_INDICATOR]}${subject[Subject.SECOND_INDICATOR]}`;
   SubjectFields[resourceType][subjectCode].forEach(subField => {
     const value = subject[subField.value];
     if (value) {
       if (value instanceof Array) {
         value.forEach(v => {
-          subjectMarc += `$${subField.value}${v}`;
+          subjectMarc += `${subField.value}${v}`;
         });
       } else {
-        subjectMarc += `$${subField.value}${value}`;
+        subjectMarc += `${subField.value}${value}`;
       }
     }
   });

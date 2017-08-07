@@ -178,7 +178,7 @@ export function uploadBookCover(file) {
   };
 }
 
-export function setMaangedSubjectState(state) {
+export function setManagedSubjectState(state) {
   return {
     type: types.SET_MANAGED_SUBJECT_STATE,
     state

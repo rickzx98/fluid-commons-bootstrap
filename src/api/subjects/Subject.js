@@ -70,7 +70,8 @@ export const Subject = {
   FUND: 'fund',
   TYPE_OF_HEADINGS: 'subjectCode',
   FIRST_INDICATOR: 'firstIndicator',
-  SECOND_INDICATOR: 'secondIndicator'
+  SECOND_INDICATOR: 'secondIndicator',
+  RESOURCE_TYPE: 'resourceType'
 };
 
 export const SubjectHeading = {

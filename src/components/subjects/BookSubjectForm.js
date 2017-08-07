@@ -1,3 +1,4 @@
+import { LABEL_THESAURUS, LABEL_TYPE_OF_HEADING } from '../../labels/';
 import {
   getAllSecondIndicatorTopicalTermsForDropDown,
   getAllSubjectsForDropDown,
@@ -6,8 +7,6 @@ import {
 } from '../../selectors/subjectSelectors';
 
 import { BookSubjectButtonControls } from './form/BookSubjectButtonControls';
-import { LABEL_THESAURUS } from '../../labels/';
-import { LABEL_TYPE_OF_HEADING } from '../../labels/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Selector } from '../common/';
@@ -15,8 +14,8 @@ import { Subject } from '../../api/subjects';
 import { SubjectFieldFormControls } from './form/SubjectFieldFormControls';
 
 export const BookSubjectForm = ({ subjects, onChange, subjectFields, subjectHeadings,
-  managedSubject, cancelManagedSubject }) => {
-  return (<form className="form container-fluid">
+  managedSubject, cancelManagedSubject, onSubmit }) => {
+  return (<form className="form container-fluid" onSubmit={onSubmit}>
     <BookSubjectButtonControls
       cancelManagedSubject={cancelManagedSubject}
       managedSubject={managedSubject} />
@@ -24,19 +23,21 @@ export const BookSubjectForm = ({ subjects, onChange, subjectFields, subjectHead
       onChange={onChange}
       name={Subject.TYPE_OF_HEADINGS}
       label={LABEL_TYPE_OF_HEADING}
-      value={managedSubject.subjectCode}
+      value={managedSubject[Subject.TYPE_OF_HEADINGS]}
       options={getSubjectHeadingsForDropdown(subjectHeadings)} />
-    <Selector value={managedSubject[Subject.SECOND_INDICATOR]}
-      onChange={onChange} options={getAllSecondIndicatorTopicalTermsForDropDown()}
-      label={LABEL_THESAURUS} name={Subject.SECOND_INDICATOR} />
-    {managedSubject.subjectCode && <Selector required={true}
+    {managedSubject[Subject.TYPE_OF_HEADINGS] && <Selector required={true}
       value={managedSubject.data[Subject.FIRST_INDICATOR]}
       onChange={onChange} name={Subject.FIRST_INDICATOR}
-      {...getFirstIndicatorSelector(managedSubject.subjectCode) } />}
-    {managedSubject.subjectCode && <SubjectFieldFormControls
+      {...getFirstIndicatorSelector(managedSubject[Subject.TYPE_OF_HEADINGS])} />}
+    <Selector required={true}
+      value={managedSubject.data[Subject.SECOND_INDICATOR]}
+      onChange={onChange} options={getAllSecondIndicatorTopicalTermsForDropDown()}
+      label={LABEL_THESAURUS} name={Subject.SECOND_INDICATOR} />
+    {managedSubject[Subject.TYPE_OF_HEADINGS] && <SubjectFieldFormControls
+      subjectCode={managedSubject[Subject.TYPE_OF_HEADINGS]}
       subjectOptions={getAllSubjectsForDropDown(subjects)}
-      subjectField={subjectFields[managedSubject.subjectCode]}
-      typeOfHeading={managedSubject.subjectCode}
+      subjectField={subjectFields[managedSubject[Subject.TYPE_OF_HEADINGS]]}
+      typeOfHeading={managedSubject[Subject.TYPE_OF_HEADINGS]}
       data={managedSubject.data}
       onChange={onChange} />}
   </form>);
@@ -48,5 +49,6 @@ BookSubjectForm.propTypes = {
   subjectFields: PropTypes.object.isRequired,
   managedSubject: PropTypes.object.isRequired,
   subjects: PropTypes.array.isRequired,
-  cancelManagedSubject: PropTypes.func.isRequired
+  cancelManagedSubject: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired
 };

@@ -31,7 +31,7 @@ export const SearchSelector = ({ options, label, name, labelKey, onChange, requi
 SearchSelector.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  labelKey: PropTypes.string.isRequired,
+  labelKey: PropTypes.string,
   options: PropTypes.array.isRequired,
   valueKey: PropTypes.string,
   disabled: PropTypes.bool,

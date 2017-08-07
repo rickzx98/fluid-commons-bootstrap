@@ -61,7 +61,8 @@ export class Api {
       setTimeout(() => {
         try {
           const bookId = generateUID();
-          const newBook = Object.assign({}, { ...book,
+          const newBook = Object.assign({}, {
+            ...book,
             _id: bookId
           });
           const filterd = BOOK_DATA.filter(storedBook => storedBook[Book.ISBN] === book[Book.ISBN]);
@@ -92,7 +93,8 @@ export class Api {
             }
           });
           BOOK_DATA = books;
-          resolve(Object.assign({}, { ...updatedBook
+          resolve(Object.assign({}, {
+            ...updatedBook
           }));
         } catch (err) {
           reject(err);
@@ -122,7 +124,7 @@ export class Api {
 function createMockBook(id, title, subtitle, author, imageUrl) {
   const book = {};
   book[Book.BOOK_ID] = id;
-  book[Book.AUTHOR] = author;
+  book[Book.AUTHOR] = [author];
   book[Book.SUB_TITLE] = subtitle;
   book[Book.TITLE] = title;
   book[Book.IMAGE_URL] = imageUrl;
@@ -130,9 +132,9 @@ function createMockBook(id, title, subtitle, author, imageUrl) {
   book[Book.EDITION] = '2nd Edition';
   book[Book.ISBN] = '1234554657';
   book[Book.SUBJECTS] = [
-    '17$aCareer Exploration.$2ericd',
-    '#0$aBallads, English$zHudson River Valley (N.Y. and N.J.)',
-    '#0$aRain and rainfall$zWashington (State)$zSeattle$vMaps'
+    '650|17$aCareer Exploration.$2ericd',
+    '650|#0$aBallads, English$zHudson River Valley (N.Y. and N.J.)',
+    '650|#0$aRain and rainfall$zWashington (State)$zSeattle$vMaps'
   ];
   return book;
 }

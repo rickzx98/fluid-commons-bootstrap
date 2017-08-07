@@ -9,17 +9,12 @@ import {
     LABEL_NO_LEVEL_SPECIFIED,
     LABEL_PRIMARY,
     LABEL_SECONDARY,
-    LABEL_SUBJECT_GENRE_INDEX_TERM,
-    LABEL_SUBJECT_GEOGRAPHIC_NAME,
-    LABEL_SUBJECT_PERSONAL_NAME,
-    LABEL_SUBJECT_TOPICAL_TERM,
     LABEL_SURNAME,
     LABEL_TYPE_OF_HEADING,
     LABEL_TYPE_OF_PERSONAL_NAME,
     LABEL_UNDEFINED
 } from '../labels/';
 
-import { SubjectHeading } from '../api/subjects/';
 import { createOptionObject } from '../utils/';
 
 export function getAllSubjectHeadersForDropDown() {

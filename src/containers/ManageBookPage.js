@@ -52,12 +52,7 @@ export class ManageBookPage extends React.Component {
   }
 
   onAddSubject() {
-    const path = this.props.route.path === 'books/new' ? '/books/new' : `/books/${this.props.managedBook._id}`;
-    this.props.actions.setMaangedSubjectState({
-      resourceType: 'book',
-      previousPath: path
-    });
-    browserHistory.push('/books/subjects/book/new');
+    browserHistory.push('/books/subjects/new');
   }
 
   onNewBook() {

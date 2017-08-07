@@ -17,7 +17,7 @@ export default {
     subjectCode: '',
     data: {
       firstIndicator: '#',
-      SecondIndicator: '0'
+      secondIndicator: '0'
     },
     subjectFormat: '#0',
   },

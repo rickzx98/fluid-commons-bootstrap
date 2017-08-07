@@ -12,7 +12,9 @@ export function loadSubjectSuccess(subjects) {
 export function loadManagedSubjectSuccess(subject) {
     return {
         type: types.LOAD_MANAGED_SUBJECT_SUCCESS,
-        subject: subject
+        data: subject.data,
+        resourceType: subject.resourceType,
+        subjectCode: subject.subjectCode
     };
 }
 export function setManagedSubjectFieldValue(field, value) {
@@ -83,5 +85,12 @@ export function openDialogConfirmSubjectCancel(dialog) {
 export function closeDialog() {
     return {
         type: types.CLOSE_DIALOG
+    };
+}
+
+export function setManagedSubjectState(state) {
+    return {
+        type: types.SET_MANAGED_SUBJECT_STATE,
+        state
     };
 }

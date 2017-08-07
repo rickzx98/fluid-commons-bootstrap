@@ -16,8 +16,8 @@ export default (
     <Route path="books/new" component={ConnectedManageBookPage} />
     <Route path="books/new/search" component={ConnectedGoogleBooksPage} />
     <Route path="books/:id" component={ConnectedManageBookPage} />
-    <Route path="books/subjects/:index" component={ConnectedManagedSubjectPage} />
-    <Route path="books/subjects/:resourceType/new" component={ConnectedManagedSubjectPage} />
+    <Route path=":resourceType/subjects/:index" component={ConnectedManagedSubjectPage} />
+    <Route path=":resourceType/subjects/new" component={ConnectedManagedSubjectPage} />
     <Route path="settings" component={ConnectSettingsPage} />
     <Route path="*" component={NotFoundPage} />
   </Route>
