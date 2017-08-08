@@ -40,9 +40,9 @@ export const Book = {
   CURRENCY: 'currency',
   FUND: 'fund',
   COST: 'cost',
-  LIBRARY: 'library'
+  LIBRARY: 'library',
+  RATING: 'rating'
 };
-
 export const Validate = (book) => {
   if (book) {
     if (!book[Book.TITLE]) {

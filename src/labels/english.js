@@ -55,6 +55,10 @@ export const LABEL_EMPTY_OPTION = '-- select --';
 export const LABEL_ADD_MORE = 'add more...';
 export const LABEL_SUBJECT_FIELD = 'Subject field';
 export const LABEL_THESAURUS = 'Thesaurus';
+export const LABEL_ORIGINAL_CATALOGING_AGENCY = 'Original cataloging agency';
+export const LABEL_LANGUAGE_OF_CATALOGING = 'Language of cataloging';
+export const LABEL_TRANSCRIBING_AGENCY = 'Transcribing agency';
+export const LABEL_RATING = 'Ratings';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';

@@ -32,6 +32,11 @@ export function convertSubjectToMarc(subject, resourceType, subjectCode) {
   });
   return subjectMarc;
 }
+
+export function toReadableSubject(marc) {
+  return marc.substr(8).replace(/\$./g, ' / ');
+}
+
 function getIndicatorValue(field, subject) {
   return subject[field] || '';
 }

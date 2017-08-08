@@ -1,9 +1,10 @@
-import { LABEL_BOOK_ADDITIONAL_INFO, LABEL_BOOK_COPIES, LABEL_BOOK_INFORMATION, LABEL_BOOK_SUBJECTS } from '../../labels/';
+import { LABEL_BOOK_ADDITIONAL_INFO, LABEL_BOOK_COPIES, LABEL_BOOK_INFORMATION, LABEL_BOOK_SUBJECTS, LABEL_SUMMARY } from '../../labels/';
 
 import { BookAdditionalInformation } from './edit-page/BookAdditionalInformation';
 import { BookCopies } from './edit-page/BookCopies';
 import { BookFormButtonControls } from './BookFormButtonControls';
 import { BookInformation } from './edit-page/BookInformation';
+import { BookSummary } from './edit-page/BookSummary';
 import { ConnectSubjectsPage } from '../../containers/BookSubjectPage';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -37,6 +38,11 @@ export const BookItemForm = ({ onCancel, onChange, addNew, tabEventKey, onSelect
           <div className="book-form-tab"><BookCopies onChange={onChange} managedBook={managedBook} settings={settings} />
           </div>
         </Tab>}
+        {(managedBook.update || (!managedBook.update && managedBook.touched)) &&
+          <Tab title={LABEL_SUMMARY} eventKey={'bookSummary'}>
+            <div className="book-form-tab">
+              <BookSummary managedBook={managedBook} />
+            </div></Tab>}
       </Tabs>
     </form>);
 };
