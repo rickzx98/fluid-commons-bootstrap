@@ -1,10 +1,30 @@
-import { ADD_MANAGED_BOOK, ADD_SUBJECT_TO_MANAGED_BOOK, CANCEL_MANAGED_BOOK, CREATE_NEW_BOOK_FROM_GOOGLE, INVALID_MANAGED_BOOK, LOAD_MANAGED_BOOK_SUCCESS, REMOVE_MANAGED_BOOK_SUBJECT, SET_MANAGED_BOOK_FIELD_VALUE, SET_TAB_EVENT_KEY, UPDATE_MANAGED_BOOK, UPDATE_MANAGED_SUBJECT } from '../actions/';
+import {
+  ADD_MANAGED_BOOK,
+  ADD_SUBJECT_TO_MANAGED_BOOK,
+  CANCEL_MANAGED_BOOK,
+  CREATE_NEW_BOOK_FROM_GOOGLE,
+  INVALID_MANAGED_BOOK,
+  LOAD_MANAGED_BOOK_SUCCESS,
+  REMOVE_MANAGED_BOOK_SUBJECT,
+  ROUTER_LOCATION_CHANGE,
+  SET_MANAGED_BOOK_FIELD_VALUE,
+  SET_TAB_EVENT_KEY,
+  UPDATE_MANAGED_BOOK,
+  UPDATE_MANAGED_SUBJECT
+} from '../actions/';
 
 import { Book } from '../api/books/Book';
 import initialState from './initialState';
 
 export default function managedBookReducer(state = initialState.book, action) {
   switch (action.type) {
+    case ROUTER_LOCATION_CHANGE: {
+      const payload = action.payload;
+      if (payload.action === 'PUSH' && payload.pathname === '/books/new') {
+        return initialState.book;
+      }
+      return state;
+    }
     case CREATE_NEW_BOOK_FROM_GOOGLE:
       {
         const newBook = { ...initialState.book, touched: true, active: true };

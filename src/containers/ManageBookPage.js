@@ -56,7 +56,6 @@ export class ManageBookPage extends React.Component {
   }
 
   onNewBook() {
-    this.props.actions.cancelManagedBook();
     browserHistory.push('/books/new');
   }
 
@@ -88,6 +87,8 @@ export class ManageBookPage extends React.Component {
       return LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES;
     } else if (next.pathname.indexOf('subjects/new') > -1 ||
       next.pathname.indexOf('subjects') > -1) {
+      return true;
+    } else if (next.pathname === this.props.router.location.pathname) {
       return true;
     } else {
       this.props.actions.cancelManagedBook();

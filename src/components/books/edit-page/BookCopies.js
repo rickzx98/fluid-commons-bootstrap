@@ -1,5 +1,14 @@
 import { DatePicker, FormGroup, Selector, TextInput } from '../../common/';
-import { LABEL_BARCODE, LABEL_CALL_NUMBER, LABEL_COST, LABEL_CURRENCY, LABEL_DATE, LABEL_FUND, LABEL_LOCATION, LABEL_VENDOR } from '../../../labels/';
+import {
+  LABEL_BARCODE,
+  LABEL_CALL_NUMBER,
+  LABEL_COST,
+  LABEL_CURRENCY,
+  LABEL_DATE_OF_PURCHASED,
+  LABEL_FUND,
+  LABEL_LOCATION,
+  LABEL_VENDOR
+} from '../../../labels/';
 import { currenciesForDropdown, fundsForDropdown } from '../../../selectors/settingsSelectors';
 
 import { Book } from '../../../api/books/Book';
@@ -16,7 +25,7 @@ export const BookCopies = ({ settings, onChange, managedBook }) => {
       value={managedBook[Book.COST]} />
     <TextInput label={LABEL_VENDOR} name={Book.VENDOR}
       value={managedBook[Book.VENDOR]} />
-    <FormGroup label={LABEL_DATE} name={Book.DATE} >
+    <FormGroup label={LABEL_DATE_OF_PURCHASED} name={Book.DATE} >
       <DatePicker value={managedBook[Book.DATE]} name={Book.DATE} onChange={(value) => {
         onChange({
           name: Book.DATE,

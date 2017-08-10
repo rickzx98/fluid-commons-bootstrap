@@ -41,7 +41,9 @@ export const BookItemForm = ({ onCancel, onChange, addNew, tabEventKey, onSelect
         {(managedBook.update || (!managedBook.update && managedBook.touched)) &&
           <Tab title={LABEL_SUMMARY} eventKey={'bookSummary'}>
             <div className="book-form-tab">
-              <BookSummary managedBook={managedBook} />
+              <BookSummary
+                settings={settings}
+                managedBook={managedBook} />
             </div></Tab>}
       </Tabs>
     </form>);

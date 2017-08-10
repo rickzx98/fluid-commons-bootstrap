@@ -4,3 +4,4 @@ export { generateUID } from './generateUID';
 export { subjectFormatter, convertSubjectToMarc, toReadableSubject } from './subjectFormatter';
 export { convertToSubject, marcToSubject } from './convertToSubject';
 export { createOptionObject } from './OptionObject';
+export { formatDateMedium } from './formatDate';

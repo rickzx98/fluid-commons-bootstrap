@@ -17,9 +17,9 @@ export const BookAdditionalInformation = ({ settings, managedBook }) => {
       value={managedBook[Book.INTERNET_RESOURCE]} />
     <TextArea label={LABEL_GENERAL_NOTE} name={Book.GENERAL_NOTE} rows={4} value={managedBook[Book.GENERAL_NOTE]} />
     <Selector options={getReadingLevelForDropdown()} label={LABEL_READING_LEVEL} name={Book.READING_LEVEL}
-      value={managedBook[Book.GENERAL_NOREADING_LEVELTE]} />
+      value={managedBook[Book.READING_LEVEL]} />
     <Selector options={resourceTypesForDropdown(settings, ItemType.BOOK)} label={LABEL_RESOURCE_TYPE} name={Book.RESOURCE_TYPE}
-      value={managedBook[Book.RESOURCE_TYPEADING_LEVEL]} />
+      value={managedBook[Book.RESOURCE_TYPE]} />
   </span>);
 };
 

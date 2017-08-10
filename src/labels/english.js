@@ -59,6 +59,7 @@ export const LABEL_ORIGINAL_CATALOGING_AGENCY = 'Original cataloging agency';
 export const LABEL_LANGUAGE_OF_CATALOGING = 'Language of cataloging';
 export const LABEL_TRANSCRIBING_AGENCY = 'Transcribing agency';
 export const LABEL_RATING = 'Ratings';
+export const LABEL_NA = 'N/A';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';
@@ -95,7 +96,7 @@ export const MESSAGE_AUTHOR_REQUIRED = 'Author is required.';
 export const MESSAGE_PUBLISHED_DATE_REQUIRED = 'Published date is required.';
 export const LABEL_LABEL = 'Label';
 export const LABEL_TYPE = 'Type';
-
+export const LABEL_DATE_OF_PURCHASED = 'Date of purchased';
 //Subjects
 export const LABEL_SUBJECT_PERSONAL_NAME = '600 - Personal name';
 export const LABEL_SUBJECT_TOPICAL_TERM = '650 - Topical Term';

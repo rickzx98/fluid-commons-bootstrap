@@ -1,7 +1,8 @@
-import { UPDATE_MANAGED_BOOK,ADD_MANAGED_BOOK, LOAD_BOOKS_SUCCESS } from '../actions/';
+import { ADD_MANAGED_BOOK, LOAD_BOOKS_SUCCESS, UPDATE_MANAGED_BOOK } from '../actions/';
 
-import initialState from './initialState';
 import {Book} from '../api/books/';
+import initialState from './initialState';
+
 //import objectAssign from 'object-assign';
 
 export default function booksReducer(state = initialState.books, action) {

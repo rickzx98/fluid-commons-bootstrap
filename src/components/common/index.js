@@ -21,13 +21,11 @@ export { DeleteModalBody } from './DeleteModalBody';
 export { ImageUpload } from './ImageUpload';
 export { PageHeader } from './PageHeader';
 export { PageBody } from './PageBody';
+export { LoadingBalls } from './LoadingBalls';
 export const Img = ReactImg;
 export const Loading = () => {
   return (<ReactLoading type="spin" color="#E67E22" height={39} width={39} delay={100} />);
 };
-export const LoadingBalls = () => {
-  return (<ReactLoading className="margin-auto" type="balls" color="#E67E22" height={39} width={50} delay={100} />)
-}
 export const IFrame = Iframe;
 export const FontAwesome = ReactFontAwesome;
 export const DatePicker = ReactBootstrapDatePicker;

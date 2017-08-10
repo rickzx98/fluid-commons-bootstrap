@@ -5,7 +5,7 @@ export const FormGroup = ({ label, required, name, children, message, invalid })
   let inputClass = 'clearfix form-group';
   return (
     <div className={!invalid ? inputClass : inputClass + ' has-error'}>
-      <label className="control-label hidden-xs" htmlFor={name + '_form'}>
+      <label className="control-label" htmlFor={name + '_form'}>
         {required && <span className="text-warning">*</span>} {label}</label>
       <div id={name + '_form'} className="col-sm-12">{children}</div>
       {invalid && <div className="col-sm-12 text-warning"><p>{message}</p></div>}
@@ -14,7 +14,7 @@ export const FormGroup = ({ label, required, name, children, message, invalid })
 
 FormGroup.propTypes = {
   label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   children: PropTypes.element.isRequired,
   required: PropTypes.bool,
   message: PropTypes.string,
