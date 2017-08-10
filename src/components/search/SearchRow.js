@@ -1,6 +1,6 @@
 import '../../images/book_ph.png';
 
-import { Img, Loading, ResponsiveButton } from '../common/';
+import { Img, Loading, ResponsiveButton, StarRating } from '../common/';
 
 import FontAwesome from 'react-fontawesome';
 import { LABEL_ADD_BOOK } from '../../labels/';
@@ -30,6 +30,12 @@ export const SearchRow = ({ volumeInfo, id, createBook, selfLink }) => {
     </td>
     <td className="hidden-xs">
       {volumeInfo.publishedDate}
+    </td>
+    <td className="hidden-xs">
+      <StarRating name={volumeInfo.id}
+        starCount={4}
+        value={volumeInfo.averageRating - 1}
+        editing={false} />
     </td>
     <td>
       <p className="hidden-sm hidden-md hidden-lg">

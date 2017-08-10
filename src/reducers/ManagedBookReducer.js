@@ -20,14 +20,16 @@ export default function managedBookReducer(state = initialState.book, action) {
   switch (action.type) {
     case ROUTER_LOCATION_CHANGE: {
       const payload = action.payload;
-      if (payload.action === 'PUSH' && payload.pathname === '/books/new') {
-        return initialState.book;
+      if (!state.searched) {
+        if (payload.action === 'PUSH' && payload.pathname === '/books/new') {
+          return initialState.book;
+        }
       }
       return state;
     }
     case CREATE_NEW_BOOK_FROM_GOOGLE:
       {
-        const newBook = { ...initialState.book, touched: true, active: true };
+        const newBook = { ...initialState.book, searched: true, touched: true, active: true };
         newBook[Book.TITLE] = action.book.title;
         newBook[Book.AUTHOR] = action.book.authors;
         newBook[Book.PUBLISHER] = action.book.publisher;
@@ -49,6 +51,7 @@ export default function managedBookReducer(state = initialState.book, action) {
         newBook[Book.SUMMARY] = action.book.description;
         newBook[Book.SUB_TITLE] = action.book.subtitle;
         newBook[Book.NUMBER_OF_PAGES] = action.book.printedPageCount;
+        newBook[Book.TITLE_POINTS] = action.book.averageRating ? action.book.averageRating - 1 : 0;
         return newBook;
       }
     case INVALID_MANAGED_BOOK:

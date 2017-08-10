@@ -1,4 +1,4 @@
-import { LABEL_AUTHOR, LABEL_PUBLISHED_DATE, LABEL_PUBLISHER, LABEL_TITLE } from '../../labels';
+import { LABEL_AUTHOR, LABEL_PUBLISHED_DATE, LABEL_PUBLISHER, LABEL_RATING, LABEL_TITLE } from '../../labels';
 
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -13,6 +13,7 @@ export const SearchTable = ({ googleBooks, createBook, preview }) => {
         <th className="hidden-xs" title={LABEL_AUTHOR}>{LABEL_AUTHOR}</th>
         <th className="hidden-xs" title={LABEL_PUBLISHER}>{LABEL_PUBLISHER}</th>
         <th className="hidden-xs" title={LABEL_PUBLISHED_DATE}>{LABEL_PUBLISHED_DATE}</th>
+        <th className="hidden-xs" title={LABEL_RATING}>{LABEL_RATING}</th>
         <th title="Action" />
       </tr>
     </thead>

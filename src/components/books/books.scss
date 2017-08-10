@@ -96,3 +96,11 @@
         width: 9em;
     }
 }
+
+@media print {
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        @include printScale();
+    }
+}

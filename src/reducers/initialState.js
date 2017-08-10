@@ -1,6 +1,7 @@
 export default {
   books: [],
   book: {
+    searched: false,
     update: false,
     touched: false,
     active: false,

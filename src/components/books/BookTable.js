@@ -4,6 +4,7 @@ import {Book} from '../../api/books/Book';
 import { BookRow } from './BookRow';
 import PropTypes from 'prop-types';
 import React from 'react';
+
 export const BookTable = ({ books, onRemove }) => {
   return (<table className="table table-hover">
     <thead>
