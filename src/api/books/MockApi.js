@@ -119,6 +119,23 @@ export class Api {
       }
     });
   }
+
+  static checkIfIdentifierExists(identifier = { type: 'ISBN_10', identifier: '' }) {
+    return new Promise((resolve, reject) => {
+      let exists = false;
+      const books = getAllBooks();
+      switch (identifier.type) {
+        case 'ISBN_10':
+          exists = books.filter(book => book[Book.ISBN10].indexOf(identifier.identifier)).length > -1;
+        case 'ISBN_13':
+          exists = books.filter(book => book[Book.ISBN13].indexOf(identifier.identifier)).length > -1;
+      }
+      resolve({
+        result: exists,
+        message: exists ? 'Book already exists.' : ''
+      });
+    });
+  }
 }
 
 function createMockBook(id, title, subtitle, author, imageUrl) {

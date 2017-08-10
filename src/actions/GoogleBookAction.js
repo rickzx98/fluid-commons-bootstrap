@@ -1,6 +1,7 @@
 import * as ajaxActions from './AjaxStatusActions';
 import * as types from './';
 
+import { getApi as booksApi } from '../api/books/';
 import { getApi as googleBooksApi } from '../api/google-books/';
 
 export function setGoogleFilterValue(field, value) {
@@ -30,9 +31,24 @@ export function createNewBookFromGoogle(bookId, selfLink) {
     return new Promise((resolve, reject) => {
       googleBooksApi().getBookInfo(selfLink)
         .then(result => {
-          dispatch(createBook(result.volumeInfo, bookId));
-          dispatch(ajaxActions.ajaxCallSuccess());
-          resolve();
+          if (result.industryIdentifiers) {
+            booksApi().checkIfIdentifierExists(result.industryIdentifiers[0])
+              .then(exists => {
+                if (exists.result) {
+                  reject({
+                    message: exists.message
+                  });
+                } else {
+                  dispatch(createBook(result.volumeInfo, bookId));
+                  dispatch(ajaxActions.ajaxCallSuccess());
+                  resolve();
+                }
+              });
+          } else {
+            dispatch(createBook(result.volumeInfo, bookId));
+            dispatch(ajaxActions.ajaxCallSuccess());
+            resolve();
+          }
         })
         .catch(error => {
           dispatch(ajaxActions.ajaxCallError(error));
