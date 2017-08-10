@@ -5,3 +5,4 @@ export { subjectFormatter, convertSubjectToMarc, toReadableSubject } from './sub
 export { convertToSubject, marcToSubject } from './convertToSubject';
 export { createOptionObject } from './OptionObject';
 export { formatDateMedium } from './formatDate';
+export { printA4 } from './printable';

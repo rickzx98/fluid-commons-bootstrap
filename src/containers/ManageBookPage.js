@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import initialState from '../reducers/initialState';
+import { printA4 } from '../utils/';
 
 export class ManageBookPage extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export class ManageBookPage extends React.Component {
     this.saveManagedBookForm = this.saveManagedBook.bind(this);
     this.addNew = this.onNewBook.bind(this);
     this.onSearch = this.onSearchBook.bind(this);
+    this.printSummary = this.print.bind(this);
   }
 
   componentWillMount() {
@@ -117,6 +119,9 @@ export class ManageBookPage extends React.Component {
     browserHistory.push('/books/new/search');
   }
 
+  print() {
+    printA4('books-summary');
+  }
   render() {
     return (<div className="books page">
       <PageHeader label={LABEL_BOOKS} iconName="book" />
@@ -131,7 +136,8 @@ export class ManageBookPage extends React.Component {
           onSelectTab={this.onSelectTab}
           onChange={this.onChangeBookEditForForm}
           tabEventKey={this.props.managedBook.tabEventKey}
-          settings={this.props.settings} />
+          settings={this.props.settings}
+          printSummary={this.printSummary} />
       </PageBody>
     </div>);
   }

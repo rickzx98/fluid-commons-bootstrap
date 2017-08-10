@@ -11,7 +11,8 @@ import React from 'react';
 import Tab from 'react-bootstrap/lib/Tab';
 import Tabs from 'react-bootstrap/lib/Tabs';
 
-export const BookItemForm = ({ onCancel, onChange, addNew, tabEventKey, onSelectTab, addSubject, managedBook, settings, saveManagedBook, onSearch }) => {
+export const BookItemForm = ({ onCancel, onChange, addNew, tabEventKey, onSelectTab, addSubject,
+  managedBook, settings, saveManagedBook, onSearch, printSummary }) => {
   return (
     <form noValidate onSubmit={event => {
       event.preventDefault();
@@ -21,7 +22,8 @@ export const BookItemForm = ({ onCancel, onChange, addNew, tabEventKey, onSelect
     }} className="form container-fluid">
       <BookFormButtonControls tabEventKey={tabEventKey} managedBook={managedBook} onCancel={onCancel} addSubject={addSubject}
         addNew={addNew}
-        onSearch={onSearch} />
+        onSearch={onSearch}
+        printSummary={printSummary} />
       <Tabs onSelect={onSelectTab} id="bookItemEditTabs" activeKey={tabEventKey} defaultActiveKey={'bookInfo'}>
         <Tab title={LABEL_BOOK_INFORMATION} eventKey={'bookInfo'}>
           <div className="book-form-tab"><BookInformation managedBook={managedBook} onChange={onChange} /></div>
@@ -59,5 +61,6 @@ BookItemForm.propTypes = {
   onCancel: PropTypes.func.isRequired,
   saveManagedBook: PropTypes.func.isRequired,
   addNew: PropTypes.func.isRequired,
-  onSearch: PropTypes.func.isRequired
+  onSearch: PropTypes.func.isRequired,
+  printSummary: PropTypes.func.isRequired
 };

@@ -41,16 +41,15 @@ import React from 'react';
 import { getReadingLevelLabel } from '../../../selectors/bookSelectors';
 
 export const BookSummary = ({ managedBook, settings }) => {
-  return (<div className="books-summary">
+  return (<div className="books-summary paper a4 portrait">
     <fieldset>
       <legend>{LABEL_BOOK_INFORMATION}</legend>
-      <div className="col-sm-12 books">
+      <div className="col-sm-2 books">
         <div className="book">
           <Img src={managedBook[Book.IMAGE_URL]} />
-        </div>
-      </div>
-      <div className="col-sm-12">
-        <div className="col-sm-6">
+        </div></div>
+      <div className="col-sm-10">
+        <div className="col-sm-6 col-sm-offset-1">
           <FormGroup label={LABEL_TITLE}>
             <span>{managedBook[Book.TITLE] || LABEL_NA}</span>
           </FormGroup>
@@ -67,7 +66,7 @@ export const BookSummary = ({ managedBook, settings }) => {
             <span>{managedBook[Book.AUTHOR] || LABEL_NA}</span>
           </FormGroup>
         </div>
-        <div className="col-sm-6">
+        <div className="col-sm-5">
           <FormGroup label={LABEL_PUBLISHED_DATE}>
             <span>{managedBook[Book.PUBLISHED_DATE] || LABEL_NA}</span>
           </FormGroup>
@@ -88,70 +87,79 @@ export const BookSummary = ({ managedBook, settings }) => {
     </fieldset>
     <fieldset>
       <legend>{LABEL_SUBJECTS}</legend>
-      <ul>
-        {managedBook[Book.SUBJECTS] && managedBook[Book.SUBJECTS].map((subject, index) => (
-          <li key={index + '_' + subject}>{toReadableSubject(subject)}</li>
-        ))}
-      </ul>
+      <div className="col-sm-2" />
+      <div className="col-sm-10">
+        <ul>
+          {managedBook[Book.SUBJECTS] && managedBook[Book.SUBJECTS].map((subject, index) => (
+            <li key={index + '_' + subject}>{toReadableSubject(subject)}</li>
+          ))}
+        </ul>
+      </div>
     </fieldset>
     {managedBook.update &&
       <fieldset>
         <legend>{LABEL_BOOK_ADDITIONAL_INFO}</legend>
-        <div className="col-sm-6">
-          <FormGroup label={LABEL_SUMMARY}>
-            <p>{managedBook[Book.SUMMARY] || LABEL_NA}</p>
-          </FormGroup>
-          <FormGroup label={LABEL_STUDY_PROGRAM}>
-            <span>{managedBook[Book.STUDY_PROGRAM] || LABEL_NA}</span>
-          </FormGroup>
-          <FormGroup label={LABEL_TITLE_POINTS}>
-            <span>{managedBook[Book.TITLE_POINTS] || LABEL_NA}</span>
-          </FormGroup>
-          <FormGroup label={LABEL_INTERNET_RESOURCE}>
-            <span>{managedBook[Book.INTERNET_RESOURCE] || LABEL_NA}</span>
-          </FormGroup>
-        </div>
-        <div className="col-sm-6">
-          <FormGroup label={LABEL_GENERAL_NOTE}>
-            <p>{managedBook[Book.GENERAL_NOTE] || LABEL_NA}</p>
-          </FormGroup>
-          <FormGroup label={LABEL_READING_LEVEL}>
-            <span>{(managedBook[Book.READING_LEVEL] && getReadingLevelLabel(managedBook[Book.READING_LEVEL])) || LABEL_NA}</span>
-          </FormGroup>
-          <FormGroup label={LABEL_RESOURCE_TYPE}>
-            <span>{managedBook[Book.RESOURCE_TYPE] && resourceTypesForLabel(settings, ItemType.BOOK, managedBook[Book.RESOURCE_TYPE]) || LABEL_NA}</span>
-          </FormGroup>
+        <div className="col-sm-2" />
+        <div className="col-sm-10">
+          <div className="col-sm-6">
+            <FormGroup label={LABEL_SUMMARY}>
+              <p>{managedBook[Book.SUMMARY] || LABEL_NA}</p>
+            </FormGroup>
+            <FormGroup label={LABEL_STUDY_PROGRAM}>
+              <span>{managedBook[Book.STUDY_PROGRAM] || LABEL_NA}</span>
+            </FormGroup>
+            <FormGroup label={LABEL_TITLE_POINTS}>
+              <span>{managedBook[Book.TITLE_POINTS] || LABEL_NA}</span>
+            </FormGroup>
+            <FormGroup label={LABEL_INTERNET_RESOURCE}>
+              <span>{managedBook[Book.INTERNET_RESOURCE] || LABEL_NA}</span>
+            </FormGroup>
+          </div>
+          <div className="col-sm-6">
+            <FormGroup label={LABEL_GENERAL_NOTE}>
+              <p>{managedBook[Book.GENERAL_NOTE] || LABEL_NA}</p>
+            </FormGroup>
+            <FormGroup label={LABEL_READING_LEVEL}>
+              <span>{(managedBook[Book.READING_LEVEL] && getReadingLevelLabel(managedBook[Book.READING_LEVEL])) || LABEL_NA}</span>
+            </FormGroup>
+            <FormGroup label={LABEL_RESOURCE_TYPE}>
+              <span>{managedBook[Book.RESOURCE_TYPE] && resourceTypesForLabel(settings, ItemType.BOOK, managedBook[Book.RESOURCE_TYPE]) || LABEL_NA}</span>
+            </FormGroup>
+          </div>
         </div>
       </fieldset>}
     {managedBook.update && <fieldset>
       <legend>{LABEL_BOOK_COPIES}</legend>
-      <div className="col-sm-6">
-        <FormGroup label={LABEL_BARCODE}>
-          <span>{managedBook[Book.BARCODE] || LABEL_NA}</span>
-        </FormGroup>
-        <FormGroup label={LABEL_LOCATION}>
-          <span>{managedBook[Book.LOCATION] || LABEL_NA}</span>
-        </FormGroup>
-        <FormGroup label={LABEL_COST}>
-          <span>{managedBook[Book.COST] || LABEL_NA}</span>
-        </FormGroup>
-        <FormGroup label={LABEL_VENDOR}>
-          <span>{managedBook[Book.VENDOR] || LABEL_NA}</span>
-        </FormGroup>
-      </div>
-      <div className="col-sm-6">
-        <FormGroup label={LABEL_DATE_OF_PURCHASED}>
-          <span>{(managedBook[Book.DATE] && formatDateMedium(managedBook[Book.DATE])) || LABEL_NA}</span>
-        </FormGroup>
-        <FormGroup label={LABEL_CALL_NUMBER}>
-          <span>{managedBook[Book.CALL_NUMBER] || LABEL_NA}</span>
-        </FormGroup>
-        <FormGroup label={LABEL_CURRENCY}>
-          <span>{(managedBook[Book.CURRENCY] && currenciesForLabel(settings, managedBook[Book.CURRENCY])) || LABEL_NA}</span>
-        </FormGroup>
-        <FormGroup label={LABEL_FUND}>
-          <span>{(managedBook[Book.FUND] && fundsForLabel(settings, managedBook[Book.FUND])) || LABEL_NA}</span>
-        </FormGroup>
+      <div className="col-sm-2" />
+      <div className="col-sm-10">
+        <div className="col-sm-6">
+          <FormGroup label={LABEL_BARCODE}>
+            <span>{managedBook[Book.BARCODE] || LABEL_NA}</span>
+          </FormGroup>
+          <FormGroup label={LABEL_LOCATION}>
+            <span>{managedBook[Book.LOCATION] || LABEL_NA}</span>
+          </FormGroup>
+          <FormGroup label={LABEL_COST}>
+            <span>{managedBook[Book.COST] || LABEL_NA}</span>
+          </FormGroup>
+          <FormGroup label={LABEL_VENDOR}>
+            <span>{managedBook[Book.VENDOR] || LABEL_NA}</span>
+          </FormGroup>
+        </div>
+        <div className="col-sm-6">
+          <FormGroup label={LABEL_DATE_OF_PURCHASED}>
+            <span>{(managedBook[Book.DATE] && formatDateMedium(managedBook[Book.DATE])) || LABEL_NA}</span>
+          </FormGroup>
+          <FormGroup label={LABEL_CALL_NUMBER}>
+            <span>{managedBook[Book.CALL_NUMBER] || LABEL_NA}</span>
+          </FormGroup>
+          <FormGroup label={LABEL_CURRENCY}>
+            <span>{(managedBook[Book.CURRENCY] && currenciesForLabel(settings, managedBook[Book.CURRENCY])) || LABEL_NA}</span>
+          </FormGroup>
+          <FormGroup label={LABEL_FUND}>
+            <span>{(managedBook[Book.FUND] && fundsForLabel(settings, managedBook[Book.FUND])) || LABEL_NA}</span>
+          </FormGroup>
+        </div>
       </div>
     </fieldset>}
   </div>);

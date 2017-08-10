@@ -60,6 +60,7 @@ export const LABEL_LANGUAGE_OF_CATALOGING = 'Language of cataloging';
 export const LABEL_TRANSCRIBING_AGENCY = 'Transcribing agency';
 export const LABEL_RATING = 'Ratings';
 export const LABEL_NA = 'N/A';
+export const LABEL_PRINT = 'Print';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';

@@ -1,11 +1,11 @@
 import { BackButton, ResponsiveButton } from '../common/';
-import { LABEL_ADD_SUBJECT, LABEL_BACK, LABEL_NEW_BOOK, LABEL_SAVE, LABEL_SEARCH } from '../../labels/';
+import { LABEL_ADD_SUBJECT, LABEL_BACK, LABEL_NEW_BOOK, LABEL_PRINT, LABEL_SAVE, LABEL_SEARCH } from '../../labels/';
 
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const BookFormButtonControls = ({ onCancel, addSubject, addNew, managedBook, tabEventKey, onSearch }) => {
+export const BookFormButtonControls = ({ onCancel, addSubject, addNew, managedBook, tabEventKey, onSearch, printSummary }) => {
   return (
     <div className="no-pad-left col-sm-12 form-group">
       <BackButton to="/books" label={LABEL_BACK} confirm={onCancel} />
@@ -24,6 +24,10 @@ export const BookFormButtonControls = ({ onCancel, addSubject, addNew, managedBo
         <ResponsiveButton label={LABEL_SEARCH} onClick={onSearch} className="btn btn-warning" icon={
           <FontAwesome name="search" size="lg" fixedWidth={true} />}
         />}
+      {tabEventKey === 'bookSummary' &&
+        <ResponsiveButton label={LABEL_PRINT} onClick={printSummary} className="btn btn-default" icon={
+          <FontAwesome name="print" size="lg" fixedWidth={true} />}
+        />}
     </div>);
 };
 
@@ -33,5 +37,6 @@ BookFormButtonControls.propTypes = {
   addSubject: PropTypes.func.isRequired,
   addNew: PropTypes.func.isRequired,
   tabEventKey: PropTypes.string,
-  onSearch: PropTypes.func.isRequired
+  onSearch: PropTypes.func.isRequired,
+  printSummary: PropTypes.func.isRequired
 };
