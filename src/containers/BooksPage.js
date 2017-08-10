@@ -48,7 +48,7 @@ export class BooksPage extends React.Component {
 
   render() {
     return (<div className="books page">
-      <PageHeader label={LABEL_BOOKS} iconName="book" />
+      <PageHeader loading={this.props.ajaxGlobal.started} spinIcon={false} label={LABEL_BOOKS} iconName="book" />
       <PageBody>
         <span>
           <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks} />
@@ -61,11 +61,13 @@ export class BooksPage extends React.Component {
 
 BooksPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  books: PropTypes.array.isRequired
+  books: PropTypes.array.isRequired,
+  ajaxGlobal: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    ajaxGlobal: state.ajaxGlobal,
     books: state.books
   };
 }
