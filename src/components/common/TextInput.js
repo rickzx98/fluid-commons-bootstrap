@@ -29,6 +29,6 @@ TextInput.propTypes = {
   onChange: PropTypes.func,
   message: PropTypes.string,
   invalid: PropTypes.bool,
-  value: PropTypes.string,
+  value: PropTypes.any,
   className: PropTypes.string
 };

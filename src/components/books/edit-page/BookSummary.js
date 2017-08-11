@@ -102,9 +102,6 @@ export const BookSummary = ({ managedBook, settings }) => {
         <div className="col-sm-2" />
         <div className="col-sm-10">
           <div className="col-sm-6">
-            <FormGroup label={LABEL_SUMMARY}>
-              <p>{managedBook[Book.SUMMARY] || LABEL_NA}</p>
-            </FormGroup>
             <FormGroup label={LABEL_STUDY_PROGRAM}>
               <span>{managedBook[Book.STUDY_PROGRAM] || LABEL_NA}</span>
             </FormGroup>
@@ -116,14 +113,21 @@ export const BookSummary = ({ managedBook, settings }) => {
             </FormGroup>
           </div>
           <div className="col-sm-6">
-            <FormGroup label={LABEL_GENERAL_NOTE}>
-              <p>{managedBook[Book.GENERAL_NOTE] || LABEL_NA}</p>
-            </FormGroup>
             <FormGroup label={LABEL_READING_LEVEL}>
               <span>{(managedBook[Book.READING_LEVEL] && getReadingLevelLabel(managedBook[Book.READING_LEVEL])) || LABEL_NA}</span>
             </FormGroup>
             <FormGroup label={LABEL_RESOURCE_TYPE}>
               <span>{managedBook[Book.RESOURCE_TYPE] && resourceTypesForLabel(settings, ItemType.BOOK, managedBook[Book.RESOURCE_TYPE]) || LABEL_NA}</span>
+            </FormGroup>
+          </div>
+          <div className="col-sm-12">
+            <FormGroup label={LABEL_GENERAL_NOTE}>
+              <p>{managedBook[Book.GENERAL_NOTE] || LABEL_NA}</p>
+            </FormGroup>
+          </div>
+          <div className="col-sm-12">
+            <FormGroup label={LABEL_SUMMARY}>
+              <p>{managedBook[Book.SUMMARY] || LABEL_NA}</p>
             </FormGroup>
           </div>
         </div>

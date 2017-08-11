@@ -60,6 +60,7 @@ export class Api {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         try {
+          const books = [...BOOK_DATA];
           const bookId = generateUID();
           const newBook = Object.assign({}, {
             ...book,
@@ -68,7 +69,8 @@ export class Api {
           const filterd = BOOK_DATA.filter(storedBook => storedBook[Book.ISBN10].indexOf(book[Book.ISBN10]) > -1 ||
             storedBook[Book.ISBN13].indexOf(book[Book.ISBN13]) > -1);
           if (!filterd || filterd.length === 0) {
-            BOOK_DATA.push(newBook);
+            books.push(newBook);
+            BOOK_DATA = books;
             resolve(newBook);
           } else {
             reject(new Error({

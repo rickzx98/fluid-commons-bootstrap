@@ -10,8 +10,10 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-//import initialState from '../reducers/initialState';
 import { printA4 } from '../utils/';
+
+//import initialState from '../reducers/initialState';
+
 
 export class ManageBookPage extends React.Component {
   constructor(props) {
@@ -86,8 +88,10 @@ export class ManageBookPage extends React.Component {
   routerWillLeave(next) {
     if (this.props.managedBook.active && this.props.managedBook.touched) {
       return LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES;
-    } else if (next.pathname.indexOf('subjects/new') > -1 ||
-      next.pathname.indexOf('subjects') > -1) {
+    } else if (
+      next.pathname.indexOf('subjects/new') > -1 ||
+      next.pathname.indexOf('subjects') > -1 ||
+      next.pathname.indexOf('books/new') < 0) {
       return true;
     } else if (next.pathname === this.props.router.location.pathname) {
       return true;
