@@ -42,7 +42,7 @@ TextArea.propTypes = {
     onChange: PropTypes.func,
     message: PropTypes.string,
     validator: PropTypes.func,
-    value: PropTypes.string,
+    value: PropTypes.any,
     rows: PropTypes.number,
     columns: PropTypes.number
 };

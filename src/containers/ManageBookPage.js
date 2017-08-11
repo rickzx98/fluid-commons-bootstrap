@@ -10,7 +10,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import initialState from '../reducers/initialState';
+//import initialState from '../reducers/initialState';
 import { printA4 } from '../utils/';
 
 export class ManageBookPage extends React.Component {
@@ -29,9 +29,8 @@ export class ManageBookPage extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.managedBook.active && this.props.book) {
-      const update = this.props.routeParams.id !== 'new';
-      this.props.actions.loadManagedBookSuccess({ ...this.props.book, update });
+    if (!this.props.managedBook.active && this.props.routeParams.id) {
+      this.props.actions.getBookById(this.props.routeParams.id);
     }
   }
 
@@ -124,7 +123,10 @@ export class ManageBookPage extends React.Component {
   }
   render() {
     return (<div className="books page">
-      <PageHeader label={LABEL_BOOKS} iconName="book" />
+      <PageHeader loading={this.props.ajaxGlobal.started}
+        spinIcon={false}
+        label={LABEL_BOOKS}
+        iconName="book" />
       <PageBody>
         <BookItemForm
           onSearch={this.onSearch}
@@ -146,27 +148,19 @@ export class ManageBookPage extends React.Component {
 ManageBookPage.propTypes = {
   actions: PropTypes.object.isRequired,
   managedBook: PropTypes.object.isRequired,
-  book: PropTypes.object,
   settings: PropTypes.object.isRequired,
   routeParams: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
+  ajaxGlobal: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
-    book: getBookById(state.books, ownProps.routeParams.id),
+    ajaxGlobal: state.ajaxGlobal,
     managedBook: state.managedBook,
     settings: state.settings
   };
-}
-
-function getBookById(books, id) {
-  if (id !== 'new') {
-    const filtered = books.filter(book => book[Book.BOOK_ID] === id);
-    return filtered ? filtered[0] : initialState.book;
-  }
-  return initialState.book;
 }
 
 function mapDispatchToProps(dispatch) {

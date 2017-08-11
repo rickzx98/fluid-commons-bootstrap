@@ -8,7 +8,9 @@ export const PageHeader = ({ label, iconName, loading = false, spinIcon = true }
     <div className="page-background-fader" />
     <h3 className="page-header-title">
       {loading && !spinIcon && <LoadingBalls />}
-      {((loading && spinIcon) || (!loading && spinIcon)) &&
+      {((loading && spinIcon) ||
+        (!loading && spinIcon) ||
+        (!loading && !spinIcon)) &&
         <FontAwesome className={loading ? 'loading-icon' : ''}
           name={iconName} size="lg" fixedWidth={true} spin={loading} />}
       <p> {label} </p>

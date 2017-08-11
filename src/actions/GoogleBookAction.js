@@ -31,10 +31,11 @@ export function createNewBookFromGoogle(bookId, selfLink) {
     return new Promise((resolve, reject) => {
       googleBooksApi().getBookInfo(selfLink)
         .then(result => {
-          if (result.industryIdentifiers) {
-            booksApi().checkIfIdentifierExists(result.industryIdentifiers[0])
+          if (result.volumeInfo.industryIdentifiers) {
+            booksApi().checkIfIdentifierExists(result.volumeInfo.industryIdentifiers[0])
               .then(exists => {
                 if (exists.result) {
+                  dispatch(ajaxActions.ajaxCallError(exists));
                   reject({
                     message: exists.message
                   });

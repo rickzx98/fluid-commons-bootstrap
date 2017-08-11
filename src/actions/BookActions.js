@@ -96,6 +96,7 @@ export function createManagedBook(managedBook) {
           dispatch(ajaxActions.ajaxCallSuccess());
         })
         .catch(error => {
+          console.log('error', error);
           dispatch(ajaxActions.ajaxCallError(error));
         });
     }
@@ -182,5 +183,22 @@ export function setManagedSubjectState(state) {
   return {
     type: types.SET_MANAGED_SUBJECT_STATE,
     state
+  };
+}
+
+
+export function getBookById(bookId) {
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      booksApi().getBookById(bookId).then(book => {
+        console.log('getBookById.book', book);
+        dispatch(loadManagedBookSuccess({ ...book, update: true }));
+        dispatch(ajaxActions.ajaxCallSuccess());
+        resolve(book);
+      }).catch(error => {
+        dispatch(ajaxActions.ajaxCallError(error));
+        reject(error);
+      });
+    });
   };
 }

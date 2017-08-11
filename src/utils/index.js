@@ -6,3 +6,4 @@ export { convertToSubject, marcToSubject } from './convertToSubject';
 export { createOptionObject } from './OptionObject';
 export { formatDateMedium } from './formatDate';
 export { printA4 } from './printable';
+export { formatAuthor } from './bookFormatter';

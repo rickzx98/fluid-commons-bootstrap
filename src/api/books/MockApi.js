@@ -65,7 +65,8 @@ export class Api {
             ...book,
             _id: bookId
           });
-          const filterd = BOOK_DATA.filter(storedBook => storedBook[Book.ISBN] === book[Book.ISBN]);
+          const filterd = BOOK_DATA.filter(storedBook => storedBook[Book.ISBN10].indexOf(book[Book.ISBN10]) > -1 ||
+            storedBook[Book.ISBN13].indexOf(book[Book.ISBN13]) > -1);
           if (!filterd || filterd.length === 0) {
             BOOK_DATA.push(newBook);
             resolve(newBook);
@@ -74,7 +75,6 @@ export class Api {
               data: `${book[Book.TITLE]} is already saved in the database.`
             }));
           }
-
         } catch (err) {
           reject(err);
         }
@@ -121,19 +121,35 @@ export class Api {
   }
 
   static checkIfIdentifierExists(identifier = { type: 'ISBN_10', identifier: '' }) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       let exists = false;
-      const books = getAllBooks();
+      const books = [...BOOK_DATA];
       switch (identifier.type) {
         case 'ISBN_10':
-          exists = books.filter(book => book[Book.ISBN10].indexOf(identifier.identifier)).length > -1;
+          exists = books.filter(book => book[Book.ISBN10] && book[Book.ISBN10].indexOf(identifier.identifier) > -1).length > 0;
+          break;
         case 'ISBN_13':
-          exists = books.filter(book => book[Book.ISBN13].indexOf(identifier.identifier)).length > -1;
+          exists = books.filter(book => book[Book.ISBN13] && book[Book.ISBN13].indexOf(identifier.identifier) > -1).length > 0;
+          break;
       }
       resolve({
         result: exists,
         message: exists ? 'Book already exists.' : ''
       });
+    });
+  }
+
+  static getBookById(bookId) {
+    return new Promise((resolve, reject) => {
+      const books = [...BOOK_DATA];
+      const filtered = books.filter(book => book[Book.BOOK_ID] === bookId);
+      if (filtered && filtered.length > 0) {
+        resolve(filtered[0]);
+      } else {
+        reject({
+          message: 'Book not found.'
+        });
+      }
     });
   }
 }
@@ -147,7 +163,8 @@ function createMockBook(id, title, subtitle, author, imageUrl) {
   book[Book.IMAGE_URL] = imageUrl;
   book[Book.PUBLISHER] = 'The book publisher';
   book[Book.EDITION] = '2nd Edition';
-  book[Book.ISBN] = '1234554657';
+  book[Book.ISBN10] = '1234554657';
+  book[Book.ISBN13] = '1234554657';
   book[Book.SUBJECTS] = [
     '650|17$aCareer Exploration.$2ericd',
     '650|#0$aBallads, English$zHudson River Valley (N.Y. and N.J.)',
