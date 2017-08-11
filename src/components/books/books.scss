@@ -5,7 +5,7 @@
         background-image: url('/books-header.jpg');
     }
     .book-search {
-        padding: 15px 0;
+        padding: 15px 15%;
     }
     .book-header-row {
         input[type='checkbox'] {
@@ -94,6 +94,20 @@
     img {
         height: 12em;
         width: 9em;
+    }
+}
+
+.book-newest {
+    padding: 0 1%;
+    min-height: 270px;
+    .book {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .book-title {
+        width: 9em;
+        font-size: 11px;
     }
 }
 

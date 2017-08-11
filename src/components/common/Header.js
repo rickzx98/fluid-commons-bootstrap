@@ -10,34 +10,34 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 
 export class Header extends React.Component {
-    constructor(props) {
-        super(props);
-        this.goToSettingsFromHeader = this.goToSettings.bind(this);
-        this.goToBooksFromHeader = this.goToBooks.bind(this);
-    }
-    goToSettings() {
-        browserHistory.push('/settings');
-    }
-    goToBooks() {
-        browserHistory.push('/books');
-    }
-    render() {
-        return (<Navbar collapseOnSelect fixedTop={true} fluid={true}>
-            <Navbar.Header>
-                <Navbar.Brand>
-                    <a href="">{APP_NAME}</a>
-                </Navbar.Brand>
-                <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-                <Nav>
-                    <NavItem onClick={this.goToBooksFromHeader} eventKey={1} href="#"><FontAwesome size="lg" name="book" />&nbsp;{LABEL_BOOKS}</NavItem>
-                </Nav>
-                <Nav pullRight>
-                    <NavItem onClick={this.goToSettingsFromHeader}><FontAwesome size="lg" name="gears" fixedWidth={true} />&nbsp;{LABEL_SETTINGS}</NavItem>
-                    <NavItem><img className="header-thumbnail" height="24" width="24" src="/profile.jpg" />&nbsp;Jerico de Guzman</NavItem>
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>);
-    }
+  constructor(props) {
+    super(props);
+    this.goToSettingsFromHeader = this.goToSettings.bind(this);
+    this.goToBooksFromHeader = this.goToBooks.bind(this);
+  }
+  goToSettings() {
+    browserHistory.push('/settings');
+  }
+  goToBooks() {
+    browserHistory.push('/books');
+  }
+  render() {
+    return (<Navbar collapseOnSelect fixedTop={true} fluid={true}>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <a href="">{APP_NAME}</a>
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav>
+          <NavItem onClick={this.goToBooksFromHeader} eventKey={1} href="#"><FontAwesome size="lg" name="book" />&nbsp;{LABEL_BOOKS}</NavItem>
+        </Nav>
+        <Nav pullRight>
+          <NavItem onClick={this.goToSettingsFromHeader}><FontAwesome size="lg" name="gear" fixedWidth={true} />&nbsp;{LABEL_SETTINGS}</NavItem>
+          <NavItem><img className="header-thumbnail" height="24" width="24" src="/profile.jpg" />&nbsp;Jerico de Guzman</NavItem>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>);
+  }
 }

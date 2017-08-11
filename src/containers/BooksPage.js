@@ -1,6 +1,7 @@
 import * as actions from '../actions/BookActions';
+import * as googleActions from '../actions/GoogleBookAction';
 
-import { BookSearch, BookTable } from '../components/books/';
+import { BookNewestHeader, BookSearch, BookTable } from '../components/books/';
 import { CancelModalFooter, DeleteModalBody, PageBody, PageHeader } from '../components/common';
 
 import { Book } from '../api/books/';
@@ -20,6 +21,7 @@ export class BooksPage extends React.Component {
 
   componentWillMount() {
     this.props.actions.loadBooks();
+    this.props.googleActions.getNewestBookCarousel();
   }
 
   createNewBook() {
@@ -48,9 +50,11 @@ export class BooksPage extends React.Component {
 
   render() {
     return (<div className="books page">
-      <PageHeader loading={this.props.ajaxGlobal.started} spinIcon={false} label={LABEL_BOOKS} iconName="book" />
+      <PageHeader loading={this.props.ajaxGlobal.started}
+        spinIcon={false} label={LABEL_BOOKS} iconName="book" />
       <PageBody>
         <span>
+          <BookNewestHeader newest={this.props.googleBooks.newest} />
           <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks} />
           <BookTable onRemove={this.onRemove} books={this.props.books} />
         </span>
@@ -61,20 +65,24 @@ export class BooksPage extends React.Component {
 
 BooksPage.propTypes = {
   actions: PropTypes.object.isRequired,
+  googleActions: PropTypes.object.isRequired,
   books: PropTypes.array.isRequired,
-  ajaxGlobal: PropTypes.object.isRequired
+  ajaxGlobal: PropTypes.object.isRequired,
+  googleBooks: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     ajaxGlobal: state.ajaxGlobal,
-    books: state.books
+    books: state.books,
+    googleBooks: state.googleBooks
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    googleActions: bindActionCreators(googleActions, dispatch)
   };
 }
 

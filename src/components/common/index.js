@@ -4,8 +4,8 @@ import ReactBootstrapDatePicker from 'react-bootstrap-date-picker';
 import ReactFontAwesome from 'react-fontawesome';
 import ReactImg from 'react-image';
 import ReactLoading from 'react-loading';
+import ReactSlick from 'react-slick';
 import StarRatingComponent from 'react-star-rating-component';
-
 export { CancelModalBody } from './CancelModalBody';
 export { CancelModalFooter } from './CancelModalFooter';
 export { BackButton } from './BackButton';
@@ -31,3 +31,4 @@ export const IFrame = Iframe;
 export const FontAwesome = ReactFontAwesome;
 export const DatePicker = ReactBootstrapDatePicker;
 export const StarRating = StarRatingComponent;
+export const Slider = ReactSlick;

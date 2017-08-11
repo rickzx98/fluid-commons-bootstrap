@@ -53,7 +53,8 @@ export default {
     touched: false,
     active: false,
     query: {},
-    result: {}
+    result: {},
+    newest: []
   },
   ajaxGlobal: {
     started: false,

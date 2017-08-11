@@ -61,6 +61,7 @@ export const LABEL_TRANSCRIBING_AGENCY = 'Transcribing agency';
 export const LABEL_RATING = 'Ratings';
 export const LABEL_NA = 'N/A';
 export const LABEL_PRINT = 'Print';
+export const LABEL_RECENT_BOOKS = 'Recent books online';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';

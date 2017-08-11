@@ -86,3 +86,24 @@ export function closeDialog() {
     type: types.CLOSE_DIALOG
   };
 }
+export function setGoogleFilterNewest(result) {
+  return {
+    type: types.SET_GOOGLE_FILTER_NEWEST,
+    result
+  };
+}
+export function getNewestBookCarousel() {
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      dispatch(ajaxActions.beginAjaxCall());
+      googleBooksApi().getNewestBooks(30).then(result => {
+        dispatch(ajaxActions.ajaxCallSuccess());
+        dispatch(setGoogleFilterNewest(result.items));
+        resolve(result);
+      }).catch(error => {
+        dispatch(ajaxActions.ajaxCallError(error));
+        reject(error);
+      });
+    });
+  };
+}

@@ -25,7 +25,8 @@ export class SettingsPage extends React.Component {
   }
   render() {
     return (<div className="settings page">
-      <PageHeader iconName="gears" label={LABEL_SETTINGS} />
+      <PageHeader loading={this.props.ajaxGlobal.started}
+        iconName="gear" label={LABEL_SETTINGS} />
       <PageBody>
         <SettingsForm
           onSubmit={this.onSubmit}
@@ -47,12 +48,14 @@ export class SettingsPage extends React.Component {
 
 SettingsPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired
+  settings: PropTypes.object.isRequired,
+  ajaxGlobal: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    settings: state.settings
+    settings: state.settings,
+    ajaxGlobal: state.ajaxGlobal
   };
 }
 

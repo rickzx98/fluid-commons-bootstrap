@@ -30,4 +30,16 @@ export class Api {
         });
     });
   }
+
+  static getNewestBooks(count, start) {
+    return new Promise((resolve, reject) => {
+      fetch(`${GOOGLE_BOOKS_API}?key=${GOOGLE_BOOKS_API_KEY}&printType=books&startIndex=${start || 0}&maxResults=${count}&q=inTitle`)
+        .then(result => {
+          resolve(result.json());
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
 }
