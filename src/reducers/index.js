@@ -1,13 +1,14 @@
+import ajaxGlobal from './AjaxGlobalReducer';
 import appModal from './AppModalReducer';
 import books from './BookReducer';
 import { combineReducers } from 'redux';
+import googleBooks from './GoogleBooksReducer';
 import managedBook from './ManagedBookReducer';
 import managedSubject from './ManagedSubjectReducer';
+import notifications from './NotificationReducer';
 import { routerReducer } from 'react-router-redux';
 import settings from './SettingsReducer';
 import subjects from './SubjectReducer';
-import googleBooks from './GoogleBooksReducer';
-import ajaxGlobal from './AjaxGlobalReducer';
 const rootReducer = combineReducers({
   books,
   subjects,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   dialog: appModal,
   routing: routerReducer,
   googleBooks,
-  ajaxGlobal
+  ajaxGlobal,
+  notifications
 });
 
 export default rootReducer;

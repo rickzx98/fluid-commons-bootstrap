@@ -1,4 +1,5 @@
 import { ConnectAppModelPage } from '../containers/AppModalPage';
+import { ConnectedNotificationPage } from '../containers/NotificationPage';
 import { Header } from './common/';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -11,6 +12,7 @@ class App extends React.Component {
     return (
       <div>
         <ConnectAppModelPage />
+        <ConnectedNotificationPage />
         <Header {...this.props} />
         {this.props.children}
       </div>

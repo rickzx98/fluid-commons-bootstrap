@@ -1,5 +1,6 @@
 export default {
   books: [],
+  notifications: [],
   book: {
     searched: false,
     update: false,

@@ -1,6 +1,7 @@
 import '../images/search-header.jpg';
 
 import * as actions from '../actions/GoogleBookAction';
+import * as alertActions from '../actions/NotificationActions';
 
 import { IFrame, PageBody, PageHeader, ResponsiveButton } from '../components/common/';
 
@@ -50,6 +51,9 @@ export class GoogleBooksPage extends React.Component {
     this.props.actions.createNewBookFromGoogle(bookId, selfLink)
       .then(() => {
         browserHistory.push('/books/new?bookId=' + bookId);
+      })
+      .catch(err => {
+        this.props.alertActions.alertDanger(err.message);
       });
   }
 
@@ -71,7 +75,8 @@ export class GoogleBooksPage extends React.Component {
 GoogleBooksPage.propTypes = {
   actions: PropTypes.object.isRequired,
   googleBooks: PropTypes.object.isRequired,
-  ajaxGlobal: PropTypes.object.isRequired
+  ajaxGlobal: PropTypes.object.isRequired,
+  alertActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -83,7 +88,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    alertActions: bindActionCreators(alertActions, dispatch)
   };
 }
 

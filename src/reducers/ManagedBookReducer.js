@@ -20,7 +20,7 @@ export default function managedBookReducer(state = initialState.book, action) {
   switch (action.type) {
     case ROUTER_LOCATION_CHANGE: {
       const payload = action.payload;
-      if (!state.searched) {
+      if (!state.searched || state.update) {
         if (payload.action === 'PUSH' && payload.pathname === '/books/new') {
           return initialState.book;
         }
