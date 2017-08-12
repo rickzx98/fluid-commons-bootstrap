@@ -1,22 +1,46 @@
-import { FontAwesome, Img, Slider, StarRating } from '../common/';
+import { FontAwesome, Img, ResponsiveButton, Slider, StarRating } from '../common/';
+import { LABEL_ONLINE_BOOKS, LABEL_SEARCH, LABEL_SEARCH_BOOKS } from '../../labels/';
 
-import { LABEL_RECENT_BOOKS } from '../../labels/';
+import { BookPreviewFooter } from '../books/';
+import { ConnectedBookPreviewPage } from '../../containers/BookPreviewPage';
+import { GoogleBooks } from '../../api/google-books/';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const BookNewestHeader = ({ newest }) => {
+export const BookNewestHeader = ({ newest, searchInput,
+  searchSubmit, googleBooks, openDialog,
+  closeDialog, addBook }) => {
   return (<div className="book-newest">
-    <h3><FontAwesome name="globe" />&nbsp;{LABEL_RECENT_BOOKS}</h3>
+    <h3><FontAwesome name="globe" />&nbsp;{LABEL_ONLINE_BOOKS}</h3>
+    <form name="newestBookSearch" className="book-search-bar"
+      onSubmit={searchSubmit}
+      onChange={searchInput}>
+      <div className="input-group">
+        <div className="input-group-btn">
+          <ResponsiveButton type="submit" className="btn btn-warning" label={LABEL_SEARCH}
+            icon={<FontAwesome name="search" size="lg" fixedWidth={true} />} />
+        </div>
+        <input placeholder={LABEL_SEARCH_BOOKS} value={googleBooks.search} type="text" className="form-control" />
+      </div>
+    </form>
     <Slider
       arrow={false}
       swipeToSlide={true}
-      adaptiveHeight={true}
       variableWidth={true}
       slidesToShow={8}>
-      {newest && newest.length > 0 ? newest.map(book => (
-        <div key={book.id}>
+      {newest && newest.length > 0 ? newest.map((book, index) => (
+        <div key={`${book.id}_${index}_key`}>
           <div className="books" key={book.id}>
-            <Img className="book book-image" src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '/book_ph.png'} />
+            <a onClick={() => {
+              openDialog({
+                body: <ConnectedBookPreviewPage bookLink={book.selfLink} />,
+                footer: <BookPreviewFooter addBook={() => {
+                  addBook(book.id, book.selfLink);
+                }} closeDialog={closeDialog} />
+              });
+            }}>
+              <Img className="book book-image" src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : '/book_ph.png'} />
+            </a>
           </div>
           <div className="padding-left-15px center">
             <StarRating value={book.volumeInfo.averageRating ? book.volumeInfo.averageRating - 1 : 0} starCount={4} />
@@ -29,5 +53,11 @@ export const BookNewestHeader = ({ newest }) => {
 };
 
 BookNewestHeader.propTypes = {
-  newest: PropTypes.array.isRequired
+  newest: PropTypes.array.isRequired,
+  searchInput: PropTypes.func.isRequired,
+  searchSubmit: PropTypes.func.isRequired,
+  googleBooks: PropTypes.object.isRequired,
+  openDialog: PropTypes.func.isRequired,
+  closeDialog: PropTypes.func.isRequired,
+  addBook: PropTypes.func.isRequired
 };

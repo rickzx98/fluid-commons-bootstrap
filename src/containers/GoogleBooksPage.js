@@ -1,6 +1,6 @@
 import '../images/search-header.jpg';
 
-import * as actions from '../actions/GoogleBookAction';
+import * as actions from '../actions/GoogleBookActions';
 import * as alertActions from '../actions/NotificationActions';
 
 import { IFrame, PageBody, PageHeader, ResponsiveButton } from '../components/common/';
@@ -61,7 +61,8 @@ export class GoogleBooksPage extends React.Component {
     return (<div className="google-books page">
       <PageHeader loading={this.props.ajaxGlobal.started} label={LABEL_ONLINE_SEARCH} iconName="globe" />
       <PageBody>
-        <SearchList ajaxGlobal={this.props.ajaxGlobal}
+        <SearchList
+          ajaxGlobal={this.props.ajaxGlobal}
           preview={this.preview}
           createBook={this.createBook}
           googleBooks={this.props.googleBooks}

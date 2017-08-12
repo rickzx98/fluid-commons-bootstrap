@@ -1,11 +1,13 @@
 import * as actions from '../actions/BookActions';
-import * as googleActions from '../actions/GoogleBookAction';
+import * as alertActions from '../actions/NotificationActions';
+import * as dialogActions from '../actions/DialogActions';
+import * as googleActions from '../actions/GoogleBookActions';
 
 import { BookNewestHeader, BookSearch, BookTable } from '../components/books/';
-import { CancelModalFooter, DeleteModalBody, PageBody, PageHeader } from '../components/common';
+import { CancelModalFooter, DeleteModalBody, FontAwesome, PageBody, PageHeader } from '../components/common';
+import { LABEL_BOOKS, LABEL_LIBRARY_BOOKS } from '../labels';
 
 import { Book } from '../api/books/';
-import { LABEL_BOOKS } from '../labels';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -17,6 +19,9 @@ export class BooksPage extends React.Component {
     super(props);
     this.createBook = this.createNewBook.bind(this);
     this.onRemove = this.onRemoveBook.bind(this);
+    this.searchSubmit = this.onSearchSubmit.bind(this);
+    this.searchInput = this.onSearchInput.bind(this);
+    this.createGoogleBook = this.createBookFromGoogle.bind(this);
   }
 
   componentWillMount() {
@@ -48,13 +53,42 @@ export class BooksPage extends React.Component {
     });
   }
 
+  onSearchSubmit(event) {
+    event.preventDefault();
+    this.props.googleActions.searchSubmit();
+  }
+
+  onSearchInput(event) {
+    this.props.googleActions.searchInput(event.target.value);
+  }
+
+  createBookFromGoogle(bookId, selfLink) {
+    this.props.googleActions.createNewBookFromGoogle(bookId, selfLink)
+      .then(() => {
+        browserHistory.push('/books/new?bookId=' + bookId);
+        this.props.dialogActions.closeDialog();
+      })
+      .catch(err => {
+        this.props.alertActions.alertDanger(err.message);
+      });
+  }
+
+
   render() {
     return (<div className="books page">
       <PageHeader loading={this.props.ajaxGlobal.started}
         spinIcon={false} label={LABEL_BOOKS} iconName="book" />
       <PageBody>
         <span>
-          <BookNewestHeader newest={this.props.googleBooks.newest} />
+          <BookNewestHeader
+            addBook={this.createGoogleBook}
+            closeDialog={this.props.dialogActions.closeDialog}
+            openDialog={this.props.dialogActions.openDialog}
+            googleBooks={this.props.googleBooks}
+            searchInput={this.searchInput}
+            searchSubmit={this.searchSubmit}
+            newest={this.props.googleBooks.newest} />
+          <h3 className="books-legend"><FontAwesome name="database" />&nbsp;{LABEL_LIBRARY_BOOKS}</h3>
           <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks} />
           <BookTable onRemove={this.onRemove} books={this.props.books} />
         </span>
@@ -68,7 +102,8 @@ BooksPage.propTypes = {
   googleActions: PropTypes.object.isRequired,
   books: PropTypes.array.isRequired,
   ajaxGlobal: PropTypes.object.isRequired,
-  googleBooks: PropTypes.object.isRequired
+  googleBooks: PropTypes.object.isRequired,
+  dialogActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -82,7 +117,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch),
-    googleActions: bindActionCreators(googleActions, dispatch)
+    googleActions: bindActionCreators(googleActions, dispatch),
+    dialogActions: bindActionCreators(dialogActions, dispatch),
+    alertActions: bindActionCreators(alertActions, dispatch)
   };
 }
 

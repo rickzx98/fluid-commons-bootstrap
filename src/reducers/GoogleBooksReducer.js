@@ -1,4 +1,4 @@
-import { CREATE_NEW_BOOK_FROM_GOOGLE, SET_GOOGLE_FILTER_NEWEST, SET_GOOGLE_FILTER_RESULT, SET_GOOGLE_FILTER_VALUE } from '../actions/';
+import { CREATE_NEW_BOOK_FROM_GOOGLE, GOOGLE_SEARCH_INPUT, SET_GOOGLE_FILTER_NEWEST, SET_GOOGLE_FILTER_RESULT, SET_GOOGLE_FILTER_VALUE } from '../actions/';
 
 import initialState from './initialState';
 
@@ -19,7 +19,10 @@ export default function googleBooksReducer(state = initialState.googleBooks, act
         return initialState.googleBooks;
       }
     case SET_GOOGLE_FILTER_NEWEST: {
-      return Object.assign({}, { ...state, touched: false, newest: action.result });
+      return Object.assign({}, { ...state, touched: false, newest: action.result, search: '' });
+    }
+    case GOOGLE_SEARCH_INPUT: {
+      return Object.assign({}, { ...state, touched: true, search: action.search });
     }
     default:
       return state;

@@ -42,4 +42,17 @@ export class Api {
         });
     });
   }
+
+  static searchHomeBooks(search) {
+    return new Promise((resolve, reject) => {
+      fetch(`${GOOGLE_BOOKS_API}?key=${GOOGLE_BOOKS_API_KEY}&printType=books&startIndex=0&maxResults=40&q=${search}`)
+        .then(result => {
+          resolve(result.json());
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
 }

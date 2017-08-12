@@ -5,5 +5,6 @@ export const GoogleBooks = {
   SUBJECT: 'subject',
   ISBN: 'isbn',
   LCCN: 'lccn',
-  OCLC: 'oclc'
+  OCLC: 'oclc',
+  SEARCH: 'search'
 };

@@ -84,6 +84,10 @@
         -moz-transform: rotateY(20deg);
         -webkit-transform: perspective(100) rotateY(20deg);
     }
+    .books-legend {
+        padding-left: 6px;
+        padding-top: 5px;
+    }
 }
 
 .book-form-tab {
@@ -108,6 +112,9 @@
     .book-title {
         width: 9em;
         font-size: 11px;
+    }
+    .book-search-bar {
+        padding: 15px 14.1%;
     }
 }
 

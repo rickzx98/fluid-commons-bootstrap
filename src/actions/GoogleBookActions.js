@@ -58,7 +58,6 @@ export function createNewBookFromGoogle(bookId, selfLink) {
     });
   };
 }
-
 export function searchBooks(query) {
   return dispatch => {
     dispatch(ajaxActions.beginAjaxCall());
@@ -72,7 +71,6 @@ export function searchBooks(query) {
       });
   };
 }
-
 export function previewBook(dialog) {
   dialog.show = true;
   return {
@@ -80,7 +78,6 @@ export function previewBook(dialog) {
     dialog
   };
 }
-
 export function closeDialog() {
   return {
     type: types.CLOSE_DIALOG
@@ -105,5 +102,49 @@ export function getNewestBookCarousel() {
         reject(error);
       });
     });
+  };
+}
+export function searchInput(input) {
+  return {
+    type: types.GOOGLE_SEARCH_INPUT,
+    search: input
+  };
+}
+export function searchSubmit() {
+  return (dispatch, getState) => {
+    const state = getState();
+    return new Promise((resolve, reject) => {
+      dispatch(ajaxActions.beginAjaxCall());
+      googleBooksApi().searchHomeBooks(state.googleBooks.search).then(result => {
+        dispatch(ajaxActions.ajaxCallSuccess());
+        dispatch(setGoogleFilterNewest(result.items));
+        resolve(result);
+      }).catch(error => {
+        dispatch(ajaxActions.ajaxCallError(error));
+        reject(error);
+      });
+    });
+  }
+}
+export function getBooksVolumeInfo(selfLink) {
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      dispatch(ajaxActions.beginAjaxCall());
+      googleBooksApi().getBookInfo(selfLink)
+        .then(result => {
+          dispatch(ajaxActions.ajaxCallSuccess());
+          dispatch(setBookPreviewFromGoogle(result.volumeInfo));
+        })
+        .catch(error => {
+          dispatch(ajaxActions.ajaxCallError(error));
+          reject(error);
+        });
+    });
+  }
+}
+export function setBookPreviewFromGoogle(volumeInfo) {
+  return {
+    type: types.SET_BOOK_PREVIEW_FROM_GOOGLE,
+    volumeInfo
   };
 }

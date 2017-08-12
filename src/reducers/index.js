@@ -1,5 +1,6 @@
 import ajaxGlobal from './AjaxGlobalReducer';
 import appModal from './AppModalReducer';
+import bookPreview from './BookPreviewReducer';
 import books from './BookReducer';
 import { combineReducers } from 'redux';
 import googleBooks from './GoogleBooksReducer';
@@ -9,6 +10,7 @@ import notifications from './NotificationReducer';
 import { routerReducer } from 'react-router-redux';
 import settings from './SettingsReducer';
 import subjects from './SubjectReducer';
+
 const rootReducer = combineReducers({
   books,
   subjects,
@@ -19,7 +21,8 @@ const rootReducer = combineReducers({
   routing: routerReducer,
   googleBooks,
   ajaxGlobal,
-  notifications
+  notifications,
+  bookPreview
 });
 
 export default rootReducer;

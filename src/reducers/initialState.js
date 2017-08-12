@@ -55,8 +55,10 @@ export default {
     active: false,
     query: {},
     result: {},
-    newest: []
+    newest: [],
+    search: ''
   },
+  bookPreview: {},
   ajaxGlobal: {
     started: false,
     done: false
