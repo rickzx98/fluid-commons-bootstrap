@@ -1,18 +1,17 @@
-import { Img, ResponsiveButton, Loading } from '../common/';
-import { LABEL_DELETE, LABEL_EDIT } from '../../labels/';
+import { FontAwesome, Img, Loading, ResponsiveButton } from '../common/';
+import { LABEL_DELETE, LABEL_EDIT, LABEL_PREVIEW } from '../../labels/';
 
 import { Book } from '../../api/books/';
-import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const BookRow = ({ book, onRemove }) => {
+export const BookRow = ({ book, onRemove, onPreview }) => {
   return (<tr key={book._id} className="book-item">
     <td>
       <div className="book">
-        <Img loader={<Loading className="text-primary" width={50} height={30}/>} className="book-image"
-             src={book[Book.IMAGE_URL]}/>
+        <Img loader={<Loading className="text-primary" width={50} height={30} />} className="book-image"
+          src={book[Book.IMAGE_URL]} />
       </div>
     </td>
     <td className="hidden-xs">
@@ -35,17 +34,22 @@ export const BookRow = ({ book, onRemove }) => {
         {book[Book.EDITION]} <br />
         {book[Book.AUTHOR]}
       </p>
+      <ResponsiveButton onClick={() => { onPreview(book); }} className="btn btn-warning" label={LABEL_PREVIEW} icon={
+        <FontAwesome name="search" size="lg" fixedWidth={true} />
+      } />
+      &nbsp;
       <Link className="btn btn-primary" to={'/books/' + book[Book.BOOK_ID]}>
-        <FontAwesome name="pencil-square-o" size="lg" fixedWidth={true}/><span className="hidden-xs">{LABEL_EDIT}</span></Link>
+        <FontAwesome name="pencil-square-o" size="lg" fixedWidth={true} /><span className="hidden-xs">{LABEL_EDIT}</span></Link>
       &nbsp;
       <ResponsiveButton onClick={() => { onRemove(book); }} className="btn btn-danger" label={LABEL_DELETE} icon={
         <FontAwesome name="trash" size="lg" fixedWidth={true} />
-      }/>
+      } />
     </td>
   </tr>);
 };
 
 BookRow.propTypes = {
   book: PropTypes.object.isRequired,
-  onRemove: PropTypes.func.isRequired
+  onRemove: PropTypes.func.isRequired,
+  onPreview: PropTypes.func.isRequired
 };

@@ -44,6 +44,9 @@ export function createNewBookFromGoogle(bookId, selfLink) {
                   dispatch(ajaxActions.ajaxCallSuccess());
                   resolve();
                 }
+              })
+              .catch(error => {
+                reject(error);
               });
           } else {
             dispatch(createBook(result.volumeInfo, bookId));
@@ -124,7 +127,7 @@ export function searchSubmit() {
         reject(error);
       });
     });
-  }
+  };
 }
 export function getBooksVolumeInfo(selfLink) {
   return dispatch => {
@@ -140,11 +143,18 @@ export function getBooksVolumeInfo(selfLink) {
           reject(error);
         });
     });
-  }
+  };
 }
 export function setBookPreviewFromGoogle(volumeInfo) {
   return {
     type: types.SET_BOOK_PREVIEW_FROM_GOOGLE,
     volumeInfo
+  };
+}
+
+export function setBookPreview(book) {
+  return {
+    type: types.SET_BOOK_PREVIEW,
+    book
   };
 }

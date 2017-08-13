@@ -3,11 +3,12 @@ import * as alertActions from '../actions/NotificationActions';
 import * as dialogActions from '../actions/DialogActions';
 import * as googleActions from '../actions/GoogleBookActions';
 
-import { BookNewestHeader, BookSearch, BookTable } from '../components/books/';
+import { BookNewestHeader, BookPreviewFooter, BookSearch, BookTable } from '../components/books/';
 import { CancelModalFooter, DeleteModalBody, FontAwesome, PageBody, PageHeader } from '../components/common';
-import { LABEL_BOOKS, LABEL_LIBRARY_BOOKS } from '../labels';
+import { LABEL_AN_ERROR_HAS_OCCURRED, LABEL_BOOKS, LABEL_LIBRARY_BOOKS } from '../labels';
 
 import { Book } from '../api/books/';
+import { ConnectedBookPreviewPage } from '../containers/BookPreviewPage';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -22,6 +23,7 @@ export class BooksPage extends React.Component {
     this.searchSubmit = this.onSearchSubmit.bind(this);
     this.searchInput = this.onSearchInput.bind(this);
     this.createGoogleBook = this.createBookFromGoogle.bind(this);
+    this.onPreview = this.previewBook.bind(this);
   }
 
   componentWillMount() {
@@ -73,6 +75,16 @@ export class BooksPage extends React.Component {
       });
   }
 
+  previewBook(book) {
+    this.props.dialogActions.openDialog({
+      title: book[Book.TITLE],
+      body: <ConnectedBookPreviewPage book={book} />,
+      footer: <BookPreviewFooter closeDialog={this.props.googleActions.closeDialog} readOnly={true} />
+    })
+      .catch(error => {
+        this.props.alertActions.alertDanger(error ? error.message : LABEL_AN_ERROR_HAS_OCCURRED);
+      });
+  }
 
   render() {
     return (<div className="books page">
@@ -90,7 +102,10 @@ export class BooksPage extends React.Component {
             newest={this.props.googleBooks.newest} />
           <h3 className="books-legend"><FontAwesome name="database" />&nbsp;{LABEL_LIBRARY_BOOKS}</h3>
           <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks} />
-          <BookTable onRemove={this.onRemove} books={this.props.books} />
+          <BookTable
+            onPreview={this.onPreview}
+            onRemove={this.onRemove}
+            books={this.props.books} />
         </span>
       </PageBody>
     </div>);
@@ -103,7 +118,8 @@ BooksPage.propTypes = {
   books: PropTypes.array.isRequired,
   ajaxGlobal: PropTypes.object.isRequired,
   googleBooks: PropTypes.object.isRequired,
-  dialogActions: PropTypes.object.isRequired
+  dialogActions: PropTypes.object.isRequired,
+  alertActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

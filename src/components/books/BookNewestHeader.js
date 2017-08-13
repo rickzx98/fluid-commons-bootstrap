@@ -3,7 +3,6 @@ import { LABEL_ONLINE_BOOKS, LABEL_SEARCH, LABEL_SEARCH_BOOKS } from '../../labe
 
 import { BookPreviewFooter } from '../books/';
 import { ConnectedBookPreviewPage } from '../../containers/BookPreviewPage';
-import { GoogleBooks } from '../../api/google-books/';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -24,6 +23,7 @@ export const BookNewestHeader = ({ newest, searchInput,
       </div>
     </form>
     <Slider
+      adaptiveHeight={true}
       arrow={false}
       swipeToSlide={true}
       variableWidth={true}

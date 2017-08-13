@@ -64,6 +64,7 @@ export const LABEL_PRINT = 'Print';
 export const LABEL_ONLINE_BOOKS = 'Online books';
 export const LABEL_LIBRARY_BOOKS = 'Library books';
 export const LABEL_CLOSE = 'Close';
+export const LABEL_AN_ERROR_HAS_OCCURRED = 'An error has occurred.';
 /* Book form */
 export const LABEL_TITLE = 'Title';
 export const LABEL_STATEMENT_OF_RESP = 'Statement of Responsibility';

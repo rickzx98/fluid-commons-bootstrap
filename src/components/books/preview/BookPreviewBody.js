@@ -7,11 +7,9 @@ import {
     LABEL_NUMBER_OF_PAGES,
     LABEL_PUBLISHED_DATE,
     LABEL_PUBLISHER,
-    LABEL_STUDY_PROGRAM,
     LABEL_SUB_TITLE,
     LABEL_SUMMARY,
-    LABEL_TITLE,
-    LABEL_VENDOR
+    LABEL_TITLE
 } from '../../../labels/';
 
 import { Book } from '../../../api/books/';
