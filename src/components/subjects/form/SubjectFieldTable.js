@@ -6,7 +6,7 @@ import React from 'react';
 
 export const SubjectFieldTable = ({ data, subjectOptions,
   onChange, fields, isNewField, newField, cancelField,
-  selectSubjectField, removeField }) => {
+  selectSubjectField, removeField, fieldOptions }) => {
   return (
     <table className="table width100pc no-padding">
       <thead>
@@ -45,7 +45,7 @@ export const SubjectFieldTable = ({ data, subjectOptions,
             onChange={selectSubjectField}
             label={LABEL_SUBJECT_FIELD}
             name="subjectField"
-            options={subjectOptions} />}
+            options={fieldOptions} />}
           <div className="btn-toolbar padding-left-15px">
             {!isNewField &&
               <ResponsiveButton onClick={newField} className="btn btn-success"
@@ -63,6 +63,7 @@ export const SubjectFieldTable = ({ data, subjectOptions,
 
 SubjectFieldTable.propTypes = {
   data: PropTypes.object.isRequired,
+  fieldOptions: PropTypes.array.isRequired,
   subjectOptions: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   fields: PropTypes.array.isRequired,

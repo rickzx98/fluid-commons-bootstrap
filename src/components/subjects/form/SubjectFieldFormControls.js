@@ -81,13 +81,14 @@ export class SubjectFieldFormControls extends React.Component {
         onChange={this.props.onChange}
         required={true}
         multiple={this.state.$a.repeatable}
-        options={this.state.subjectOptions}
+        options={this.props.subjectOptions}
         name={this.state.$a.value}
         value={this.props.data[this.state.$a.value]}
         label={this.state.$a.label} />
       <SubjectFieldTable
+        fieldOptions={this.state.subjectOptions}
         fields={this.state.fields}
-        subjectOptions={this.state.subjectOptions}
+        subjectOptions={this.props.subjectOptions}
         onChange={this.props.onChange}
         data={this.props.data}
         isNewField={this.state.newField}
