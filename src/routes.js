@@ -2,6 +2,7 @@ import { IndexRoute, Route } from 'react-router';
 
 import App from './components/App';
 import { ConnectBookPage } from './containers/BooksPage';
+import { ConnectLoginPage } from './containers/LoginPage';
 import { ConnectSettingsPage } from './containers/SettingsPage';
 import { ConnectedGoogleBooksPage } from './containers/GoogleBooksPage';
 import { ConnectedManageBookPage } from './containers/ManageBookPage';
@@ -19,6 +20,7 @@ export default (
     <Route path=":resourceType/subjects/:index" component={ConnectedManagedSubjectPage} />
     <Route path=":resourceType/subjects/new" component={ConnectedManagedSubjectPage} />
     <Route path="settings" component={ConnectSettingsPage} />
+    <Route path="login" component={ConnectLoginPage} />
     <Route path="*" component={NotFoundPage} />
   </Route>
 );

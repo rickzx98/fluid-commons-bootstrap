@@ -1,5 +1,16 @@
 /* Variables */
 
+$vin-blue: #5bb7db;
+$vin-green: #60b044;
+$vin-red: #ff0000;
+$hd-text-color: #ececed;
+$fd-bg-color: #3f5c73;
+$page-header-height: 130px;
+$loading-color: #E67E22;
+$screen-lg-min: 1200px;
+$screen-md-min: 992px;
+$screen-sm-min: 768px;
+
 @import './mixin.scss';
 @import '../../node_modules/animate.css/animate.css';
 @import '../../node_modules/font-awesome/css/font-awesome.css';
@@ -8,14 +19,8 @@
 @import '../components/books/books.scss';
 @import '../components/settings/settings.scss';
 @import '../components/search/search.scss';
+@import '../components/login/login.scss';
 @import './paper.scss';
-$vin-blue: #5bb7db;
-$vin-green: #60b044;
-$vin-red: #ff0000;
-$hd-text-color: #ececed;
-$fd-bg-color: #3f5c73;
-$page-header-height: 130px;
-$loading-color: #E67E22;
 
 /* Styles */
 

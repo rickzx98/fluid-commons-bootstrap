@@ -1,0 +1,21 @@
+    .login {
+        .page-header {
+            /* width: 100%; */
+            /* -webkit-filter: blur(1px); */
+            background-image: url('/books-header.jpg');
+        }
+        form {
+            /* Small devices (tablets, 768px and up) */
+            @media (min-width: $screen-sm-min) {
+                padding: 0 8pc;
+            }
+            /* Medium devices (desktops, 992px and up) */
+            @media (min-width: $screen-md-min) {
+                padding: 0 25pc;
+            }
+            /* Large devices (large desktops, 1200px and up) */
+            @media (min-width: $screen-lg-min) {
+                padding: 0 25pc;
+            }
+        }
+    }

@@ -145,3 +145,7 @@ export const LABEL_GEOGRAPHIC_NAME = 'Geographic name';
 export const LABEL_GENRE_FORM_DATA_FOCUS_TERM = ' Genre/form data or focus term';
 export const LABEL_NON_FOCUS_TERM = 'Non-focus term';
 export const LABEL_FACET_HIERARCHY_DESIGNATION = 'Facet/hierarchy designation';
+export const LABEL_WELCOME = `Welcome to ${APP_NAME}`;
+export const LABEL_PLEASE_SIGN_IN = 'Please sign in.';
+export const LABEL_USERNAME = 'Username';
+export const LABEL_PASSWORD = 'Password';
