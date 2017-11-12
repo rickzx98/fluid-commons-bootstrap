@@ -62,5 +62,13 @@ export default {
   ajaxGlobal: {
     started: false,
     done: false
+  },
+  security: {
+    isAuthenticated: false
+  },
+  login: {
+    forgotPassword: false,
+    username: '',
+    password: ''
   }
 };

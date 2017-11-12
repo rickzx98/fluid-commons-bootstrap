@@ -9,24 +9,27 @@ import { connect } from 'react-redux';
 export class LoginPage extends React.Component {
     componentWillMount() {
         this.state = {};
-        this.thisOnUsernameChange = this.onUsernameChange.bind(this);
+        this.thisOnFormChange = this.onFormChange.bind(this);
+        this.thisOnFormSubmit = this.onFormSubmit.bind(this);
     }
-    onUsernameChange(event) {
-        this.setState({
-            username: event.target.value
-        });
+    onFormChange(event) {
+        this.props.actions.setLogin(event.target.name, event.target.value);
+    }
+    onFormSubmit(event) {
+        event.preventDefault();
     }
     render() {
         const loginProps = {
-            userame: this.state.username,
-            onUsernameChange: this.thisOnUsernameChange
+            onChange: this.thisOnFormChange,
+            onSubmit: this.thisOnFormSubmit,
+            login: this.props.login
         };
         return <div className="login page"><LoginBody {...loginProps} /></div>;
     }
 }
 
 function mapStateToProps(state) {
-    return {};
+    return { login: state.login };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -34,3 +37,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 export const ConnectLoginPage = connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+
+
+LoginPage.propTypes = {
+    actions: PropTypes.object.isRequired,
+    login: PropTypes.object.isRequired
+};

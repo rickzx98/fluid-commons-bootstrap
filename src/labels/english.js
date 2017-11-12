@@ -149,3 +149,4 @@ export const LABEL_WELCOME = `Welcome to ${APP_NAME}`;
 export const LABEL_PLEASE_SIGN_IN = 'Please sign in.';
 export const LABEL_USERNAME = 'Username';
 export const LABEL_PASSWORD = 'Password';
+export const LABEL_SIGN_IN = "Sign in";

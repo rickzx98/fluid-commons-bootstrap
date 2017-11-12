@@ -4,6 +4,7 @@ import bookPreview from './BookPreviewReducer';
 import books from './BookReducer';
 import { combineReducers } from 'redux';
 import googleBooks from './GoogleBooksReducer';
+import login from './LoginReducer';
 import managedBook from './ManagedBookReducer';
 import managedSubject from './ManagedSubjectReducer';
 import notifications from './NotificationReducer';
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   googleBooks,
   ajaxGlobal,
   notifications,
-  bookPreview
+  bookPreview,
+  login
 });
 
 export default rootReducer;
