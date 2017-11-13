@@ -14,6 +14,7 @@ export class SecurityCheckerPage extends React.Component {
     }
     render() {
         if (this.props.security.isAuthenticated) {
+            console.log(this.props);
             return this.props.children;
         } else {
             return null;

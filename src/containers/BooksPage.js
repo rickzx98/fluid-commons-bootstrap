@@ -112,6 +112,10 @@ export class BooksPage extends React.Component {
   }
 }
 
+BooksPage.defaultProps = {
+  access: ['admin', 'librarian']
+};
+
 BooksPage.propTypes = {
   actions: PropTypes.object.isRequired,
   googleActions: PropTypes.object.isRequired,

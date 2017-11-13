@@ -6,6 +6,7 @@ import FontAwesome from 'react-fontawesome';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Navbar from 'react-bootstrap/lib/Navbar';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { browserHistory } from 'react-router';
 
@@ -35,9 +36,14 @@ export class Header extends React.Component {
         </Nav>
         <Nav pullRight>
           <NavItem onClick={this.goToSettingsFromHeader}><FontAwesome size="lg" name="gear" fixedWidth={true} />&nbsp;{LABEL_SETTINGS}</NavItem>
-          <NavItem><img className="header-thumbnail" height="24" width="24" src="/profile.jpg" />&nbsp;Jerico de Guzman</NavItem>
+          <NavItem><img className="header-thumbnail" height="24" width="24" src="/profile.jpg" />&nbsp;{this.props.security.fullname}</NavItem>
         </Nav>
       </Navbar.Collapse>
     </Navbar>);
   }
 }
+
+
+Header.propTypes = {
+  security: PropTypes.object.isRequired
+};
