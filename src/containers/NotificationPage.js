@@ -39,3 +39,6 @@ export const ConnectedNotificationPage = connect(
   mapDispatchToProps
 )(NotificationPage);
 
+NotificationPage.defaultProps = {
+  access: ['admin', 'librarian', 'student']
+};

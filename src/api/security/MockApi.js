@@ -14,6 +14,13 @@ const SECURITY = {
         password: "testPassword",
         fullname: "Jerico as Librarian",
         role: "librarian"
+    },
+    {
+        _id: "0001246",
+        username: "rickzx98Student",
+        password: "testPassword",
+        fullname: "Jerico as Student",
+        role: "student"
     }]
 };
 export class Api {

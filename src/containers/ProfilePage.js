@@ -19,3 +19,7 @@ function mapStateToProps(state) {
 }
 
 export const ConnectProfilePage = connect(mapStateToProps)(ProfilePage);
+
+ProfilePage.defaultProps = {
+    access: ['admin', 'librarian', 'student']
+};

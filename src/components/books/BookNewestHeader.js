@@ -43,7 +43,7 @@ export const BookNewestHeader = ({ newest, searchInput,
             </a>
           </div>
           <div className="padding-left-15px center">
-            <StarRating value={book.volumeInfo.averageRating ? book.volumeInfo.averageRating - 1 : 0} starCount={4} />
+            <StarRating name="googleBookRating" value={book.volumeInfo.averageRating ? book.volumeInfo.averageRating - 1 : 0} starCount={4} />
           </div>
           <p className="book-title">{book.volumeInfo.title}</p>
         </div>

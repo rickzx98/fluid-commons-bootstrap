@@ -174,3 +174,7 @@ ManagedSubjectPage.propTypes = {
   subjectFields: PropTypes.object.isRequired,
   resourceType: PropTypes.string.isRequired
 };
+
+ManagedSubjectPage.defaultProps = {
+  access: ['admin', 'librarian']
+};

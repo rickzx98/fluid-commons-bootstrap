@@ -7,15 +7,39 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 export class SecurityCheckerPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.thisIsRoleAllowed = this.isRoleAllowed.bind(this);
+    }
     componentDidMount() {
         if (!this.props.security.isAuthenticated) {
             browserHistory.replace('/login');
+        } else if (!this.isRoleAllowed()) {
+            this.props.actions.notAuthorizedAccess(this.props.router.getCurrentLocation().pathname);
+            this.props.router.goBack();
         }
     }
+    componentDidUpdate() {
+        if (!this.isRoleAllowed()) {
+            this.props.actions.notAuthorizedAccess(this.props.router.getCurrentLocation().pathname);
+            this.props.router.goBack();
+        }
+    }
+
+    isRoleAllowed() {
+        const Component = this.props.children.type.WrappedComponent;
+        const { access } = Component.defaultProps;
+        return access.indexOf(this.props.security.role) > -1;
+    }
+
     render() {
         if (this.props.security.isAuthenticated) {
-            console.log(this.props);
-            return this.props.children;
+            if (this.thisIsRoleAllowed()) {
+                return this.props.children;
+            }
+            else {
+                return null;
+            }
         } else {
             return null;
         }
@@ -24,7 +48,9 @@ export class SecurityCheckerPage extends React.Component {
 
 SecurityCheckerPage.propTypes = {
     security: PropTypes.object.isRequired,
-    children: PropTypes.element
+    children: PropTypes.element,
+    router: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

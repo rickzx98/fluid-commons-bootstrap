@@ -42,3 +42,7 @@ export const ConnectSubjectsPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(SubjectsPage);
+
+SubjectsPage.defaultProps = {
+  access: ['admin', 'librarian']
+};

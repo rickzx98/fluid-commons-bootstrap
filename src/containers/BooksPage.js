@@ -113,7 +113,7 @@ export class BooksPage extends React.Component {
 }
 
 BooksPage.defaultProps = {
-  access: ['admin', 'librarian']
+  access: ['admin', 'librarian', 'student']
 };
 
 BooksPage.propTypes = {

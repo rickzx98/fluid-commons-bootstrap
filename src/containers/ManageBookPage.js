@@ -177,3 +177,7 @@ export const ConnectedManageBookPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ManageBookPage);
+
+ManageBookPage.defaultProps = {
+  access: ['admin', 'librarian']
+};

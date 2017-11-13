@@ -69,3 +69,7 @@ export const ConnectSettingsPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(SettingsPage);
+
+SettingsPage.defaultProps = {
+  access: ['admin', 'librarian']
+};

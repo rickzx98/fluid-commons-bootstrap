@@ -98,3 +98,7 @@ export const ConnectedGoogleBooksPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(GoogleBooksPage);
+
+GoogleBooksPage.defaultProps = {
+  access: ['admin', 'librarian']
+};

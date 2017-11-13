@@ -46,3 +46,7 @@ BookPreviewPage.propTypes = {
   bookPreview: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 };
+
+BookPreviewPage.defaultProps = {
+  access: ['admin', 'librarian', 'student']
+};
