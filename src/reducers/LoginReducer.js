@@ -1,5 +1,4 @@
-import { LOGIN_REQUEST, SET_LOGIN } from '../actions/';
-
+import { SET_LOGIN } from '../actions/';
 import initialState from './initialState';
 
 //import objectAssign from 'object-assign';

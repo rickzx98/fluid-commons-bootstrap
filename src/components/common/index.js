@@ -6,6 +6,7 @@ import ReactImg from 'react-image';
 import ReactLoading from 'react-loading';
 import ReactSlick from 'react-slick';
 import StarRatingComponent from 'react-star-rating-component';
+
 export { CancelModalBody } from './CancelModalBody';
 export { CancelModalFooter } from './CancelModalFooter';
 export { BackButton } from './BackButton';

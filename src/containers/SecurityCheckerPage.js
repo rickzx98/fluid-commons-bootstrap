@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 export class SecurityCheckerPage extends React.Component {
     componentDidMount() {
-        if (this.props.security.isAuthenticated) {
+        if (!this.props.security.isAuthenticated) {
             browserHistory.replace('/login');
         }
     }

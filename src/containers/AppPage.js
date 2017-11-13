@@ -1,8 +1,9 @@
 import { ConnectAppModelPage } from '../containers/AppModalPage';
 import { ConnectedNotificationPage } from '../containers/NotificationPage';
-import { Header } from './common/';
+import { Header } from '../components/common/';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 // This is a class-based component because the current
@@ -14,19 +15,20 @@ class App extends React.Component {
     const prevAuthenticated = prevProps.security.isAuthenticated;
     const isLoggingOut = prevAuthenticated && !isAuthenticated;
     const isLoggingIn = !prevAuthenticated && isAuthenticated;
-
     if (isLoggingIn) {
-      // redirect
+      browserHistory.push("/");
     } else if (isLoggingOut) {
       // do any kind of cleanup or post-logout redirection here
     }
   }
+
   render() {
+    const { isAuthenticated } = this.props.security;
     return (
       <div>
         <ConnectAppModelPage />
         <ConnectedNotificationPage />
-        <Header {...this.props} />
+        {isAuthenticated ? <Header {...this.props} /> : ''}
         {this.props.children}
       </div>
     );
@@ -41,7 +43,7 @@ App.propTypes = {
 function mapStateToProps(state) {
   return {
     security: state.security
-  }
+  };
 }
 
 export const ConnectApp = connect(mapStateToProps)(App);

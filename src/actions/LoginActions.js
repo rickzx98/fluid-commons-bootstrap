@@ -1,10 +1,22 @@
+import * as ajaxActions from './AjaxStatusActions';
+import * as notificationActions from './NotificationActions';
 import * as types from './';
 
+import { getApi as securityApi } from '../api/security/';
+
 export function requestLogin(credentials) {
-    return {
-        type: types.LOGIN_REQUEST,
-        isAuthenticated: false,
-        credentials
+    return (dispatch) => {
+        dispatch(ajaxActions.beginAjaxCall());
+        securityApi().requestLogin(credentials)
+            .then(user => {
+                dispatch(ajaxActions.ajaxCallSuccess());
+                dispatch(receiveLogin(user));
+            })
+            .catch(error => {
+                dispatch(ajaxActions.ajaxCallError(error));
+                dispatch(notificationActions.alertDanger(error.message));
+                dispatch(loginError(error.message));
+            });
     };
 }
 

@@ -1,6 +1,6 @@
 import { IndexRoute, Route } from 'react-router';
 
-import { ConnectApp } from './components/App';
+import { ConnectApp } from './containers/AppPage';
 import { ConnectBookPage } from './containers/BooksPage';
 import { ConnectLoginPage } from './containers/LoginPage';
 import { ConnectSecurityCheckerPage } from './containers/SecurityCheckerPage';
@@ -14,8 +14,8 @@ import React from 'react';
 export default (
   <Route path="/" component={ConnectApp}>
     <Route path="login" component={ConnectLoginPage} />
-    <Route path="*" component={NotFoundPage} />
     <Route component={ConnectSecurityCheckerPage}>
+      <IndexRoute component={ConnectBookPage} />
       <Route path="books" component={ConnectBookPage} />
       <Route path="books/new" component={ConnectedManageBookPage} />
       <Route path="books/new/search" component={ConnectedGoogleBooksPage} />
@@ -23,6 +23,7 @@ export default (
       <Route path=":resourceType/subjects/:index" component={ConnectedManagedSubjectPage} />
       <Route path=":resourceType/subjects/new" component={ConnectedManagedSubjectPage} />
       <Route path="settings" component={ConnectSettingsPage} />
+      <Route path="*" component={NotFoundPage} />
     </Route>
   </Route>
 );

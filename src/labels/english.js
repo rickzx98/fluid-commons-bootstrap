@@ -150,3 +150,5 @@ export const LABEL_PLEASE_SIGN_IN = 'Please sign in.';
 export const LABEL_USERNAME = 'Username';
 export const LABEL_PASSWORD = 'Password';
 export const LABEL_SIGN_IN = "Sign in";
+export const LABEL_NEW_USER = 'New user';
+export const LABEL_FORGOT_PASSWORD = 'Forgot password?';
