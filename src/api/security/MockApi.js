@@ -16,25 +16,26 @@ const SECURITY = {
         role: "librarian"
     }]
 };
-let data = SETTING;
 export class Api {
     static requestLogin(credentials) {
         return new Promise((resolve, reject) => {
-            const users = SECURITY.users.filter(user => user.username === credentials.username);
-            if (users.length > 0) {
-                if (users[0].password === credentials.password) {
-                    resolve({
-                        username: users[0].username,
-                        fullname: users[0].fullname,
-                        role: users[0].role
+            setTimeout(() => {
+                const users = SECURITY.users.filter(user => user.username === credentials.username);
+                if (users.length > 0) {
+                    if (users[0].password === credentials.password) {
+                        resolve({
+                            username: users[0].username,
+                            fullname: users[0].fullname,
+                            role: users[0].role
+                        });
+                    }
+                }
+                else {
+                    reject({
+                        message: "Invalid username or password."
                     });
                 }
-            }
-            else {
-                reject({
-                    message: "Invalid username or password."
-                });
-            }
+            }, delay);
         });
     }
 }

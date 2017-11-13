@@ -9,6 +9,7 @@ import managedBook from './ManagedBookReducer';
 import managedSubject from './ManagedSubjectReducer';
 import notifications from './NotificationReducer';
 import { routerReducer } from 'react-router-redux';
+import security from './SecurityReducer';
 import settings from './SettingsReducer';
 import subjects from './SubjectReducer';
 
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   ajaxGlobal,
   notifications,
   bookPreview,
-  login
+  login,
+  security
 });
 
 export default rootReducer;
