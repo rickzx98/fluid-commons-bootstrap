@@ -1,0 +1,28 @@
+.library {
+  .page-header {
+    /* width: 100%; */
+    /* -webkit-filter: blur(1px); */
+    background-image: url('/library-header.jpg');
+  }
+  table {
+    background: white;
+    thead {
+      font-weight: 400;
+      font-size: 14px;
+      background: $fd-bg-color;
+      color: $hd-text-color;
+      th {
+        text-align: center;
+        height: 35px;
+      }
+    }
+    tbody {
+      tr {
+        font-weight: 400;
+        font-size: 12px;
+        height: 30px;
+        text-align: center;
+      }
+    }
+  }
+}

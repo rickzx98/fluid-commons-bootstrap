@@ -3,9 +3,9 @@ import * as alertActions from '../actions/NotificationActions';
 import * as dialogActions from '../actions/DialogActions';
 import * as googleActions from '../actions/GoogleBookActions';
 
-import { BookNewestHeader, BookPreviewFooter, BookSearch, BookTable } from '../components/books/';
-import { CancelModalFooter, DeleteModalBody, FontAwesome, PageBody, PageHeader } from '../components/common';
-import { LABEL_AN_ERROR_HAS_OCCURRED, LABEL_BOOKS, LABEL_LIBRARY_BOOKS } from '../labels';
+import { BooksPageBody, BookPreviewFooter} from '../components/books/';
+import { CancelModalFooter, DeleteModalBody } from '../components/common';
+import { LABEL_AN_ERROR_HAS_OCCURRED } from '../labels';
 
 import { Book } from '../api/books/';
 import { ConnectedBookPreviewPage } from '../containers/BookPreviewPage';
@@ -39,7 +39,7 @@ export class BooksPage extends React.Component {
     return new Promise((resolve, reject) => {
       try {
         this.props.actions.openDialogConfirmBookCancel({
-          body: <DeleteModalBody itemName={book[Book.TITLE]} />,
+          body: <DeleteModalBody itemName={book[Book.TITLE]}/>,
           footer: <CancelModalFooter
             reject={reject}
             resolve={resolve}
@@ -47,7 +47,7 @@ export class BooksPage extends React.Component {
               this.props.actions.deleteBook(book[Book.BOOK_ID]);
               this.props.actions.closeDialog();
             }}
-            closeDialog={this.props.actions.closeDialog} />
+            closeDialog={this.props.actions.closeDialog}/>
         });
       } catch (err) {
         reject(err);
@@ -77,38 +77,28 @@ export class BooksPage extends React.Component {
 
   previewBook(book) {
     this.props.dialogActions.openDialog({
-      title: book[Book.TITLE],
-      body: <ConnectedBookPreviewPage book={book} />,
-      footer: <BookPreviewFooter closeDialog={this.props.googleActions.closeDialog} readOnly={true} />
-    })
+        title: book[Book.TITLE],
+        body: <ConnectedBookPreviewPage book={book}/>,
+        footer: <BookPreviewFooter closeDialog={this.props.googleActions.closeDialog} readOnly={true}/>
+      })
       .catch(error => {
         this.props.alertActions.alertDanger(error ? error.message : LABEL_AN_ERROR_HAS_OCCURRED);
       });
   }
 
   render() {
-    return (<div className="books page">
-      <PageHeader loading={this.props.ajaxGlobal.started}
-        spinIcon={false} label={LABEL_BOOKS} iconName="book" />
-      <PageBody>
-        <span>
-          <BookNewestHeader
-            addBook={this.createGoogleBook}
-            closeDialog={this.props.dialogActions.closeDialog}
-            openDialog={this.props.dialogActions.openDialog}
-            googleBooks={this.props.googleBooks}
-            searchInput={this.searchInput}
-            searchSubmit={this.searchSubmit}
-            newest={this.props.googleBooks.newest} />
-          <h3 className="books-legend"><FontAwesome name="database" />&nbsp;{LABEL_LIBRARY_BOOKS}</h3>
-          <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks} />
-          <BookTable
-            onPreview={this.onPreview}
-            onRemove={this.onRemove}
-            books={this.props.books} />
-        </span>
-      </PageBody>
-    </div>);
+    return (<BooksPageBody
+      books={this.props.books}
+      onRemove={this.onRemove}
+      onPreview={this.onPreview}
+      searchBooks={this.props.googleActions.searchBooks}
+      createBook={this.createBook}
+      searchSubmit={this.searchSubmit}
+      searchInput={this.searchInput}
+      googleBooks={this.props.googleBooks}
+      dialogActions={this.props.dialogActions}
+      ajaxGlobal={this.props.ajaxGlobal}
+      createGoogleBook={this.createGoogleBook}/>);
   }
 }
 

@@ -1,6 +1,6 @@
 import '../../images/profile.jpg';
 
-import { APP_NAME, LABEL_BOOKS, LABEL_SETTINGS } from '../../labels/';
+import { APP_NAME, LABEL_SETTINGS, LABEL_LIBRARY, LABEL_BOOKS } from '../../labels/';
 
 import FontAwesome from 'react-fontawesome';
 import Nav from 'react-bootstrap/lib/Nav';
@@ -14,13 +14,17 @@ export class Header extends React.Component {
   constructor(props) {
     super(props);
     this.goToSettingsFromHeader = this.goToSettings.bind(this);
-    this.goToBooksFromHeader = this.goToBooks.bind(this);
+    this.thisGoToLibrary = this.goToLibrary.bind(this);
+    this.thisGoToBooks = this.goToBooks.bind(this);
   }
   goToSettings() {
     browserHistory.push('/settings');
   }
   goToBooks() {
     browserHistory.push('/books');
+  }
+  goToLibrary(){
+    browserHistory.push('/library');
   }
   render() {
     return (<Navbar collapseOnSelect fixedTop={true} fluid={true}>
@@ -31,10 +35,9 @@ export class Header extends React.Component {
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
-        <Nav>
-          <NavItem onClick={this.goToBooksFromHeader} eventKey={1} href="#"><FontAwesome size="lg" name="book" />&nbsp;{LABEL_BOOKS}</NavItem>
-        </Nav>
         <Nav pullRight>
+          <NavItem onClick={this.thisGoToBooks}><FontAwesome size="lg" name="book" fixedWidth={true} />&nbsp;{LABEL_BOOKS}</NavItem>
+          <NavItem onClick={this.thisGoToLibrary}><FontAwesome size="lg" name="bookmark" fixedWidth={true} />&nbsp;{LABEL_LIBRARY}</NavItem>
           <NavItem onClick={this.goToSettingsFromHeader}><FontAwesome size="lg" name="gear" fixedWidth={true} />&nbsp;{LABEL_SETTINGS}</NavItem>
           <NavItem><img className="header-thumbnail" height="24" width="24" src="/profile.jpg" />&nbsp;{this.props.security.fullname}</NavItem>
         </Nav>
