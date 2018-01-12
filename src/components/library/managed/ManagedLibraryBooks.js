@@ -22,14 +22,14 @@ export class ManagedLibraryBooks extends React.Component {
   onRemoveBook(book, index) {
     const libraryBooks = [...this.state.libraryBooks];
     libraryBooks.splice(index, 1);
-    if (!libraryBooks.filter(curBook=>curBook[Book.BOOK_ID] === book[Book.BOOK_ID]).length) {
-      this.setState({libraryBooks});
-    }
+    this.setState({libraryBooks});
   }
 
   onAddBook(book) {
-    const libraryBooks = [...this.state.libraryBooks, book];
-    this.setState({libraryBooks});
+    if (!this.state.libraryBooks.filter(curBook=>curBook[Book.BOOK_ID] === book[Book.BOOK_ID]).length) {
+      const libraryBooks = [...this.state.libraryBooks, book];
+      this.setState({libraryBooks});
+    }
   }
 
   render() {

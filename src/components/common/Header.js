@@ -9,7 +9,7 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { browserHistory } from 'react-router';
-
+import {connect} from 'react-redux';
 export class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -50,3 +50,6 @@ export class Header extends React.Component {
 Header.propTypes = {
   security: PropTypes.object.isRequired
 };
+
+
+export const ConnectedHeader = connect(Header);
