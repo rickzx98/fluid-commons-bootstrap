@@ -6,6 +6,9 @@ import { LABEL_LIBRARY_BOOKS} from '../../../labels/';
 import {DatabaseBooks} from './books/DatabaseBooks';
 import {LibraryBooks} from './books/LibraryBooks';
 import {Book} from '../../../api/books/';
+
+import { bindActionCreators } from 'redux';
+
 export class ManagedLibraryBooks extends React.Component {
   constructor(prop) {
     super(prop);
@@ -35,11 +38,15 @@ export class ManagedLibraryBooks extends React.Component {
   render() {
     return (<div className="container-fluid col-lg-12">
       <LibraryBooks books={this.state.libraryBooks} onRemove={this.thisOnRemoveBook}/>
-      <DatabaseBooks onAdd={this.thisOnAddBook} books={this.props.books}/>
+      <DatabaseBooks bookActions={this.props.bookActions} onAdd={this.thisOnAddBook} books={this.props.books}/>
     </div>)
   }
 }
-
+function mapDispatchToProps(dispatch) {
+  return {
+    bookActions: bindActionCreators(bookActions, dispatch)
+  };
+}
 function mapStateToProps(state) {
   return {
     books: state.books,
@@ -47,4 +54,4 @@ function mapStateToProps(state) {
   };
 }
 
-export const ConnectedManagedLibraryBooks = connect(mapStateToProps)(ManagedLibraryBooks);
+export const ConnectedManagedLibraryBooks = connect(mapStateToProps, mapDispatchToProps)(ManagedLibraryBooks);

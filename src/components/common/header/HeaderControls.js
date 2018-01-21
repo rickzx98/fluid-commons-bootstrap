@@ -8,8 +8,6 @@ export const HeaderControls = ({ headers, router }) => {
   for (let field in newHeaders) {
     if (newHeaders.hasOwnProperty(field)) {
       const itemProperties = newHeaders[field];
-      console.log('itemProperties', itemProperties);
-      console.log('router', router.location);
       let path = router.location.pathname;
       if (path.charAt(0) !== '/') {
         path = '/' + path;
