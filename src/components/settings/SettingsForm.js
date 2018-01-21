@@ -1,4 +1,4 @@
-import { CollapseHeader, ListForm, ResponsiveButton } from '../common/';
+import { CollapseHeader, ListForm, ResponsiveButton , HiddenButton} from '../common/';
 import { LABEL_CURRENCY, LABEL_FUND, LABEL_REFRESH, LABEL_RESOURCE_TYPE, LABEL_SAVE } from '../../labels/';
 
 import FontAwesome from 'react-fontawesome';
@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { ResourceTypeTableForm } from './ResourceTypeTableForm';
 
-export const SettingsForm = ({ onSubmit, loadSettings, settings, addFund, removeFund, updateFund, addCurrency, removeCurrency, updateCurrency,
+export const SettingsForm = ({ onSubmit, settings, addFund, removeFund, updateFund, addCurrency, removeCurrency, updateCurrency,
   addResourceType, removeResourceType, updateResourceType }) => {
   const FundSettingProps = {
     formName: 'settingsForm', addValue: addFund,
@@ -29,21 +29,16 @@ export const SettingsForm = ({ onSubmit, loadSettings, settings, addFund, remove
     values: settings.resourceTypes
   };
   return (<form onSubmit={onSubmit} id="settingsForm" className="form container-fluid">
-    <div className="margin-bottom-5px btn-group btn-group-sm">
-      <ResponsiveButton onClick={loadSettings} label={LABEL_REFRESH} className="btn btn-success"
-        icon={<FontAwesome name="refresh" fixedWidth={true} size="lg" />} />
-      <ResponsiveButton type="submit" label={LABEL_SAVE} className="btn btn-primary"
-        icon={<FontAwesome name="floppy-o" fixedWidth={true} size="lg" />} />
-    </div>
+    <HiddenButton/>
     <CollapseHeader panelStyle="panel panel-default" heading={
       <h5><FontAwesome name="money" size="lg" fixedWidth={true} />&nbsp;{LABEL_FUND}</h5>}
-      body={<ListForm {...FundSettingProps} />} />
+                    body={<ListForm {...FundSettingProps} />}/>
     <CollapseHeader panelStyle="panel panel-default" heading={
       <h5><FontAwesome name="dollar" size="lg" fixedWidth={true} />&nbsp;{LABEL_CURRENCY}</h5>}
-      body={<ListForm {...CurrencySettingProps} />} />
+                    body={<ListForm {...CurrencySettingProps} />}/>
     <CollapseHeader panelStyle="panel panel-default" heading={
       <h5><FontAwesome name="file-text-o" size="lg" fixedWidth={true} />&nbsp;{LABEL_RESOURCE_TYPE}</h5>}
-      body={<ResourceTypeTableForm {...ResourceTypeSettingProps} />} />
+                    body={<ResourceTypeTableForm {...ResourceTypeSettingProps} />}/>
   </form>);
 };
 SettingsForm.propTypes = {
@@ -57,7 +52,6 @@ SettingsForm.propTypes = {
   addResourceType: PropTypes.func.isRequired,
   removeResourceType: PropTypes.func.isRequired,
   updateResourceType: PropTypes.func.isRequired,
-  loadSettings: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 };
 

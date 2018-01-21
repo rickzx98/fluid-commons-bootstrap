@@ -1,11 +1,12 @@
 import '../images/subject-header.jpg';
-
+import * as headerActions from '../actions/HeaderActions';
 import * as actions from '../actions/BookSubjectActions';
 
 import { CancelSubjectModalBody, ManagedSubjectIndex } from '../components/subjects/';
 import {
   LABEL_CONFIRM_CANCEL_SUBJECT_TITLE,
-  LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES
+  LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES,
+  LABEL_BACK, LABEL_SAVE, LABEL_UPDATE
 } from '../labels/';
 import { Subject, SubjectFields, SubjectHeadingsByType } from '../api/subjects/';
 
@@ -26,6 +27,8 @@ export class ManagedSubjectPage extends React.Component {
     this.onPageLeave = this.routerWillLeave.bind(this);
     this.modalConfirmCancel = this.confirmCancel.bind(this);
     this.onSubmit = this.onFormSubmit.bind(this);
+    this.thisIsUpdate = this.isUpdate.bind(this);
+    this.thisIsNotUpdate = this.isNotUpdate.bind(this);
   }
 
   componentWillMount() {
@@ -38,10 +41,41 @@ export class ManagedSubjectPage extends React.Component {
         resourceType: this.props.resourceType
       });
     }
+    this.setHeader();
   }
 
   componentDidMount() {
     this.props.router.setRouteLeaveHook(this.props.route, this.onPageLeave);
+  }
+
+  componentDidUpdate() {
+    this.setHeader();
+  }
+
+  setHeader() {
+    const header = {};
+    header[LABEL_BACK] = {
+      confirm: this.cancelManagedSubject
+    };
+    header[LABEL_SAVE] = {
+      onClick: this.onSubmit,
+      fontIcon: 'save',
+      isVisible: this.thisIsNotUpdate
+    };
+    header[LABEL_UPDATE] = {
+      onClick: this.onSubmit,
+      fontIcon: 'save',
+      isVisible: this.thisIsUpdate
+    };
+    this.props.headerActions.setHeaderControls(header);
+  }
+
+  isUpdate() {
+    return !!this.props.managedSubject.update;
+  }
+
+  isNotUpdate() {
+    return !this.props.managedSubject.update;
   }
 
   onChange(field, value) {
@@ -73,7 +107,7 @@ export class ManagedSubjectPage extends React.Component {
             reject={reject}
             resolve={resolve}
             confirmCancel={this.modalConfirmCancel}
-            closeDialog={this.props.actions.closeDialog} />
+            closeDialog={this.props.actions.closeDialog}/>
         });
       } else {
         this.props.actions.cancelManagedSubject();
@@ -111,7 +145,7 @@ export class ManagedSubjectPage extends React.Component {
       onChange={this.onChangeForm}
       managedSubject={this.props.managedSubject}
       subjectFields={this.props.subjectFields}
-      subjectHeadings={this.props.subjectHeadings} />);
+      subjectHeadings={this.props.subjectHeadings}/>);
   }
 }
 
@@ -151,7 +185,8 @@ function getSubjectByIndex(subjects, index, resourceType) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    headerActions: bindActionCreators(headerActions, dispatch)
   };
 }
 
@@ -161,8 +196,8 @@ export const ConnectedManagedSubjectPage = connect(
 )(ManagedSubjectPage);
 
 
-
 ManagedSubjectPage.propTypes = {
+  headerActions: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   subjects: PropTypes.array.isRequired,
   subject: PropTypes.object,

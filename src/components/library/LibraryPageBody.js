@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {LABEL_LIBRARY} from '../../labels/';
 import {LibraryTable} from './table/LibraryTable';
-import {LibraryControls} from './controls/LibraryControls';
 export const LibraryPageBody = ({ajaxGlobal, library})=> {
   return (<div className="page library">
     <PageHeader loading={ajaxGlobal.started}
@@ -11,7 +10,6 @@ export const LibraryPageBody = ({ajaxGlobal, library})=> {
                 label={LABEL_LIBRARY}/>
     <PageBody>
       <span>
-      <LibraryControls/>
       <LibraryTable library={library}/>
       </span>
     </PageBody>

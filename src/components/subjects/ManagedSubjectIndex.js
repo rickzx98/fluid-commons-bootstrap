@@ -5,20 +5,18 @@ import { LABEL_SUBJECTS } from '../../labels/';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const ManagedSubjectIndex = ({ cancelManagedSubject,
-  subjects, subjectHeadings, subjectFields, managedSubject,
+export const ManagedSubjectIndex = ({ subjects, subjectHeadings, subjectFields, managedSubject,
   onChange, onSubmit }) => {
   return (<div className="subjects page">
-    <PageHeader label={LABEL_SUBJECTS} iconName={'hashtag'} />
+    <PageHeader label={LABEL_SUBJECTS} iconName={'hashtag'}/>
     <PageBody>
       <BookSubjectForm
         onSubmit={onSubmit}
-        cancelManagedSubject={cancelManagedSubject}
         subjects={subjects}
         onChange={onChange}
         managedSubject={managedSubject}
         subjectFields={subjectFields}
-        subjectHeadings={subjectHeadings} />
+        subjectHeadings={subjectHeadings}/>
     </PageBody>
   </div>);
 };
@@ -29,6 +27,5 @@ ManagedSubjectIndex.propTypes = {
   subjectHeadings: PropTypes.array.isRequired,
   subjectFields: PropTypes.object.isRequired,
   subjects: PropTypes.array.isRequired,
-  cancelManagedSubject: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 };

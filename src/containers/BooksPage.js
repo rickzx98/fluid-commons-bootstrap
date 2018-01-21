@@ -2,13 +2,14 @@ import * as actions from '../actions/BookActions';
 import * as alertActions from '../actions/NotificationActions';
 import * as dialogActions from '../actions/DialogActions';
 import * as googleActions from '../actions/GoogleBookActions';
+import * as headerActions from '../actions/HeaderActions';
 
-import { BooksPageBody, BookPreviewFooter} from '../components/books/';
+import { BookPreviewFooter, BooksPageBody } from '../components/books/';
 import { CancelModalFooter, DeleteModalBody } from '../components/common';
-import { LABEL_AN_ERROR_HAS_OCCURRED } from '../labels';
 
 import { Book } from '../api/books/';
 import { ConnectedBookPreviewPage } from '../containers/BookPreviewPage';
+import { LABEL_AN_ERROR_HAS_OCCURRED } from '../labels';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -29,6 +30,12 @@ export class BooksPage extends React.Component {
   componentWillMount() {
     this.props.actions.loadBooks();
     this.props.googleActions.getNewestBookCarousel();
+    this.props.headerActions.setHeaderControls({
+      'Add book': {
+        fontIcon: 'plus',
+        onClick: this.createBook
+      }
+    });
   }
 
   createNewBook() {
@@ -39,7 +46,7 @@ export class BooksPage extends React.Component {
     return new Promise((resolve, reject) => {
       try {
         this.props.actions.openDialogConfirmBookCancel({
-          body: <DeleteModalBody itemName={book[Book.TITLE]}/>,
+          body: <DeleteModalBody itemName={book[Book.TITLE]} />,
           footer: <CancelModalFooter
             reject={reject}
             resolve={resolve}
@@ -47,7 +54,7 @@ export class BooksPage extends React.Component {
               this.props.actions.deleteBook(book[Book.BOOK_ID]);
               this.props.actions.closeDialog();
             }}
-            closeDialog={this.props.actions.closeDialog}/>
+            closeDialog={this.props.actions.closeDialog} />
         });
       } catch (err) {
         reject(err);
@@ -77,10 +84,10 @@ export class BooksPage extends React.Component {
 
   previewBook(book) {
     this.props.dialogActions.openDialog({
-        title: book[Book.TITLE],
-        body: <ConnectedBookPreviewPage book={book}/>,
-        footer: <BookPreviewFooter closeDialog={this.props.googleActions.closeDialog} readOnly={true}/>
-      })
+      title: book[Book.TITLE],
+      body: <ConnectedBookPreviewPage book={book} />,
+      footer: <BookPreviewFooter closeDialog={this.props.googleActions.closeDialog} readOnly={true} />
+    })
       .catch(error => {
         this.props.alertActions.alertDanger(error ? error.message : LABEL_AN_ERROR_HAS_OCCURRED);
       });
@@ -98,7 +105,7 @@ export class BooksPage extends React.Component {
       googleBooks={this.props.googleBooks}
       dialogActions={this.props.dialogActions}
       ajaxGlobal={this.props.ajaxGlobal}
-      createGoogleBook={this.createGoogleBook}/>);
+      createGoogleBook={this.createGoogleBook} />);
   }
 }
 
@@ -113,7 +120,8 @@ BooksPage.propTypes = {
   ajaxGlobal: PropTypes.object.isRequired,
   googleBooks: PropTypes.object.isRequired,
   dialogActions: PropTypes.object.isRequired,
-  alertActions: PropTypes.object.isRequired
+  alertActions: PropTypes.object.isRequired,
+  headerActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -129,7 +137,8 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(actions, dispatch),
     googleActions: bindActionCreators(googleActions, dispatch),
     dialogActions: bindActionCreators(dialogActions, dispatch),
-    alertActions: bindActionCreators(alertActions, dispatch)
+    alertActions: bindActionCreators(alertActions, dispatch),
+    headerActions: bindActionCreators(headerActions, dispatch)
   };
 }
 

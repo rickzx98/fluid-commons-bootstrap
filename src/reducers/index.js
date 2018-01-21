@@ -14,6 +14,7 @@ import settings from './SettingsReducer';
 import subjects from './SubjectReducer';
 import library from './LibraryReducer';
 import managedLibrary from './ManagedLibraryReducer';
+import headers from './HeadersReducer';
 const rootReducer = combineReducers({
   books,
   subjects,
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
   login,
   security,
   library,
-  managedLibrary
+  managedLibrary,
+  headers
 });
 
 export default rootReducer;

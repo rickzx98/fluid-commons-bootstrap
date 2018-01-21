@@ -2,7 +2,7 @@ import {HEADER_CALL_CONTROL_ACTION, HEADER_SET_CONTROLS} from './';
 
 export function setHeaderControls(headerControls) {
   return {
-    type: HEADER_CALL_CONTROL_ACTION,
+    type: HEADER_SET_CONTROLS,
     headerControls
   };
 }

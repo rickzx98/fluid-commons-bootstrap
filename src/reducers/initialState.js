@@ -1,4 +1,5 @@
 export default {
+  headers: {},
   books: [],
   library: [],
   notifications: [],

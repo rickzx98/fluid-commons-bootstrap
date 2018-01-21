@@ -1,11 +1,11 @@
 import '../images/search-header.jpg';
-
+import * as headerActions from '../actions/HeaderActions';
 import * as actions from '../actions/GoogleBookActions';
 import * as alertActions from '../actions/NotificationActions';
 
 import { IFrame, PageBody, PageHeader, ResponsiveButton } from '../components/common/';
 
-import { LABEL_ONLINE_SEARCH } from '../labels/';
+import { LABEL_ONLINE_SEARCH , LABEL_BACK} from '../labels/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { SearchList } from '../components/search/';
@@ -22,20 +22,38 @@ export class GoogleBooksPage extends React.Component {
     this.createBook = this.createFormBook.bind(this);
     this.preview = this.previewBook.bind(this);
   }
+  componentWillMount(){
+    this.setHeader();
+  }
+  comonentDidUpdate(){
+    this.setHeader();
+  }
+  setHeader() {
+    const header = {};
+    header[LABEL_BACK] = {
+      confirm: ()=> new Promise(resolve=> {
+        resolve();
+      })
+    };
+    this.props.headerActions.setHeaderControls(header);
+  }
+
   closePreview() {
     this.props.actions.closeDialog();
   }
+
   previewBook(book) {
     this.props.actions.previewBook({
       title: book.title,
       body: (<IFrame url={`${book.previewLink}&key=${process.env.GOOGLE_BOOKS_API_KEY}`}
-        display="initial"
-        position="relative"
-        allowFullScreen />),
+                     display="initial"
+                     position="relative"
+                     allowFullScreen/>),
       footer: (<div className="btn btn-group btn-group-xs">
-        <ResponsiveButton onClick={this.closePreview.bind(this)} label="close" className="btn btn-primary" /></div>)
+        <ResponsiveButton onClick={this.closePreview.bind(this)} label="close" className="btn btn-primary"/></div>)
     });
   }
+
   onFormFilterChange(event) {
     this.props.actions.setGoogleFilterValue(event.target.name, event.target.value);
   }
@@ -59,7 +77,7 @@ export class GoogleBooksPage extends React.Component {
 
   render() {
     return (<div className="google-books page">
-      <PageHeader loading={this.props.ajaxGlobal.started} label={LABEL_ONLINE_SEARCH} iconName="globe" />
+      <PageHeader loading={this.props.ajaxGlobal.started} label={LABEL_ONLINE_SEARCH} iconName="globe"/>
       <PageBody>
         <SearchList
           ajaxGlobal={this.props.ajaxGlobal}
@@ -67,7 +85,7 @@ export class GoogleBooksPage extends React.Component {
           createBook={this.createBook}
           googleBooks={this.props.googleBooks}
           onSearchFilterSubmit={this.onSearchFilterSubmit}
-          onSearchFilterChange={this.onSearchFilterChange} />
+          onSearchFilterChange={this.onSearchFilterChange}/>
       </PageBody>
     </div>);
   }
@@ -77,7 +95,8 @@ GoogleBooksPage.propTypes = {
   actions: PropTypes.object.isRequired,
   googleBooks: PropTypes.object.isRequired,
   ajaxGlobal: PropTypes.object.isRequired,
-  alertActions: PropTypes.object.isRequired
+  alertActions: PropTypes.object.isRequired,
+  headerActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -90,7 +109,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(actions, dispatch),
-    alertActions: bindActionCreators(alertActions, dispatch)
+    alertActions: bindActionCreators(alertActions, dispatch),
+    headerActions: bindActionCreators(headerActions, dispatch)
   };
 }
 

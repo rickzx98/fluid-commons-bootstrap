@@ -1,7 +1,10 @@
 import * as actions from '../actions/BookActions';
+import * as headerActions from '../actions/HeaderActions';
 
 import { CancelModalBody, CancelModalFooter, PageBody, PageHeader } from '../components/common/';
-import { LABEL_BOOKS, LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES } from '../labels/';
+import { LABEL_BOOKS, LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES,
+  LABEL_ADD_SUBJECT, LABEL_BACK, LABEL_NEW_BOOK,
+  LABEL_PRINT, LABEL_SAVE, LABEL_SEARCH} from '../labels/';
 
 import { Book } from '../api/books/';
 import { BookItemForm } from '../components/books/';
@@ -28,22 +31,63 @@ export class ManageBookPage extends React.Component {
     this.addNew = this.onNewBook.bind(this);
     this.onSearch = this.onSearchBook.bind(this);
     this.printSummary = this.print.bind(this);
+    this.thisIsTabBookSummary = this.isTabBookSummary.bind(this);
+    this.thisIsNotUpdate = this.isNotUpdate.bind(this);
+    this.thisIsUpdate = this.isUpdate.bind(this);
+    this.thisIsTabBookSubjects = this.isTabBookSubjects.bind(this);
   }
 
   componentWillMount() {
     if (!this.props.managedBook.active && this.props.routeParams.id) {
       this.props.actions.getBookById(this.props.routeParams.id);
     }
-  }
-
-  componentDidMount() {
-    this.props.router.setRouteLeaveHook(this.props.route, this.onPageLeave);
+    this.setHeader();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.route.path === 'books/new' && nextProps.managedBook._id) {
       browserHistory.push('/books/' + nextProps.managedBook._id);
     }
+  }
+  componentDidUpdate() {
+    this.setHeader();
+  }
+
+  componentDidMount() {
+    this.props.router.setRouteLeaveHook(this.props.route, this.onPageLeave);
+  }
+
+
+  setHeader() {
+    const header = {};
+    header[LABEL_BACK] = {
+      confirm: this.cancelManagedBook
+    };
+    header[LABEL_SAVE] = {
+      onClick: this.saveManagedBookForm,
+      fontIcon: 'floppy-o'
+    };
+    header[LABEL_ADD_SUBJECT] = {
+      fontIcon: 'plus-circle',
+      onClick: this.addSubject,
+      isVisible: this.thisIsTabBookSubjects
+    };
+    header[LABEL_SEARCH] = {
+      onClick: this.onSearch,
+      fontIcon: 'search',
+      isVisible: this.thisIsNotUpdate
+    };
+    header[LABEL_NEW_BOOK] = {
+      onClick: this.addNew,
+      fontIcon: 'book',
+      isVisible: this.thisIsUpdate
+    };
+    header[LABEL_PRINT] = {
+      isVisible: this.thisIsTabBookSummary,
+      onClick: this.printSummary,
+      fontIcon: 'print'
+    };
+    this.props.headerActions.setHeaderControls(header);
   }
 
   onTabChanged(activeKey) {
@@ -76,7 +120,7 @@ export class ManageBookPage extends React.Component {
             reject={reject}
             resolve={resolve}
             confirmCancel={this.modalConfirmCancel}
-            closeDialog={this.props.actions.closeDialog} />
+            closeDialog={this.props.actions.closeDialog}/>
         });
       } else {
         this.props.actions.cancelManagedBook();
@@ -122,15 +166,32 @@ export class ManageBookPage extends React.Component {
     browserHistory.push('/books/new/search');
   }
 
+  isTabBookSummary() {
+    return this.props.managedBook.tabEventKey === 'bookSummary';
+  }
+
+  isUpdate() {
+    return !!this.props.managedBook.update;
+  }
+
+  isNotUpdate() {
+    return !this.props.managedBook.update;
+  }
+
+  isTabBookSubjects() {
+    return this.props.managedBook.tabEventKey === 'bookSubjects';
+  }
+
   print() {
     printA4('books-summary');
   }
+
   render() {
     return (<div className="books page">
       <PageHeader loading={this.props.ajaxGlobal.started}
-        spinIcon={false}
-        label={LABEL_BOOKS}
-        iconName="book" />
+                  spinIcon={false}
+                  label={LABEL_BOOKS}
+                  iconName="book"/>
       <PageBody>
         <BookItemForm
           onSearch={this.onSearch}
@@ -143,7 +204,7 @@ export class ManageBookPage extends React.Component {
           onChange={this.onChangeBookEditForForm}
           tabEventKey={this.props.managedBook.tabEventKey}
           settings={this.props.settings}
-          printSummary={this.printSummary} />
+          printSummary={this.printSummary}/>
       </PageBody>
     </div>);
   }
@@ -156,7 +217,8 @@ ManageBookPage.propTypes = {
   routeParams: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
-  ajaxGlobal: PropTypes.object.isRequired
+  ajaxGlobal: PropTypes.object.isRequired,
+  headerActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -169,7 +231,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    headerActions: bindActionCreators(headerActions, dispatch)
   };
 }
 
