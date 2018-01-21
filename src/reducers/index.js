@@ -12,7 +12,9 @@ import { routerReducer } from 'react-router-redux';
 import security from './SecurityReducer';
 import settings from './SettingsReducer';
 import subjects from './SubjectReducer';
-
+import library from './LibraryReducer';
+import managedLibrary from './ManagedLibraryReducer';
+import headers from './HeadersReducer';
 const rootReducer = combineReducers({
   books,
   subjects,
@@ -26,7 +28,10 @@ const rootReducer = combineReducers({
   notifications,
   bookPreview,
   login,
-  security
+  security,
+  library,
+  managedLibrary,
+  headers
 });
 
 export default rootReducer;

@@ -1,6 +1,15 @@
 export default {
+  headers: {},
   books: [],
+  library: [],
   notifications: [],
+  managedLibrary: {
+    update: false,
+    touched: false,
+    active: false,
+    invalid: false,
+    books: []
+  },
   book: {
     searched: false,
     update: false,

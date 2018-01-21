@@ -2,13 +2,14 @@ import * as actions from '../actions/BookActions';
 import * as alertActions from '../actions/NotificationActions';
 import * as dialogActions from '../actions/DialogActions';
 import * as googleActions from '../actions/GoogleBookActions';
+import * as headerActions from '../actions/HeaderActions';
 
-import { BookNewestHeader, BookPreviewFooter, BookSearch, BookTable } from '../components/books/';
-import { CancelModalFooter, DeleteModalBody, FontAwesome, PageBody, PageHeader } from '../components/common';
-import { LABEL_AN_ERROR_HAS_OCCURRED, LABEL_BOOKS, LABEL_LIBRARY_BOOKS } from '../labels';
+import { BookPreviewFooter, BooksPageBody } from '../components/books/';
+import { CancelModalFooter, DeleteModalBody } from '../components/common';
 
 import { Book } from '../api/books/';
 import { ConnectedBookPreviewPage } from '../containers/BookPreviewPage';
+import { LABEL_AN_ERROR_HAS_OCCURRED } from '../labels';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
@@ -29,6 +30,12 @@ export class BooksPage extends React.Component {
   componentWillMount() {
     this.props.actions.loadBooks();
     this.props.googleActions.getNewestBookCarousel();
+    this.props.headerActions.setHeaderControls({
+      'Add book': {
+        fontIcon: 'plus',
+        onClick: this.createBook
+      }
+    });
   }
 
   createNewBook() {
@@ -87,28 +94,18 @@ export class BooksPage extends React.Component {
   }
 
   render() {
-    return (<div className="books page">
-      <PageHeader loading={this.props.ajaxGlobal.started}
-        spinIcon={false} label={LABEL_BOOKS} iconName="book" />
-      <PageBody>
-        <span>
-          <BookNewestHeader
-            addBook={this.createGoogleBook}
-            closeDialog={this.props.dialogActions.closeDialog}
-            openDialog={this.props.dialogActions.openDialog}
-            googleBooks={this.props.googleBooks}
-            searchInput={this.searchInput}
-            searchSubmit={this.searchSubmit}
-            newest={this.props.googleBooks.newest} />
-          <h3 className="books-legend"><FontAwesome name="database" />&nbsp;{LABEL_LIBRARY_BOOKS}</h3>
-          <BookSearch createBook={this.createBook} searchBooks={this.props.actions.searchBooks} />
-          <BookTable
-            onPreview={this.onPreview}
-            onRemove={this.onRemove}
-            books={this.props.books} />
-        </span>
-      </PageBody>
-    </div>);
+    return (<BooksPageBody
+      books={this.props.books}
+      onRemove={this.onRemove}
+      onPreview={this.onPreview}
+      searchBooks={this.props.googleActions.searchBooks}
+      createBook={this.createBook}
+      searchSubmit={this.searchSubmit}
+      searchInput={this.searchInput}
+      googleBooks={this.props.googleBooks}
+      dialogActions={this.props.dialogActions}
+      ajaxGlobal={this.props.ajaxGlobal}
+      createGoogleBook={this.createGoogleBook} />);
   }
 }
 
@@ -123,7 +120,8 @@ BooksPage.propTypes = {
   ajaxGlobal: PropTypes.object.isRequired,
   googleBooks: PropTypes.object.isRequired,
   dialogActions: PropTypes.object.isRequired,
-  alertActions: PropTypes.object.isRequired
+  alertActions: PropTypes.object.isRequired,
+  headerActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -139,7 +137,8 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators(actions, dispatch),
     googleActions: bindActionCreators(googleActions, dispatch),
     dialogActions: bindActionCreators(dialogActions, dispatch),
-    alertActions: bindActionCreators(alertActions, dispatch)
+    alertActions: bindActionCreators(alertActions, dispatch),
+    headerActions: bindActionCreators(headerActions, dispatch)
   };
 }
 

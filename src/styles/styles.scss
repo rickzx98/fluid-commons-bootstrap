@@ -20,13 +20,14 @@ $screen-sm-min: 768px;
 @import '../components/settings/settings.scss';
 @import '../components/search/search.scss';
 @import '../components/login/login.scss';
+@import '../components/library/library.scss';
 @import './paper.scss';
 
 /* Styles */
 
 body {
     background-color: antiquewhite !important;
-    
+
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.4em;
     color: #4d4d4d; //min-width: 70%;

@@ -6,3 +6,4 @@ export { BookSummary } from './edit-page/BookSummary';
 export { BookNewestHeader } from './BookNewestHeader';
 export { BookPreviewFooter } from './preview/BookPreviewFooter';
 export { BookPreviewBody } from './preview/BookPreviewBody';
+export { BooksPageBody } from './BookPageBody';

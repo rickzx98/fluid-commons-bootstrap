@@ -1,10 +1,10 @@
 import '../images/settings-header.jpg';
-
+import * as headerActions from '../actions/HeaderActions';
 import * as actions from '../actions/SettingsActions';
 
 import { PageBody, PageHeader } from '../components/common/';
 
-import { LABEL_SETTINGS } from '../labels/';
+import { LABEL_SETTINGS, LABEL_SAVE, LABEL_REFRESH } from '../labels/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { SettingsForm } from '../components/settings/';
@@ -16,17 +16,38 @@ export class SettingsPage extends React.Component {
     super(props);
     this.onSubmit = this.onFormSubmit.bind(this);
   }
+
   componentWillMount() {
     this.props.actions.loadSettings();
+    this.setHeader();
   }
+
+  componentDidUpdate() {
+    this.setHeader();
+  }
+
+  setHeader() {
+    const header = {};
+    header[LABEL_SAVE] = {
+      fontIcon: 'floppy-o',
+      onClick: this.onSubmit
+    };
+    header[LABEL_REFRESH] = {
+      fontIcon: 'refresh',
+      onClick: this.props.actions.loadSettings
+    };
+    this.props.headerActions.setHeaderControls(header);
+  }
+
   onFormSubmit(event) {
     event.preventDefault();
     this.props.actions.saveSettings(process.env.SCHOOL_ID, this.props.settings);
   }
+
   render() {
     return (<div className="settings page">
       <PageHeader loading={this.props.ajaxGlobal.started}
-        iconName="gear" label={LABEL_SETTINGS} />
+                  iconName="gear" label={LABEL_SETTINGS}/>
       <PageBody>
         <SettingsForm
           onSubmit={this.onSubmit}
@@ -39,8 +60,7 @@ export class SettingsPage extends React.Component {
           addResourceType={this.props.actions.addResourceType}
           removeResourceType={this.props.actions.removeResourceType}
           updateResourceType={this.props.actions.updateResourceType}
-          loadSettings={this.props.actions.loadSettings}
-          settings={this.props.settings} />
+          settings={this.props.settings}/>
       </PageBody>
     </div>);
   }
@@ -49,7 +69,8 @@ export class SettingsPage extends React.Component {
 SettingsPage.propTypes = {
   actions: PropTypes.object.isRequired,
   settings: PropTypes.object.isRequired,
-  ajaxGlobal: PropTypes.object.isRequired
+  ajaxGlobal: PropTypes.object.isRequired,
+  headerActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -61,7 +82,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    headerActions: bindActionCreators(headerActions, dispatch)
   };
 }
 
