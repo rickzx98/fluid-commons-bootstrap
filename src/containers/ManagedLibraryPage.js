@@ -1,11 +1,16 @@
+import '../images/library-header.jpg';
+
+import * as actions from '../actions/LibraryActions';
+import * as headerActions from '../actions/HeaderActions';
+
+import { LABEL_SAVE } from '../labels/';
+import { ManagedLibraryPageBody } from '../components/library/';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import * as actions from '../actions/LibraryActions';
-import '../images/library-header.jpg';
-import {ManagedLibraryPageBody} from '../components/library/';
+
 export class ManagedLibraryPage extends React.Component {
   constructor(props) {
     super(props);
@@ -15,13 +20,28 @@ export class ManagedLibraryPage extends React.Component {
 
   componentWillMount() {
     this.state = {};
+    this.setHeader();
   }
-
+  componentDidUpdate() {
+    this.setHeader();
+  }
+  setHeader() {
+    const header = {};
+    header[LABEL_SAVE] = {
+      fontIcon: 'floppy-o',
+      onClick: this.thisOnFormSubmit
+    };
+    this.props.headerActions.setHeaderControls(header);
+  }
   onFormChange(event) {
     this.props.actions.setManagedLibraryFieldValue(event.target.name, event.target.value);
   }
-  onFormSubmit(event){
 
+  onFormSubmit() {
+    this.props.actions.createLibrary(this.props.managedLibrary)
+      .then(() => {
+        browserHistory.push('/library');
+      });
   }
 
   render() {
@@ -31,7 +51,7 @@ export class ManagedLibraryPage extends React.Component {
       onFormChange: this.thisOnFormChange,
       onFormSubmit: this.thisOnFormSubmit
     };
-    return <ManagedLibraryPageBody {...managedLibraryPageBodyProps}/>;
+    return <ManagedLibraryPageBody {...managedLibraryPageBodyProps} />;
   }
 }
 
@@ -44,7 +64,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
+    headerActions: bindActionCreators(headerActions, dispatch)
   };
 }
 
@@ -57,5 +78,6 @@ ManagedLibraryPage.defaultProps = {
 ManagedLibraryPage.propTypes = {
   actions: PropTypes.object.isRequired,
   managedLibrary: PropTypes.object.isRequired,
-  ajax: PropTypes.object.isRequired
+  ajax: PropTypes.object.isRequired,
+  headerActions: PropTypes.object.isRequired
 };

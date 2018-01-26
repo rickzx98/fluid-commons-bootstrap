@@ -4,5 +4,6 @@
 export const Library = {
   LIBRARY_ID: '_id',
   NAME: 'name',
-  DEPARTMENT: 'department'
+  DEPARTMENT: 'department',
+  BOOKS: 'books'
 };

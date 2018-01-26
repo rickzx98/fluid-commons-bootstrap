@@ -2,7 +2,8 @@ import {
   delay,
   generateUID
 } from '../../utils/';
-import {Library} from './Library';
+
+import { Library } from './Library';
 let LIBRARY_DATA = [
   createMockData('Assumption Library', 'College', generateUID()),
   createMockData('Assumption Library', 'Senior High', generateUID()),
@@ -11,8 +12,8 @@ let LIBRARY_DATA = [
 export class Api {
 
   static getLibraries() {
-    return new Promise((resolve)=> {
-      setTimeout(()=> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
         resolve(LIBRARY_DATA);
       }, delay);
     });
@@ -21,9 +22,9 @@ export class Api {
   static createLibrary(libary) {
     return new Promise((resolve, reject) => {
       const DATA = [...LIBRARY_DATA];
-      setTimeout(()=> {
+      setTimeout(() => {
         try {
-          const newLib = createMockData(libary[Library.NAME], libary[Library.DEPARTMENT], generateUID());
+          const newLib = createMockData(libary[Library.NAME], libary[Library.DEPARTMENT], generateUID(), libary[Library.BOOKS]);
           DATA.push(newLib);
           LIBRARY_DATA = DATA;
           resolve(newLib);
@@ -36,10 +37,11 @@ export class Api {
 }
 
 
-function createMockData(name, department, id) {
+function createMockData(name, department, id, books) {
   const newLib = {};
   newLib[Library.LIBRARY_ID] = id;
   newLib[Library.NAME] = name;
   newLib[Library.DEPARTMENT] = department;
+  newLib[Library.BOOKS] = books;
   return Object.create(newLib);
 }

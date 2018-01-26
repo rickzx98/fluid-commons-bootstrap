@@ -1,5 +1,5 @@
-import { CollapseHeader, ListForm, ResponsiveButton , HiddenButton} from '../common/';
-import { LABEL_CURRENCY, LABEL_FUND, LABEL_REFRESH, LABEL_RESOURCE_TYPE, LABEL_SAVE } from '../../labels/';
+import { CollapseHeader, HiddenButton, ListForm } from '../common/';
+import { LABEL_CURRENCY, LABEL_FUND, LABEL_RESOURCE_TYPE } from '../../labels/';
 
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';

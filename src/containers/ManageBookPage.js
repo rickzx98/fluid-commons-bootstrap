@@ -2,9 +2,16 @@ import * as actions from '../actions/BookActions';
 import * as headerActions from '../actions/HeaderActions';
 
 import { CancelModalBody, CancelModalFooter, PageBody, PageHeader } from '../components/common/';
-import { LABEL_BOOKS, LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES,
-  LABEL_ADD_SUBJECT, LABEL_BACK, LABEL_NEW_BOOK,
-  LABEL_PRINT, LABEL_SAVE, LABEL_SEARCH} from '../labels/';
+import {
+  LABEL_ADD_SUBJECT,
+  LABEL_BACK,
+  LABEL_BOOKS,
+  LABEL_CONFIRM_PAGE_LEAVE_UNSAVED_CHANGES,
+  LABEL_NEW_BOOK,
+  LABEL_PRINT,
+  LABEL_SAVE,
+  LABEL_SEARCH
+} from '../labels/';
 
 import { Book } from '../api/books/';
 import { BookItemForm } from '../components/books/';
@@ -44,6 +51,10 @@ export class ManageBookPage extends React.Component {
     this.setHeader();
   }
 
+  componentDidMount() {
+    this.props.router.setRouteLeaveHook(this.props.route, this.onPageLeave);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.route.path === 'books/new' && nextProps.managedBook._id) {
       browserHistory.push('/books/' + nextProps.managedBook._id);
@@ -51,10 +62,6 @@ export class ManageBookPage extends React.Component {
   }
   componentDidUpdate() {
     this.setHeader();
-  }
-
-  componentDidMount() {
-    this.props.router.setRouteLeaveHook(this.props.route, this.onPageLeave);
   }
 
 
@@ -120,7 +127,7 @@ export class ManageBookPage extends React.Component {
             reject={reject}
             resolve={resolve}
             confirmCancel={this.modalConfirmCancel}
-            closeDialog={this.props.actions.closeDialog}/>
+            closeDialog={this.props.actions.closeDialog} />
         });
       } else {
         this.props.actions.cancelManagedBook();
@@ -189,9 +196,9 @@ export class ManageBookPage extends React.Component {
   render() {
     return (<div className="books page">
       <PageHeader loading={this.props.ajaxGlobal.started}
-                  spinIcon={false}
-                  label={LABEL_BOOKS}
-                  iconName="book"/>
+        spinIcon={false}
+        label={LABEL_BOOKS}
+        iconName="book" />
       <PageBody>
         <BookItemForm
           onSearch={this.onSearch}
@@ -204,7 +211,7 @@ export class ManageBookPage extends React.Component {
           onChange={this.onChangeBookEditForForm}
           tabEventKey={this.props.managedBook.tabEventKey}
           settings={this.props.settings}
-          printSummary={this.printSummary}/>
+          printSummary={this.printSummary} />
       </PageBody>
     </div>);
   }
