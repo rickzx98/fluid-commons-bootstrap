@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export const LibraryTable = ({ library, removeLibrary }) => {
-  return (<table className="table table-hover table-condensed table-striped">
+  return (<table className="table table-hover table-condensed table-striped common-table">
     <LibraryTableHeader />
     <LibraryTableRow removeLibrary={removeLibrary} library={library} />
   </table>);

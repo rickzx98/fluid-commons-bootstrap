@@ -1,8 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import {PageBody, PageHeader} from '../../common/';
+
 import {LABEL_LIBRARY} from '../../../labels/';
 import {ManagedLibraryForm} from './ManagedLibraryForm';
+import PropTypes from 'prop-types';
+import React from 'react';
+
 export const ManagedLibraryPageBody = ({ajaxGlobal, managedLibrary, onFormChange, onFormSubmit})=> {
   const managedLibraryFormProps = {managedLibrary, onChange: onFormChange, onSubmit: onFormSubmit};
   return (<div className="page library">
@@ -12,7 +14,7 @@ export const ManagedLibraryPageBody = ({ajaxGlobal, managedLibrary, onFormChange
     <PageBody>
       <ManagedLibraryForm {...managedLibraryFormProps}/>
     </PageBody>
-  </div>)
+  </div>);
 };
 
 ManagedLibraryPageBody.propTypes = {

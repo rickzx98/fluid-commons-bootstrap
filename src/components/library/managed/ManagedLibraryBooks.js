@@ -3,7 +3,6 @@ import * as libraryActions from '../../../actions/LibraryActions';
 
 import { Book } from '../../../api/books/';
 import { DatabaseBooks } from './books/DatabaseBooks';
-import { LABEL_LIBRARY_BOOKS } from '../../../labels/';
 import { Library } from '../../../api/library/';
 import { LibraryBooks } from './books/LibraryBooks';
 import PropTypes from 'prop-types';
@@ -21,7 +20,9 @@ export class ManagedLibraryBooks extends React.Component {
 
   componentWillMount() {
     bookActions.loadBooks();
-    this.state.libraryBooks = [];
+    this.setState({
+      libraryBooks: []
+    });
   }
 
   onRemoveBook(book, index) {
@@ -43,7 +44,7 @@ export class ManagedLibraryBooks extends React.Component {
     return (<div className="container-fluid col-lg-12">
       <LibraryBooks books={this.state.libraryBooks} onRemove={this.thisOnRemoveBook} />
       <DatabaseBooks bookActions={this.props.bookActions} onAdd={this.thisOnAddBook} books={this.props.books} />
-    </div>)
+    </div>);
   }
 }
 function mapDispatchToProps(dispatch) {
@@ -60,6 +61,8 @@ function mapStateToProps(state) {
 }
 ManagedLibraryBooks.propTypes = {
   books: PropTypes.array,
-  ajax: PropTypes.object.isRequired
+  ajax: PropTypes.object.isRequired,
+  libraryActions: PropTypes.object.isRequired,
+  bookActions: PropTypes.object.isRequired
 };
 export const ConnectedManagedLibraryBooks = connect(mapStateToProps, mapDispatchToProps)(ManagedLibraryBooks);

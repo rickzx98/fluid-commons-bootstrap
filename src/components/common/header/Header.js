@@ -71,7 +71,7 @@ Header.propTypes = {
 function mapStateToProps(state) {
   return {
     headers: state.headers
-  }
+  };
 }
 
 

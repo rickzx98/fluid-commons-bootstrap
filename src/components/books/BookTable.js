@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export const BookTable = ({ books, onRemove, onPreview }) => {
-  return (<table className="table table-hover">
+  return (<table className="table table-hover common-table">
     <thead>
       <tr>
         <th title="preview" />

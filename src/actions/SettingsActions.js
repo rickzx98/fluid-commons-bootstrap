@@ -29,7 +29,7 @@ export function saveSettings(schoolId, settings) {
     return settingsApi().saveSettings(schoolId, settings).then(newSettings => {
       dispatch(loadSettingsSuccess(newSettings));
       dispatch(ajaxActions.ajaxCallSuccess());
-      dispatch(notificationActions.alertSuccess('Settings have been saved.'))
+      dispatch(notificationActions.alertSuccess('Settings have been saved.'));
     }).catch(error => {
       dispatch(ajaxActions.ajaxCallError(error));
     });

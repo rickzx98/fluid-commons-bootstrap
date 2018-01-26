@@ -1,10 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {LABEL_AUTHOR, LABEL_EDITION, LABEL_PUBLISHER,
-  LABEL_TITLE, LABEL_BOOKS, LABEL_SUB_TITLE,
-  LABEL_SEARCH} from '../../../../labels/';
+import {FontAwesome, ResponsiveButton} from '../../../common/';
+import {
+  LABEL_AUTHOR,
+  LABEL_BOOKS,
+  LABEL_EDITION,
+  LABEL_PUBLISHER,
+  LABEL_SEARCH,
+  LABEL_SUB_TITLE,
+  LABEL_TITLE
+} from '../../../../labels/';
+
 import {Book} from '../../../../api/books/';
-import {ResponsiveButton, FontAwesome} from '../../../common/';
+import PropTypes from 'prop-types';
+import React from 'react';
 export const DatabaseBooks = ({books, onAdd, bookActions})=> {
   return (
     <div className="col-lg-6">
@@ -17,7 +24,7 @@ export const DatabaseBooks = ({books, onAdd, bookActions})=> {
         </div>
         <table className="table table-hover table-condensed table-striped">
           <thead>
-          <th></th>
+          <th/>
           <th>{LABEL_TITLE}</th>
           <th>{LABEL_SUB_TITLE}</th>
           <th>{LABEL_EDITION}</th>

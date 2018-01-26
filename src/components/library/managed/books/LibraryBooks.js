@@ -19,7 +19,7 @@ export const LibraryBooks = ({ books, onRemove }) => {
         <legend>{LABEL_LIBRARY_BOOKS}</legend>
         <table className="table table-hover table-condensed table-striped">
           <thead>
-            <th></th>
+            <th />
             <th>{LABEL_TITLE}</th>
             <th>{LABEL_SUB_TITLE}</th>
             <th>{LABEL_EDITION}</th>

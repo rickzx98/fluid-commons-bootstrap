@@ -60,5 +60,5 @@ export function removeLibrary(libraryId) {
         dispatchEvent(notificationActions.alertDanger(err.message));
         dispatch(ajaxActions.ajaxCallError(err));
       });
-  }
+  };
 }
