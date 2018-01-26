@@ -22,9 +22,11 @@ export class ManagedLibraryPage extends React.Component {
     this.state = {};
     this.setHeader();
   }
+
   componentDidUpdate() {
     this.setHeader();
   }
+  
   setHeader() {
     const header = {};
     header[LABEL_SAVE] = {
@@ -38,10 +40,12 @@ export class ManagedLibraryPage extends React.Component {
   }
 
   onFormSubmit() {
-    this.props.actions.createLibrary(this.props.managedLibrary)
-      .then(() => {
-        browserHistory.push('/library');
-      });
+    if (!this.props.managedLibrary.update) {
+      this.props.actions.createLibrary(this.props.managedLibrary)
+        .then(() => {
+          browserHistory.push('/library');
+        });
+    }
   }
 
   render() {

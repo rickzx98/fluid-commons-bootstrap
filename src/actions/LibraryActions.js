@@ -36,13 +36,29 @@ export function loadLibrarySuccess(libraries) {
 export function createLibrary(library) {
   return dispatch => {
     dispatch(ajaxActions.beginAjaxCall());
-    new LibraryApi().createLibrary(library)
+    return new LibraryApi().createLibrary(library)
       .then(createdLib => {
         dispatch(notificationActions.alertSuccess(`${createdLib[Library.NAME]} is created.`));
         dispatch(ajaxActions.ajaxCallSuccess());
       })
       .catch(err => {
+        dispatchEvent(notificationActions.alertDanger(err.message));
         dispatch(ajaxActions.ajaxCallError(err));
       });
   };
+}
+
+export function removeLibrary(libraryId) {
+  return dispatch => {
+    dispatch(ajaxActions.beginAjaxCall());
+    return new LibraryApi().removeLibrary(libraryId)
+      .then(() => {
+        dispatch(notificationActions.alertSuccess('Delete successful.'));
+        dispatch(ajaxActions.ajaxCallSuccess());
+      })
+      .catch(err => {
+        dispatchEvent(notificationActions.alertDanger(err.message));
+        dispatch(ajaxActions.ajaxCallError(err));
+      });
+  }
 }

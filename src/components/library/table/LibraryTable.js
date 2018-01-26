@@ -1,14 +1,16 @@
-import React from 'react';
+import { LibraryTableHeader } from './LibraryTableHeader';
+import { LibraryTableRow } from './LibraryTableRow';
 import PropTypes from 'prop-types';
-import {LibraryTableHeader}from './LibraryTableHeader';
-import {LibraryTableRow} from './LibraryTableRow';
-export const LibraryTable = ({library})=> {
+import React from 'react';
+
+export const LibraryTable = ({ library, removeLibrary }) => {
   return (<table className="table table-hover table-condensed table-striped">
-    <LibraryTableHeader/>
-    <LibraryTableRow library={library}/>
-  </table>)
+    <LibraryTableHeader />
+    <LibraryTableRow removeLibrary={removeLibrary} library={library} />
+  </table>);
 };
 
 LibraryTable.propTypes = {
+  removeLibrary: PropTypes.func.isRequired,
   library: PropTypes.array.isRequired
 };

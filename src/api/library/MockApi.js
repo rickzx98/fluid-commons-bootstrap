@@ -4,6 +4,7 @@ import {
 } from '../../utils/';
 
 import { Library } from './Library';
+
 let LIBRARY_DATA = [
   createMockData('Assumption Library', 'College', generateUID()),
   createMockData('Assumption Library', 'Senior High', generateUID()),
@@ -28,6 +29,25 @@ export class Api {
           DATA.push(newLib);
           LIBRARY_DATA = DATA;
           resolve(newLib);
+        } catch (err) {
+          reject(err);
+        }
+      }, delay);
+    });
+  }
+
+  static removeLibrary(libraryId) {
+    return new Promise((resolve, reject) => {
+      const DATA = [...LIBRARY_DATA];
+      setTimeout(() => {
+        try {
+          DATA.forEach((library, index) => {
+            if (library[Library.LIBRARY_ID] === libraryId) {
+              DATA.splice(index, 1);
+            }
+          });
+          LIBRARY_DATA = DATA;
+          resolve();
         } catch (err) {
           reject(err);
         }
