@@ -10,7 +10,6 @@ $loading-color: #E67E22;
 $screen-lg-min: 1200px;
 $screen-md-min: 992px;
 $screen-sm-min: 768px;
-
 @import './mixin.scss';
 @import '../../node_modules/animate.css/animate.css';
 @import '../../node_modules/font-awesome/css/font-awesome.css';
@@ -26,132 +25,164 @@ $screen-sm-min: 768px;
 /* Styles */
 
 body {
-  background-color: yellowgreen !important;
-
-  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  line-height: 1.4em;
-  color: #4d4d4d; //min-width: 70%;
-  //max-width: 70%;
-  margin: 0 auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  font-weight: 300;
+    background-color: yellowgreen !important;
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.4em;
+    color: #4d4d4d; //min-width: 70%;
+    //max-width: 70%;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    font-weight: 300;
 }
 
 td {
-  padding: 12px;
+    padding: 12px;
 }
 
 h2 {
-  color: $vin-blue;
+    color: $vin-blue;
 }
 
 input.small {
-  width: 46px;
+    width: 46px;
 }
 
 td.fuel-savings-label {
-  width: 175px;
+    width: 175px;
 }
 
 .table {
-  &.table-hover {
-    tbody {
-      tr {
-        &:hover {
-          cursor: pointer !important;
-          background-color: wheat !important;
+    &.table-hover {
+        tbody {
+            tr {
+                &:hover {
+                    cursor: pointer !important;
+                    background-color: wheat !important;
+                }
+            }
         }
-      }
     }
-  }
 }
 
 .page {
-  .page-header {
-    .page-background-fader {
-      z-index: 1;
-      width: 100%;
-      height: $page-header-height;
-      position: absolute;
-      background-color: $fd-bg-color;
-      opacity: 0.5;
-    }
-    height: $page-header-height;
-    .page-header-title {
-      z-index: 2;
-      position: relative;
-      padding-top: 30px;
-      color: $hd-text-color;
-      text-align: center;
-      font-weight: 600;
-      font-family: 'BebasNeueRegular';
-      p {
-        &::first-letter {
-          font-weight: 800;
-          border-bottom: 1px solid $hd-text-color;
+    .page-header {
+        .page-background-fader {
+            z-index: 1;
+            width: 100%;
+            height: $page-header-height;
+            position: absolute;
+            background-color: $fd-bg-color;
+            opacity: 0.5;
         }
-      }
+        height: $page-header-height;
+        .page-header-title {
+            z-index: 2;
+            position: relative;
+            padding-top: 30px;
+            color: $hd-text-color;
+            text-align: center;
+            font-weight: 600;
+            font-family: 'BebasNeueRegular';
+            p {
+                &::first-letter {
+                    font-weight: 800;
+                    border-bottom: 1px solid $hd-text-color;
+                }
+            }
+        }
     }
-  }
-  .page-body {
-    padding: 0 15px;
-  }
+    .page-body {
+        padding: 0 15px;
+    }
 }
 
 .floatLeft {
-  float: left;
+    float: left;
 }
 
 .form-group {
-  label {
-    font-weight: 600;
-  }
-  .form-control {
-    color: black;
-    font-weight: 500;
-  }
+    label {
+        font-weight: 600;
+    }
+    .form-control {
+        color: black;
+        font-weight: 500;
+    }
 }
 
 .margin-bottom-5px {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .no-pad-left {
-  padding-left: 0 !important;
+    padding-left: 0 !important;
 }
 
 .no-padding {
-  padding: 0 !important;
+    padding: 0 !important;
 }
 
 .center {
-  margin: auto;
+    margin: auto;
 }
 
 .padding-left-15px {
-  padding-left: 15px;
+    padding-left: 15px;
 }
 
 .width100pc {
-  width: 100% !important;
+    width: 100% !important;
 }
 
 .margin-auto {
-  margin: auto;
+    margin: auto;
 }
 
 .loading-icon {
-  color: $loading-color;
+    color: $loading-color;
 }
 
 .common-table {
-  background: white;
-  thead {
-    font-weight: 400;
-    font-size: 14px;
-    background: $fd-bg-color;
-    color: $hd-text-color;
-  }
+    background: white;
+    thead {
+        font-weight: 400;
+        font-size: 14px;
+        background: $fd-bg-color;
+        color: $hd-text-color;
+    }
+}
+
+thead {
+    th {
+        &.column-class {
+            background: $fd-bg-color;
+            color: $hd-text-color;
+            font-weight: 500;
+            font-size: 14px;
+        }
+    }
+}
+
+tbody {
+    tr {
+        &.row-class {
+            background: white;
+            font-size: 12px;
+            &.even {
+                background: whitesmoke;
+            }
+            &:hover {
+                cursor: pointer;
+                background: $loading-color;
+                color: white;
+            }
+            .editable-column {
+                color: black;
+                width: 100%;
+                height: 34px;
+            }
+        }
+    }
 }

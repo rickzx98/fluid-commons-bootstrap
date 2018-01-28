@@ -72,6 +72,7 @@ export function loadBooks() {
     return booksApi().getAllBooks().then(books => {
       dispatch(loadBooksSuccess(books));
       dispatch(ajaxActions.ajaxCallSuccess());
+      return books;
     }).catch(error => {
       dispatch(ajaxActions.ajaxCallError(error));
     });
