@@ -31,7 +31,8 @@ export class FluidTable extends React.Component {
       className={this.props.className}>
       <TableHead columnClass={this.props.columnClass} columns={this.props.columns} />
       <TableBody rowClass={this.props.rowClass}
-        columnClass={this.props.columnClass} name={this.props.name} fieldKey={this.props.fieldKey} columns={this.props.columns} value={this.props.value} />
+        columnClass={this.props.columnClass} name={this.props.name}
+        fieldKey={this.props.fieldKey} columns={this.props.columns} value={this.props.value} />
     </table>);
   }
 }

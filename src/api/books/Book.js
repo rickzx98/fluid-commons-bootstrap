@@ -44,19 +44,19 @@ export const Book = {
   RATING: 'rating'
 };
 export const Validate = (book) => {
-  // if (book) {
-  //   if (!book[Book.TITLE]) {
-  //     return getValidation(Book.TITLE, MESSAGE_TITLE_REQUIRED);
-  //   } else if (!book[Book.ISBN10] || !book[Book.ISBN13]) {
-  //     return getValidation(Book.ISBN, MESSAGE_ISBN_REQUIRED);
-  //   } else if (!book[Book.PUBLISHER]) {
-  //     return getValidation(Book.PUBLISHER, MESSAGE_PUBLISHER_REQUIRED);
-  //   } else if (!book[Book.AUTHOR]) {
-  //     return getValidation(Book.AUTHOR, MESSAGE_AUTHOR_REQUIRED);
-  //   } else if (!book[Book.PUBLISHED_DATE]) {
-  //     return getValidation(Book.PUBLISHED_DATE, MESSAGE_PUBLISHED_DATE_REQUIRED);
-  //   }
-  // }
+  if (book) {
+    if (!book[Book.TITLE]) {
+      return getValidation(Book.TITLE, MESSAGE_TITLE_REQUIRED);
+    } else if (!book[Book.ISBN10] || !book[Book.ISBN13]) {
+      return getValidation(Book.ISBN, MESSAGE_ISBN_REQUIRED);
+    } else if (!book[Book.PUBLISHER]) {
+      return getValidation(Book.PUBLISHER, MESSAGE_PUBLISHER_REQUIRED);
+    } else if (!book[Book.AUTHOR]) {
+      return getValidation(Book.AUTHOR, MESSAGE_AUTHOR_REQUIRED);
+    } else if (!book[Book.PUBLISHED_DATE]) {
+      return getValidation(Book.PUBLISHED_DATE, MESSAGE_PUBLISHED_DATE_REQUIRED);
+    }
+  }
 };
 
 export function getValidation(field, message) {

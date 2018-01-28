@@ -110,15 +110,18 @@ export function updateManagedBook(bookId, managedBook) {
       dispatch(invalidManagedBook(invalid));
     } else {
       dispatch(ajaxActions.beginAjaxCall());
-      return booksApi()
-        .updateBook(bookId, managedBook)
-        .then(book => {
-          dispatch(updatedBook(bookId, book));
-          dispatch(ajaxActions.ajaxCallSuccess());
-        })
-        .catch(error => {
-          dispatch(ajaxActions.ajaxCallError(error));
-        });
+      return new Promise((resolve, reject) => {
+        booksApi()
+          .updateBook(bookId, managedBook)
+          .then(book => {
+            dispatch(updatedBook(bookId, book));
+            dispatch(ajaxActions.ajaxCallSuccess());
+            resolve(book);
+          }).catch(error => {
+            dispatch(ajaxActions.ajaxCallError(error));
+            reject(error);
+          });
+      });
     }
   };
 }

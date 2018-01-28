@@ -29,7 +29,13 @@ export class Sample extends React.Component {
       .connect(`${FluidTableActions.TABLE_EDIT_SUBMIT}sampleTable`)
       .onStart(parameter => {
         const updatedValue = parameter.updatedValue();
-        return this.props.actions.updateManagedBook(updatedValue[Book.BOOK_ID], updatedValue);
+        return this.props.actions.updateManagedBook(updatedValue[Book.BOOK_ID], updatedValue)
+          .then(() => {
+            return FluidFunc.start(`${FluidTableActions.TABLE_REFRESH}sampleTable`)
+              .then(() => {
+                this.setState({ editTable: false });
+              });
+          });
       });
   }
   componentWillMount() {
@@ -53,7 +59,8 @@ export class Sample extends React.Component {
       <FluidTable
         rowClass="row-class"
         className="table table-condensed table-hovered"
-        name="sampleTable" value={this.props.actions.loadBooks}
+        name="sampleTable"
+        value={this.props.actions.loadBooks}
         columnClass={'column-class'}
         columns={BookColumns} />
     </div>);

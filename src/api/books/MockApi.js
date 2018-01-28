@@ -167,6 +167,7 @@ function createMockBook(id, title, subtitle, author, imageUrl) {
   book[Book.EDITION] = '2nd Edition';
   book[Book.ISBN10] = '1234554657';
   book[Book.ISBN13] = '1234554657';
+  book[Book.PUBLISHED_DATE] = '1991';
   book[Book.SUBJECTS] = [
     '650|17$aCareer Exploration.$2ericd',
     '650|#0$aBallads, English$zHudson River Valley (N.Y. and N.J.)',
