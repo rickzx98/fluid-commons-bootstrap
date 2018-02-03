@@ -8,10 +8,20 @@ import { TableHead } from './TableHead';
 
 export const FluidTableActions = actions;
 export class FluidTable extends React.Component {
+
+  static refresh(tableName) {
+    return FluidFunc.start(`${actions.TABLE_REFRESH}${tableName}`);
+  }
+  static cancelEdit(tableName) {
+    return FluidFunc.start(`${actions.TABLE_CANCEL_EDIT}${tableName}`);
+  }
   constructor(props) {
     super(props);
     this.state = {};
     this.thisSort = this.sort.bind(this);
+    this.onEdit(props.onEdit);
+    this.onSubmit(props.onSubmit);
+    this.onSort(props.onSort);
   }
   sort(prop) {
     const sort = { ...this.state.sort };
@@ -24,6 +34,24 @@ export class FluidTable extends React.Component {
       });
     }
     this.setState({ sort });
+  }
+  onEdit(callback) {
+    if (callback) {
+      FluidFunc.create(`${actions.TABLE_EDIT_MODE}${this.props.name}`)
+        .onStart(callback);
+    }
+  }
+  onSubmit(callback) {
+    if (callback) {
+      FluidFunc.create(`${actions.TABLE_EDIT_SUBMIT}${this.props.name}`)
+        .onStart(callback);
+    }
+  }
+  onSort(callback) {
+    if (callback) {
+      FluidFunc.create(`${actions.TABLE_SORT}${this.props.name}`)
+        .onStart(callback);
+    }
   }
   render() {
     return (<table
@@ -47,7 +75,10 @@ FluidTable.propTypes = {
   sort: PropTypes.func,
   name: PropTypes.string.isRequired,
   columnClass: PropTypes.string,
-  rowClass: PropTypes.string
+  rowClass: PropTypes.string,
+  onEdit: PropTypes.func,
+  onSubmit: PropTypes.func,
+  onSort: PropTypes.func
 };
 
 

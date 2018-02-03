@@ -4,6 +4,7 @@ import FluidFunc from 'fluid-func';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { TableRow } from './TableRow';
+
 export class TableBody extends React.Component {
   constructor(props) {
     super(props);
@@ -14,17 +15,20 @@ export class TableBody extends React.Component {
     FluidFunc
       .create(`${TABLE_REFRESH}${this.props.name}`)
       .onStart(() => {
+        this.thisCancelEditable();
         this.thisRefresh();
-      })
-      .connect(`${TABLE_EDIT}${this.props.name}`)
+      });
+    FluidFunc
+      .create(`${TABLE_EDIT}${this.props.name}`)
       .onStart(parameter => {
         const field = parameter.field();
         const index = parameter.index();
         this.thisSetEditable(field, index);
       })
       .spec('field', { require: true })
-      .spec('index', { require: true })
-      .connect(`${TABLE_CANCEL_EDIT}${this.props.name}`)
+      .spec('index', { require: true });
+    FluidFunc
+      .create(`${TABLE_CANCEL_EDIT}${this.props.name}`)
       .onStart(() => {
         this.thisCancelEditable();
       });

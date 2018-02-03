@@ -1,16 +1,15 @@
 import * as actions from '../../actions/BookActions';
 
-import { FluidTable, FluidTableActions } from './fluid-table';
+import { FluidPaginate, FluidTable } from './';
 
 import { Book } from '../../api/books';
-import FluidFunc from 'fluid-func';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 const BookColumns = [
-  { field: Book.TITLE, label: 'Title' },
+  { field: Book.TITLE, label: 'Title', editable: true },
   { field: Book.SUB_TITLE, label: 'Sub Title' },
   { field: Book.AUTHOR, label: 'Author' }
 ];
@@ -19,51 +18,83 @@ export class Sample extends React.Component {
   constructor(props) {
     super(props);
     this.state = { editTable: false };
+    this.thisPaginateChange = this.paginateChange.bind(this);
     this.thisSetEditTableMode = this.setEditTableMode.bind(this);
-    FluidFunc
-      .create(`${FluidTableActions.TABLE_SORT}sampleTable`)
-      .connect(`${FluidTableActions.TABLE_EDIT_MODE}sampleTable`)
-      .onStart(() => {
-        this.thisSetEditTableMode();
-      })
-      .connect(`${FluidTableActions.TABLE_EDIT_SUBMIT}sampleTable`)
-      .onStart(parameter => {
-        const updatedValue = parameter.updatedValue();
-        return this.props.actions.updateManagedBook(updatedValue[Book.BOOK_ID], updatedValue)
-          .then(() => {
-            return FluidFunc.start(`${FluidTableActions.TABLE_REFRESH}sampleTable`)
-              .then(() => {
-                this.setState({ editTable: false });
-              });
-          });
-      });
+    this.thisOnSubmit = this.onSubmit.bind(this);
   }
   componentWillMount() {
-    this.setState({ editTable: false });
+    this.setState({ editTable: false, paginate: { total: 100, size: 25, page: 1 } });
+  }
+  componentDidMount() {
+    FluidPaginate.refresh('samplePaginator');
   }
   setEditTableMode() {
     this.setState({
       editTable: true
     });
   }
+  paginateChange(paginate) {
+    this.setState({ paginate });
+  }
+  onSubmit(parameter) {
+    const updatedValue = parameter.updatedValue();
+    return this.props.actions.updateManagedBook(updatedValue[Book.BOOK_ID], updatedValue)
+      .then(() => {
+        return FluidTable.refresh('sampleTable')
+          .then(() => {
+            this.setState({ editTable: false });
+          });
+      });
+  }
   render() {
     return (<div><h1>Sample Page</h1>
-      <button type="button" onClick={() => {
-        FluidFunc.start(`${FluidTableActions.TABLE_REFRESH}sampleTable`);
-      }}>Refresh</button>
-      {this.state.editTable && <button type="button" onClick={() => {
-        FluidFunc.start(`${FluidTableActions.TABLE_CANCEL_EDIT}sampleTable`).then(() => {
-          this.setState({ editTable: false });
-        });
-      }}>Cancel</button>}
+      <FluidPaginate className="btn-group btn-group-md"
+        onChange={this.thisPaginateChange}
+        total={this.state.paginate.total}
+        size={this.state.paginate.size}
+        page={this.state.paginate.page}
+        name="samplePaginator">
+        <button onClick={() => {
+          FluidPaginate.first('samplePaginator');
+        }} type="button">First</button>
+        <button onClick={() => {
+          FluidPaginate.previous('samplePaginator');
+        }} type="button">Previous</button>
+        <button onClick={() => {
+          FluidPaginate.next('samplePaginator');
+        }} type="button">Next</button>
+        <button onClick={() => {
+          FluidPaginate.last('samplePaginator');
+        }} type="button">Last</button>
+      </FluidPaginate>
+      <div className="btn-group btn-group-md">
+        <button type="button" onClick={() => {
+          FluidTable.refresh('sampleTable');
+        }}>Refresh</button>
+        {
+          this.state.editTable && <button type="button" onClick={() => {
+            FluidTable.cancelEdit('sampleTable').then(() => {
+              this.setState({ editTable: false });
+            });
+          }}>Cancel</button>
+        }
+      </div>
+      <ul className="pagination">
+        {this.state.paginate.pages && this.state.paginate.pages.map(page => {
+          return (<li className={`${page.selected && 'active'}`} key={page.page}>
+            <a href="#" disabled={page.selected} onClick={page.onClick}>{page.page}</a></li>);
+        })}
+      </ul>
       <FluidTable
+        onSubmit={this.thisOnSubmit}
+        onEdit={this.thisSetEditTableMode}
         rowClass="row-class"
         className="table table-condensed table-hovered"
         name="sampleTable"
         value={this.props.actions.loadBooks}
         columnClass={'column-class'}
         columns={BookColumns} />
-    </div>);
+    </div >);
   }
 }
 
