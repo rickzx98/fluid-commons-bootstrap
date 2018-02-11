@@ -6,7 +6,7 @@ export const TableRow = ({ columns, value, index, columnClass, rowClass, tableNa
   const scheme = index % 2 === 0 ? 'even' : 'odd';
   const className = `${scheme} ${rowClass || ''}`;
   return (<tr className={className}>{columns && columns.map(col => {
-    return editable && index === editableIndex && col.field === column ?
+    return editable && index === editableIndex && col.field === column || value.isNew ?
       <TableEditableColumn tableName={tableName}
         columnClass={columnClass} key={col.field}
         value={value} column={col} />

@@ -8,7 +8,9 @@ import { TableHead } from './TableHead';
 
 export const FluidTableActions = actions;
 export class FluidTable extends React.Component {
-
+  static addRow(tableName) {
+    return FluidFunc.start(`${actions.TABLE_ADD_ROW}${tableName}`);
+  }
   static refresh(tableName) {
     return FluidFunc.start(`${actions.TABLE_REFRESH}${tableName}`);
   }

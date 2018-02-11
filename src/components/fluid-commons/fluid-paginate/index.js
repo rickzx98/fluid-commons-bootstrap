@@ -35,6 +35,11 @@ export class FluidPaginate extends React.Component {
       .cache(props.cacheTimeout)
       .onStart(this.thisOnRefresh);
   }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.total !== nextProps.total) {
+      FluidPaginate.goToPage(nextProps.page);
+    }
+  }
   onNext() {
     const isNext = this.hasNext();
     if (isNext) {
@@ -60,14 +65,16 @@ export class FluidPaginate extends React.Component {
     const size = this.props.size;
     const total = this.props.total;
     const pages = this.getPages(page);
-    this.props.onChange({ page, size, total, pages });
+    const hasNext = this.hasNext(page);
+    const hasPrevious = this.hasPrevious(page);
+    this.props.onChange({ page, size, total, pages, hasNext, hasPrevious });
   }
-  hasNext() {
-    const current = this.props.page * this.props.size;
+  hasNext(page) {
+    const current = (page || this.props.page) * this.props.size;
     return current < this.props.total;
   }
-  hasPrevious() {
-    const current = this.props.page * this.props.size;
+  hasPrevious(page) {
+    const current = (page || this.props.page) * this.props.size;
     return current > this.props.size;
   }
   getTotalPage() {

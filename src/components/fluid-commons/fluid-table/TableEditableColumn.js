@@ -1,4 +1,4 @@
-import { TABLE_CANCEL_EDIT, TABLE_EDIT_SUBMIT } from './fluid.info';
+import { TABLE_CANCEL_EDIT, TABLE_EDIT_SUBMIT, TABLE_SET_NEW_VALUE, TABLE_SUBMIT_NEW_VALUE } from './fluid.info';
 
 import FluidFunc from 'fluid-func';
 import PropTypes from 'prop-types';
@@ -17,15 +17,23 @@ export class TableEditableColumn extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     if (FluidFunc.exists(`${TABLE_EDIT_SUBMIT}${this.props.tableName}`)) {
-      const updatedValue = { ...this.props.value };
-      updatedValue[this.props.column.field] = this.state.value;
-      FluidFunc.start([`${TABLE_EDIT_SUBMIT}${this.props.tableName}`, `${TABLE_CANCEL_EDIT}${this.props.tableName}`], {
-        updatedValue,
-        currentValue: this.props.value
-      });
+      if (this.props.value.isNew) {
+        FluidFunc.start([`${TABLE_SUBMIT_NEW_VALUE}${this.props.tableName}`, `${TABLE_EDIT_SUBMIT}${this.props.tableName}`, `${TABLE_CANCEL_EDIT}${this.props.tableName}`], { isNew: true });
+      } else {
+        const updatedValue = { ...this.props.value };
+        updatedValue[this.props.column.field] = this.state.value;
+        FluidFunc.start([`${TABLE_EDIT_SUBMIT}${this.props.tableName}`, `${TABLE_CANCEL_EDIT}${this.props.tableName}`], {
+          updatedValue,
+          currentValue: this.props.value
+        });
+      }
+
     }
   }
   onChange(event) {
+    if (this.props.value.isNew) {
+      FluidFunc.start(`${TABLE_SET_NEW_VALUE}${this.props.tableName}`, { field: this.props.column.field, value: event.target.value });
+    }
     this.setValue(event.target.value);
   }
   setValue(value) {

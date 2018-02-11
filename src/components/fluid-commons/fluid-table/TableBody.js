@@ -1,4 +1,4 @@
-import { TABLE_CANCEL_EDIT, TABLE_EDIT, TABLE_REFRESH } from './fluid.info';
+import { TABLE_ADD_ROW, TABLE_CANCEL_EDIT, TABLE_EDIT, TABLE_REFRESH, TABLE_SET_NEW_VALUE, TABLE_SUBMIT_NEW_VALUE } from './fluid.info';
 
 import FluidFunc from 'fluid-func';
 import PropTypes from 'prop-types';
@@ -8,10 +8,13 @@ import { TableRow } from './TableRow';
 export class TableBody extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: [], editable: false, column: '', editableIndex: 0 };
+    this.state = { value: [], editable: false, column: '', editableIndex: 0, newRow: {} };
     this.thisRefresh = this.refresh.bind(this);
     this.thisSetEditable = this.setEditable.bind(this);
     this.thisCancelEditable = this.cancelEditable.bind(this);
+    this.thisAddRow = this.addRow.bind(this);
+    this.thisSetNewRowValue = this.setNewRowValue.bind(this);
+    this.thisSubmitNewRowValue = this.submitNewRowValue.bind(this);
     FluidFunc
       .create(`${TABLE_REFRESH}${this.props.name}`)
       .onStart(() => {
@@ -29,9 +32,16 @@ export class TableBody extends React.Component {
       .spec('index', { require: true });
     FluidFunc
       .create(`${TABLE_CANCEL_EDIT}${this.props.name}`)
-      .onStart(() => {
-        this.thisCancelEditable();
-      });
+      .onStart(this.thisCancelEditable);
+    FluidFunc.create(`${TABLE_ADD_ROW}${this.props.name}`)
+      .onStart(this.thisAddRow);
+    FluidFunc.create(`${TABLE_SET_NEW_VALUE}${this.props.name}`)
+      .onStart(this.thisSetNewRowValue)
+      .spec('field', { require: true })
+      .spec('value')
+      .cache(1000);
+    FluidFunc.create(`${TABLE_SUBMIT_NEW_VALUE}${this.props.name}`)
+      .onStart(this.thisSubmitNewRowValue);
   }
   componentWillMount() {
     this.setTableValue(this.props);
@@ -86,6 +96,41 @@ export class TableBody extends React.Component {
       column: '',
       editableIndex: 0
     });
+    const value = [...this.state.value];
+    value.forEach((row, index) => {
+      if (row.isNew) {
+        value.splice(index, 1);
+      }
+    });
+    this.setState({ value });
+  }
+  addRow() {
+    const value = [...this.state.value];
+    value.push({ isNew: true });
+    this.setState({ value });
+  }
+  setNewRowValue(parameter) {
+    const field = parameter.field();
+    const value = parameter.value();
+    const newRow = { ...this.state.newRow };
+    newRow[field] = value;
+    this.setState({ newRow });
+  }
+  submitNewRowValue() {
+    const newRow = { ...this.state.newRow };
+    const value = [...this.state.value];
+    value.forEach(row => {
+      if (row.isNew) {
+        row.isNew = false;
+        for (let field in newRow) {
+          if (newRow.hasOwnProperty(field)) {
+            row[field] = newRow[field];
+          }
+        }
+      }
+    });
+    this.setState({ value, newRow: {} });
+    return newRow;
   }
   render() {
     return (<tbody>

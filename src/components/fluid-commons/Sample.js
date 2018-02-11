@@ -23,7 +23,7 @@ export class Sample extends React.Component {
     this.thisOnSubmit = this.onSubmit.bind(this);
   }
   componentWillMount() {
-    this.setState({ editTable: false, paginate: { total: 100, size: 25, page: 1 } });
+    this.setState({ editTable: false, paginate: { total: 100, size: 25, page: 1, hasNext: true, hasPrevious: false } });
   }
   componentDidMount() {
     FluidPaginate.refresh('samplePaginator');
@@ -37,42 +37,51 @@ export class Sample extends React.Component {
     this.setState({ paginate });
   }
   onSubmit(parameter) {
-    const updatedValue = parameter.updatedValue();
-    return this.props.actions.updateManagedBook(updatedValue[Book.BOOK_ID], updatedValue)
-      .then(() => {
-        return FluidTable.refresh('sampleTable')
-          .then(() => {
-            this.setState({ editTable: false });
-          });
-      });
+    if (parameter.isNew && parameter.isNew()) {
+      console.log('newSubmitted', parameter);
+    } else {
+      const updatedValue = parameter.updatedValue();
+      return this.props.actions.updateManagedBook(updatedValue[Book.BOOK_ID], updatedValue)
+        .then(() => {
+          return FluidTable.refresh('sampleTable')
+            .then(() => {
+              this.setState({ editTable: false });
+            });
+        });
+    }
   }
   render() {
     return (<div><h1>Sample Page</h1>
-      <FluidPaginate className="btn-group btn-group-md"
+      <FluidPaginate className="btn-group btn-group-xs"
         onChange={this.thisPaginateChange}
         total={this.state.paginate.total}
         size={this.state.paginate.size}
         page={this.state.paginate.page}
         name="samplePaginator">
-        <button onClick={() => {
+        <button className="btn btn-info" onClick={() => {
           FluidPaginate.first('samplePaginator');
         }} type="button">First</button>
-        <button onClick={() => {
+        <button className="btn btn-info" disabled={!this.state.paginate.hasPrevious} onClick={() => {
           FluidPaginate.previous('samplePaginator');
         }} type="button">Previous</button>
-        <button onClick={() => {
+        <button className="btn btn-info" disabled={!this.state.paginate.hasNext} onClick={() => {
           FluidPaginate.next('samplePaginator');
         }} type="button">Next</button>
-        <button onClick={() => {
+        <button className="btn btn-info" onClick={() => {
           FluidPaginate.last('samplePaginator');
         }} type="button">Last</button>
       </FluidPaginate>
-      <div className="btn-group btn-group-md">
-        <button type="button" onClick={() => {
+      <div className="btn-group btn-group-xs">
+        <button className="btn btn-info" type="button" onClick={() => {
+          FluidTable.addRow('sampleTable').then(() => {
+            this.setState({ editTable: true });
+          });
+        }}>Add</button>
+        <button className="btn btn-info" type="button" onClick={() => {
           FluidTable.refresh('sampleTable');
         }}>Refresh</button>
         {
-          this.state.editTable && <button type="button" onClick={() => {
+          this.state.editTable && <button className="btn btn-danger" type="button" onClick={() => {
             FluidTable.cancelEdit('sampleTable').then(() => {
               this.setState({ editTable: false });
             });
