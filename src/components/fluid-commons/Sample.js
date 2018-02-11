@@ -9,17 +9,24 @@ import { connect } from 'react-redux';
 export class Sample extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
     this.thisOnSubmit = this.onSubmit.bind(this);
     this.thisOnFailed = this.onFailed.bind(this);
   }
   onSubmit(parameter) {
-    console.log('submit', parameter);
+    const { name } = parameter;
+    console.log('name', name());
   }
-  onFailed(message) {
-    console.log('message', message);
+  onFailed(error) {
+    this.setState({ message: error.error.message });
+    console.log(this.state);
   }
   render() {
     return (<div><h1>Sample Page</h1>
+      {this.state.message || ''}
+      <button type="button" onClick={() => {
+        FluidForm.submit('sampleForm');
+      }}>Submit</button>
       <FluidForm
         name="sampleForm"
         onSubmit={this.thisOnSubmit}

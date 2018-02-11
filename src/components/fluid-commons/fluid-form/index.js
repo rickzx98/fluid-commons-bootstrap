@@ -1,9 +1,13 @@
-import { FORM_SUBMIT } from './fluid.info';
+import { FORM_ON_SUBMIT, FORM_SUBMIT } from './fluid.info';
+
 import FluidFunc from 'fluid-func';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 export class FluidForm extends React.Component {
+  static submit(tableName) {
+    return FluidFunc.start(`${FORM_ON_SUBMIT}${tableName}`);
+  }
   constructor(props) {
     super(props);
     this.state = {};
@@ -16,9 +20,16 @@ export class FluidForm extends React.Component {
     SubmitChain.onStart(parameter => {
       props.onSubmit(parameter);
     });
+
+    FluidFunc.create(`${FORM_ON_SUBMIT}${props.name}`)
+      .onStart(() => {
+        this.thisSubmitForm();
+      });
   }
   submitForm(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
     FluidFunc.start(`${FORM_SUBMIT}${this.props.name}`, this.state)
       .catch(this.props.onFailed);
   }
