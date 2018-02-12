@@ -1,25 +1,29 @@
 /* Variables */
 
 $vin-blue: #5bb7db;
+$awe-blue: rgba(152, 203, 216, 0.3);
+$awe-blueH: rgba(88, 123, 168, 0.4);
 $vin-green: #60b044;
 $vin-red: #ff0000;
 $hd-text-color: #ececed;
 $fd-bg-color: #3f5c73;
-$page-header-height: 130px;
+$page-header-height: 160px;
 $loading-color: #E67E22;
 $screen-lg-min: 1200px;
 $screen-md-min: 992px;
 $screen-sm-min: 768px;
+
 @import './mixin.scss';
 @import '../../node_modules/animate.css/animate.css';
 @import '../../node_modules/font-awesome/css/font-awesome.css';
-@import '../components/index.scss';
-@import './paper.scss';
+@import '../components/common/common.scss';
+@import '../components/coupons/coupons.scss';
 
 /* Styles */
 
 body {
-    background-color: yellowgreen !important;
+    background-color: #ececed !important;
+    
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.4em;
     color: #4d4d4d; //min-width: 70%;
@@ -61,6 +65,7 @@ td.fuel-savings-label {
 }
 
 .page {
+    margin-top: -42px;
     .page-header {
         .page-background-fader {
             z-index: 1;
@@ -74,7 +79,7 @@ td.fuel-savings-label {
         .page-header-title {
             z-index: 2;
             position: relative;
-            padding-top: 30px;
+            padding-top: 54px;
             color: $hd-text-color;
             text-align: center;
             font-weight: 600;
@@ -138,44 +143,22 @@ td.fuel-savings-label {
     color: $loading-color;
 }
 
-.common-table {
-    background: white;
-    thead {
-        font-weight: 400;
-        font-size: 14px;
-        background: $fd-bg-color;
-        color: $hd-text-color;
-    }
+.navbar.navbar-default.navbar-fixed-top{
+        background: $awe-blue;
 }
-
-thead {
-    th {
-        &.column-class {
-            background: $fd-bg-color;
-            color: $hd-text-color;
-            font-weight: 500;
-            font-size: 14px;
-        }
-    }
-}
-
-tbody {
-    tr {
-        &.row-class {
-            background: white;
-            font-size: 12px;
-            &.even {
-                background: whitesmoke;
-            }
-            &:hover {
-                cursor: pointer;
-                background: $loading-color;
-                color: white;
-            }
-            .editable-column {
-                color: black;
-                width: 100%;
-                height: 34px;
+.navbar-default{
+    color:$hd-text-color !important;
+    .navbar-nav {
+        li {
+            a {
+                &:hover {
+                    background: $awe-blueH !important;
+                    color:$hd-text-color !important;
+                }
+                &:focus {
+                    background: $awe-blueH !important;
+                    color: $hd-text-color !important;
+                }
             }
         }
     }
