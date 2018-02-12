@@ -1,7 +1,7 @@
 {
-  "name": "Cataloguing-app",
+  "name": "fluid-commons-boostraps",
   "version": "0.1.0",
-  "description": "Cataloguing front end application",
+  "description": "Fluid Component Libraries with Bootstrap UI",
   "engines": {
     "npm": ">=3"
   },
