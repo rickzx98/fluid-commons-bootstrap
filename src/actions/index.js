@@ -11,3 +11,4 @@ export const ALERT_DANGER = 'Notification.ALERT_DANGER';
 export const REMOVE_ALERT = 'Notification.REMOVE_ALERT';
 export const HEADER_SET_CONTROLS = 'Header.SET_CONTROLS';
 export const HEADER_CALL_CONTROL_ACTION = 'Header.CALL_CONTROL_ACTION';
+export const LOGIN_SUCCESS = 'Security.LOGIN_SUCCESS';
